@@ -1,28 +1,44 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Are you at Campina Grande/PB during São João and are looking for the events of Parque do Povo?
 
-Things you may want to cover:
+We can help you to find the shows of Parque do Povo - Campina Grande/PB with this Telegram Bot, pphoje_bot.
 
-* Ruby version
+If you are a Telegram user, you can include this bot into a channel or write commands directly on a private chat.
 
-* System dependencies
+We support the commands:
+
+* /start - To start the bot
+
+* /help  - To check the supported commands
+
+* /shows {day_number} {week_day} {next_day} - To check the shows for a specific date. The arguments are optional and you can inform one of the commands as the example.
+{day_number} -> Integer value, representing the day of a month. [1, 2, 3, 4, ..., 30]
+{week_day}   -> String value, representing the day of a week. [segunda, terca|terça, quarta, quinta, sexta, sabado|sábado, domingo]
+{next_day}   -> String value, representing the day after today. [amanha|amanhã]
+
+Example of usage:
+/shows 21 -> return the shows for the 21th day of the current month
+/shows amanha  -> return the shows for the next day
+/shows segunda -> return the shows on Monday (current day, if it's Monday or next Monday otherwise)
+
+This project is configured to run using the following configuration:
+
+* Ruby version - 2.3.0
 
 * Configuration
 
-* Database creation
+* Database creation:
+You should run the following commands to start the project correctly:
+1- rake db:create
 
 * Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+You should run the following commands to start the project correctly:
+1- rake db:migrate
+2- rake db:seed
 
 * Deployment instructions
+Just run bin/rake telegram:bot:poller to start the project
 
-* ...
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Feel free to contribute using your own bot, as we should change the bot secret soon (should be configured in system variables environment).
