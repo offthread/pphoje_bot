@@ -36,9 +36,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       dateFormated = dayFromArgs + "/" + currentMonth
 
       if @shows.empty?
-        reply_with :message, text: "Não há shows programados para o dia " + dateFormated
+        reply_with :message, text: "Não há shows programados para o dia " + dateFormated + "."
       else
-        response_message = "No dia " + dateFormated + ", teremos: \n"
+        response_message = "No dia " + dateFormated + " teremos: \n"
         
         @shows.each do |show|
           response_message += "-> " + show.nome + "\n"
