@@ -5,23 +5,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   context_to_action!
 
   def start(*)
+    # TODO: change this default message
     reply_with :message, text: 'Hi there!'
-  end
-
-  def memo(*args)
-    if args.any?
-      session[:memo] = args.join(' ')
-      reply_with :message, text: 'Remembered!'
-    else
-      reply_with :message, text: 'What should I remember?'
-      save_context :memo
-    end
-  end
-
-  def remind_me
-    to_remind = session.delete(:memo)
-    reply = to_remind || 'Nothing to remind'
-    reply_with :message, text: reply
   end
 
   def shows(*args)
@@ -48,10 +33,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         return
       end
 
+      dateFormated = dayFromArgs + "/" + currentMonth
+
       if @shows.empty?
-        reply_with :message, text: 'Não há shows programados no dia informado.'
+        reply_with :message, text: "Não há shows programados para o dia " + dateFormated
       else
-        response_message = "No dia " + dayFromArgs + "/" + currentMonth + ", teremos: \n"
+        response_message = "No dia " + dateFormated + ", teremos: \n"
         
         @shows.each do |show|
           response_message += "-> " + show.nome + "\n"
