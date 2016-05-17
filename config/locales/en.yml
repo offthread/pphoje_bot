@@ -21,7 +21,7 @@ en:
   help_message         : "Sure! The available commands are:\n-> Use the command '/shows' to check today's events.\n\n"
   help_shows_tomorrow  : "-> Using the command '/shows tomorrow', check the events for the next day.\n"
   help_shows_day_num   : "-> The command '/shows #day' informs the events for the #day chosen. Example: '/shows 21'.\n\n"
-  help_shows_further   : "* P.S.: If the chosen day is greater than the current day, we'll verify the events in the next month.\n\n"
+  help_shows_further   : "* P.S.: If the current day is greater than the chosen day, we'll verify the events in the next month.\n\n"
   help_shows_day_str   : "-> Also, the command '/shows day_of_week' informs the events for the day of week chosen (inform only the three first letters). Example: '/shows mon'.\n"
 
   custom_data_format   : "%{month}/%{day}"
