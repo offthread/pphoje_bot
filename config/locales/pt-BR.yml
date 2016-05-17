@@ -21,7 +21,7 @@ pt-BR:
   help_message         : "Claro! Os comandos disponíveis são:\n -> Utilize o comando '/shows' para ver os eventos do dia atual.\n\n"
   help_shows_tomorrow  : "-> Utilizando o comando '/shows amanha', veja os eventos do próximo dia.\n\n"
   help_shows_day_num   : "-> O comando '/shows #dia' informa quais os eventos do #dia selecionado. Exemplo: '/shows 21'.\n"
-  help_shows_further   : "* Obs.: Caso o dia selecionado seja maior que o dia atual, tentaremos verificar os eventos do próximo mês.\n\n"
+  help_shows_further   : "* Obs.: Caso o dia atual seja maior que dia o selecionado, tentaremos verificar os eventos do próximo mês.\n\n"
   help_shows_day_str   : "-> O comando '/shows dia_da_semana' informa quais os eventos do dia da semana (apenas as três primeiras letras do dia) selecionado. Exemplo: '/shows seg'.\n"
 
   custom_data_format   : "%{day}/%{month}"
