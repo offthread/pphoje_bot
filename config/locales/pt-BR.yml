@@ -18,8 +18,10 @@ pt-BR:
   week_day_sunday      : "dom"
   week_tomorrow        : "amanha"
 
-  custom_data_format   : "%{day}/%{month}"
+  custom_date_format   : "%{day}/%{month}"
 
   check_usage_command  : "Verifique as instruções de uso utilizando o comando /help"
+
+  date_format          : "%d/%m/%Y"
 
   error_invalid_days   : "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."

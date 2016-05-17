@@ -18,7 +18,9 @@ en:
   week_day_sunday     : "sun"
   week_tomorrow       : "tomorrow"
 
-  custom_data_format   : "%{month}/%{day}"
+  custom_date_format   : "%{month}/%{day}"
+
+  date_format          : "%m/%d/%Y"
 
   check_usage_command  : "Verify the usage instructions using the command /help"
 

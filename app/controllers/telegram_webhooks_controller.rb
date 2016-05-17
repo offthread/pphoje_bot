@@ -10,6 +10,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def shows(*args)
+    endingDate = Date.parse(END_DATE_STRING, t(:date_format))
+
     # If arguments is not empty, check if it's a number or a string
     if args.any?
       #Day informed as a number
@@ -38,7 +40,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         return
       end
 
-      dateFormated = t(:custom_data_format, :day => dayFromArgs, :month => currentMonth)
+      dateFormated = t(:custom_date_format, :day => dayFromArgs, :month => currentMonth)
 
       if @shows.empty?
         reply_with :message, text: t(:empty_shows_results, :dateFormated => dateFormated)
