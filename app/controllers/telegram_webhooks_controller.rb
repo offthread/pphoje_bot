@@ -26,6 +26,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         errorMessage = MESSAGE_CHECK_USAGE_COMMAND
       end
 
+      # Return immediately if an error message was caught
+      if errorMessage
+        reply_with :message, text: errorMessage
+        return
+      end
+
       currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
 
       # If the current day is bigger than the requested day, get data from next month
@@ -33,11 +39,18 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
       end
 
-      if errorMessage.nil?
-        @shows = Show.by_day(dayFromArgs, currentMonth)
-      else
-        reply_with :message, text: errorMessage
+      requestedDate = Date.parse(dayFromArgs + "/" + currentMonth + "/" + Time.now.year.to_s, t(:date_format))
+
+      # If requested date is bigger than the end date
+      if Date.today > endingDate
+        reply_with :message, text: t(:ended_message)
         return
+      elsif requestedDate > endingDate
+        # If current date is bigger than the end date
+        reply_with :message, text: t(:error_after_end_date)
+        return
+      elsif errorMessage.nil?
+        @shows = Show.by_day(dayFromArgs, currentMonth)
       end
 
       dateFormated = t(:custom_date_format, :day => dayFromArgs, :month => currentMonth)
