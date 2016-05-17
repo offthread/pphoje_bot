@@ -1,30 +1,36 @@
 en:
-  empty_shows_results : "There are no events for the date %{dateFormated}."
-  shows_title_message : "The events for the date %{dateFormated} are:\n"
+  empty_shows_results  : "There are no events for the date %{dateFormated}."
+  shows_title_message  : "The events for the date %{dateFormated} are:\n"
 
-  event_title         : "-> %{eventTitle}\n"
-  event_confirmed     : "- Event confirmed: %{eventConfirmed}\n"
-  event_band_info  : "- Band info: %{moreInfo}\n"
+  event_title          : "-> %{eventTitle}\n"
+  event_confirmed      : "- Event confirmed: %{eventConfirmed}\n"
+  event_band_info      : "- Band info: %{moreInfo}\n"
 
-  confirmed : "Yes"
-  not_confirmed : "No"
+  confirmed            : "Yes"
+  not_confirmed        : "No"
 
-  week_day_monday     : "mon"
-  week_day_tuesday    : "tue"
-  week_day_wednesday  : "wed"
-  week_day_thursday   : "thu"
-  week_day_friday     : "fri"
-  week_day_saturday   : "sat"
-  week_day_sunday     : "sun"
-  week_tomorrow       : "tomorrow"
+  week_day_monday      : "mon"
+  week_day_tuesday     : "tue"
+  week_day_wednesday   : "wed"
+  week_day_thursday    : "thu"
+  week_day_friday      : "fri"
+  week_day_saturday    : "sat"
+  week_day_sunday      : "sun"
+  week_tomorrow        : "tomorrow"
 
-  custom_date_format   : "%{month}/%{day}"
+  help_message         : "Sure! The available commands are:\n-> Use the command '/shows' to check today's events.\n\n"
+  help_shows_tomorrow  : "-> Using the command '/shows tomorrow', check the events for the next day.\n"
+  help_shows_day_num   : "-> The command '/shows #day' informs the events for the #day chosen. Example: '/shows 21'.\n\n"
+  help_shows_further   : "* P.S.: If the chosen day is greater than the current day, we'll verify the events in the next month.\n\n"
+  help_shows_day_str   : "-> Also, the command '/shows day_of_week' informs the events for the day of week chosen (inform only the three first letters). Example: '/shows mon'.\n"
+
+  custom_data_format   : "%{month}/%{day}"
+
+  check_usage_command  : "Verify the usage instructions using the command /help"
 
   date_format          : "%m/%d/%Y"
 
   ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
-
-  check_usage_command  : "Verify the usage instructions using the command /help"
 
   error_invalid_days  : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
   error_after_end_date : "Only dates between June 3rd and July 3rd and greater than the current date are valid."
