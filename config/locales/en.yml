@@ -18,8 +18,13 @@ en:
   week_day_sunday     : "sun"
   week_tomorrow       : "tomorrow"
 
-  custom_data_format   : "%{month}/%{day}"
+  custom_date_format   : "%{month}/%{day}"
+
+  date_format          : "%m/%d/%Y"
+
+  ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
 
   check_usage_command  : "Verify the usage instructions using the command /help"
 
-  error_invalid_days  : "The greatest São João of the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
+  error_invalid_days  : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
+  error_after_end_date : "Only dates between June 3rd and July 3rd and greater than the current date are valid."
