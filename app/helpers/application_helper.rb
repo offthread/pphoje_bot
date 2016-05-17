@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	NUM_WEEK_DAYS = 7
-	MESSAGE_CHECK_USAGE_COMMAND = "Verifique as instruções de uso utilizando o comando /help"
+	MESSAGE_CHECK_USAGE_COMMAND = I18n.t(:check_usage_command)
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
 
 	def getDayFromString (day)
@@ -10,21 +10,21 @@ module ApplicationHelper
 		weekDayRequested = 1
 
 		case day
-		when "segunda"
+		when t(:week_day_monday)
 			weekDayRequested = daysBefore(currentWeekDay, 1)
-		when "terca"
+		when t(:week_day_tuesday)
 			weekDayRequested = daysBefore(currentWeekDay, 2)
-		when "quarta"
+		when t(:week_day_wednesday)
 			weekDayRequested = daysBefore(currentWeekDay, 3)
-		when "quinta"
+		when t(:week_day_thursday)
 			weekDayRequested = daysBefore(currentWeekDay, 4)
-		when "sexta"
+		when t(:week_day_friday)
 			weekDayRequested = daysBefore(currentWeekDay, 5)
-		when "sabado", "sábado"
+		when t(:week_day_saturday)
 			weekDayRequested = daysBefore(currentWeekDay, 6)
-		when "domingo"
+		when t(:week_day_sunday)
 			weekDayRequested = daysBefore(currentWeekDay, 0)
-		when "amanhã", "amanha"
+		when t(:week_day_tomorrow)
 			weekDayRequested = 1
 		else
 			weekDayRequested = Date.today.wday
@@ -33,7 +33,6 @@ module ApplicationHelper
 		dateRequested = Date.today() + weekDayRequested.to_i
 		dayRequested = dateRequested.strftime("%d")
 
-		puts "Day Requested " + dayRequested.to_s
 		return dayRequested
 	end
 
@@ -47,8 +46,7 @@ module ApplicationHelper
 
 	def validateDayFromMonth(day)
 		if day > 30 || day < 1
-			puts "Estou aqui"
-			return "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."
+			return I18n.t(:error_invalid_days)
 		end
 	end
 end

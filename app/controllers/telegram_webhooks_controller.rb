@@ -33,19 +33,23 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         return
       end
 
-      dateFormated = dayFromArgs + "/" + currentMonth
+      dateFormated = t(:custom_data_format, :day => dayFromArgs, :month => currentMonth)
 
       if @shows.empty?
-        reply_with :message, text: "Não há shows programados para o dia " + dateFormated + "."
+        reply_with :message, text: t(:empty_shows_results, :dateFormated => dateFormated)
       else
-        response_message = "No dia " + dateFormated + " teremos: \n"
-        
+
+        response_message = t(:shows_title_message, :dateFormated => dateFormated)
+
         @shows.each do |show|
-          response_message += "-> " + show.nome + "\n"
-          response_message += "- Show confirmado: " + (show.confirmado ? "Sim" : "Não") + "\n"
-          response_message += "- Informações da banda: " + show.link_artista + "\n\n"
+          response_message += t(:event_title, :eventTitle => show.name)
+
+          eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
+          response_message +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
+          response_message +=  t(:event_band_info, :moreInfo => show.link_band)
         end
         response_message += "--------------- \n"
+        
         reply_with :message, text: response_message
       end
     else

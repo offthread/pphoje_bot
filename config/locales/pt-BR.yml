@@ -1,0 +1,25 @@
+pt-BR:
+  empty_shows_results : "Não há eventos programados para o dia %{dateFormated}."
+  shows_title_message : "No dia %{dateFormated} os eventos serão:\n"
+
+  event_title         : "-> %{eventTitle}\n"
+  event_confirmed      : "- Evento confirmado: %{eventConfirmed}\n"
+  event_band_info  : "- Informações da banda: %{moreInfo}\n\n"
+
+  confirmed : "Sim"
+  not_confirmed : "Não"
+
+  week_day_monday      : "seg"
+  week_day_tuesday     : "ter"
+  week_day_wednesday   : "qua"
+  week_day_thursday    : "qui"
+  week_day_friday      : "sex"
+  week_day_saturday    : "sab"
+  week_day_sunday      : "dom"
+  week_tomorrow        : "amanha"
+
+  custom_data_format   : "%{day}/%{month}"
+
+  check_usage_command  : "Verifique as instruções de uso utilizando o comando /help"
+
+  error_invalid_days   : "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."

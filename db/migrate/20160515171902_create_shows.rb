@@ -1,10 +1,10 @@
 class CreateShows < ActiveRecord::Migration
   def change
     create_table :shows do |t|
-	  t.string :nome
-      t.date :data
-      t.boolean :confirmado
-      t.string :link_artista
+	  t.string :name
+      t.date :date
+      t.boolean :is_confirmed
+      t.string :link_band
       
       t.timestamps null: false
     end
