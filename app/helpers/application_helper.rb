@@ -3,7 +3,7 @@ module ApplicationHelper
 	NUM_WEEK_DAYS = 7
 	MESSAGE_CHECK_USAGE_COMMAND = I18n.t(:check_usage_command)
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
-	END_DATE_STRING = "17/05/2016"
+	END_DATE_STRING = "04/07/2016"
 
 	def getDayFromString (day)
 		currentWeekDay = Date.today.wday
