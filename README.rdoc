@@ -1,6 +1,6 @@
 == README
 
-Do you want to stay tuned about the big events that will be happening at Parque do Povo during the Greatest São João of the World - Campina Grande?
+Do you want to stay tuned about the big events that will be happening at Parque do Povo during the biggest São João in the World - Campina Grande?
 
 We can help you to find the shows of Parque do Povo - Campina Grande/PB with this Telegram Bot, pphoje_bot.
 
@@ -29,13 +29,10 @@ This project is configured to run using the following configuration:
 * Configuration
 
 * Database creation:
-You should run the following commands to start the project correctly:
-1- rake db:create
+You should run the following commands to start the project correctly: rake db:create
 
 * Database initialization
-You should run the following commands to start the project correctly:
-1- rake db:migrate
-2- rake db:seed
+You should run the following commands to start the project correctly: rake db:migrate -> rake db:seed
 
 * Deployment instructions
 Just run bin/rake telegram:bot:poller to start the project
