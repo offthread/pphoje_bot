@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20160515171902) do
 
   create_table "shows", force: :cascade do |t|
-    t.string   "nome"
-    t.date     "data"
-    t.boolean  "confirmado"
-    t.string   "link_artista"
+    t.string   "name"
+    t.date     "date"
+    t.boolean  "is_confirmed"
+    t.string   "link_band"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

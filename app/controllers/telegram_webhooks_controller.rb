@@ -5,23 +5,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   context_to_action!
 
   def start(*)
+    # TODO: change this default message
     reply_with :message, text: 'Hi there!'
-  end
-
-  def memo(*args)
-    if args.any?
-      session[:memo] = args.join(' ')
-      reply_with :message, text: 'Remembered!'
-    else
-      reply_with :message, text: 'What should I remember?'
-      save_context :memo
-    end
-  end
-
-  def remind_me
-    to_remind = session.delete(:memo)
-    reply = to_remind || 'Nothing to remind'
-    reply_with :message, text: reply
   end
 
   def shows(*args)
@@ -39,24 +24,32 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         errorMessage = MESSAGE_CHECK_USAGE_COMMAND
       end
 
+      currentMonth = Date.today.strftime("%m").to_s
+
       if errorMessage.nil?
-        @shows = Show.by_day(dayFromArgs)
+        @shows = Show.by_day(dayFromArgs, currentMonth)
       else
         reply_with :message, text: errorMessage
         return
       end
 
+      dateFormated = t(:custom_data_format, :day => dayFromArgs, :month => currentMonth)
+
       if @shows.empty?
-        reply_with :message, text: 'Não há shows programados no dia informado.'
+        reply_with :message, text: t(:empty_shows_results, :dateFormated => dateFormated)
       else
-        response_message = "No dia " + dayFromArgs + ", teremos: \n"
-        
+
+        response_message = t(:shows_title_message, :dateFormated => dateFormated)
+
         @shows.each do |show|
-          response_message += "-> " + show.nome + "\n"
-          response_message += "- Show confirmado: " + (show.confirmado ? "Sim" : "Não") + "\n"
-          response_message += "- Informações da banda: " + show.link_artista + "\n\n"
+          response_message += t(:event_title, :eventTitle => show.name)
+
+          eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
+          response_message +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
+          response_message +=  t(:event_band_info, :moreInfo => show.link_band)
         end
         response_message += "--------------- \n"
+        
         reply_with :message, text: response_message
       end
     else
