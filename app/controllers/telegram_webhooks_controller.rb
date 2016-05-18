@@ -9,74 +9,45 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     reply_with :message, text: 'Hi there!'
   end
 
-  def shows(*args)
+  def shows(* args)
     endingDate = Date.parse(END_DATE_STRING, t(:date_format))
 
     # If arguments is not empty, check if it's a number or a string
     if args.any?
-      #Day informed as a number
-      if args[0].match(NUMBER_REGULAR_EXPRESSION)
-        dayFromArgs = args[0].to_s.rjust(2, '0')
-        errorMessage = validateDayFromMonth(dayFromArgs.to_i)
-      elsif args[0].is_a? String
-        #Day informed as a string (monday, tuesday...)
-        dayFromArgs = getDayFromString(args[0].to_s)
-      else
-        #Command does not match anything
-        errorMessage = MESSAGE_CHECK_USAGE_COMMAND
-      end
+
+      selectedDay, argsTypeErrorMessage = getArgsFromCommand(* args)
 
       # Return immediately if an error message was caught
-      if errorMessage
-        reply_with :message, text: errorMessage
+      if argsTypeErrorMessage
+        replyWithText(argsTypeErrorMessage)
+        return
+      elsif selectedDay.nil?
+        replyWithText(t(:error_invalid_weekday))
         return
       end
 
-      if not dayFromArgs
-        reply_with :message, text: t(:error_invalid_weekday)
+      requestedDate = getRequestedDateFormated(selectedDay)
+
+      resultAvailable = checkDateAvailability(endingDate, requestedDate)
+
+      if resultAvailable.is_a? String
+        replyWithText(resultAvailable)
         return
-      end
-
-      currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
-
-      # If the current day is bigger than the requested day, get data from next month
-      if Date.today.strftime("%d").to_i > dayFromArgs.to_i
-        currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
-      end
-
-      requestedDate = Date.parse(dayFromArgs + "/" + currentMonth + "/" + Time.now.year.to_s, t(:date_format))
-
-      # If requested date is bigger than the end date
-      if Date.today > endingDate
-        reply_with :message, text: t(:ended_message)
-        return
-      elsif requestedDate > endingDate
-        # If current date is bigger than the end date
-        reply_with :message, text: t(:error_after_end_date)
-        return
-      elsif errorMessage.nil?
-        @shows = Show.by_day(dayFromArgs, currentMonth)
-      end
-
-      dateFormated = t(:custom_date_format, :day => dayFromArgs, :month => currentMonth)
-
-      if @shows.empty?
-        reply_with :message, text: t(:empty_shows_results, :dateFormated => dateFormated)
       else
+        @shows = Show.by_date(requestedDate)
 
-        response_message = t(:shows_title_message, :dateFormated => dateFormated)
+        dateFormated = t(:custom_date_format, :day => requestedDate.strftime("%d"), :month => requestedDate.strftime("%m"))
 
-        @shows.each do |show|
-          response_message += t(:event_title, :eventTitle => show.name)
+        if @shows.empty?
+          replyWithText(t(:empty_shows_results, :dateFormated => dateFormated))
+        else
+          responseMessage = getShowsFormated(@shows, dateFormated)
 
-          eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
-          response_message +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
-          response_message +=  t(:event_band_info, :moreInfo => show.link_band)
+          replyWithText(responseMessage)
         end
-        response_message += "--------------- \n"
 
-        reply_with :message, text: response_message
       end
+
     else
       shows(Date.today.strftime("%d"))
     end
@@ -97,4 +68,74 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def action_missing(action)
     reply_with :message, text: "Can not perform #{action}" if command?
   end
+
+  private
+  def getArgsFromCommand(* args)
+    #Day informed as a number
+    if args[0].match(NUMBER_REGULAR_EXPRESSION)
+      dayFromArgs = args[0].to_s.rjust(2, '0')
+      errorMessage = validateDayFromMonth(dayFromArgs.to_i)
+    elsif args[0].is_a? String
+      #Day informed as a string (monday, tuesday...)
+      dayFromArgs = getDayFromString(args[0].to_s)
+    else
+      #Command does not match anything
+      errorMessage = MESSAGE_CHECK_USAGE_COMMAND
+    end
+    return dayFromArgs, errorMessage
+  end
+
+  def replyWithText(text)
+    reply_with :message, text: text
+  end
+
+  def checkDateAvailability (endingDate, requestedDate)
+    # If requested date is bigger than the end date
+    if Date.today > endingDate
+      return t(:ended_message)
+    elsif requestedDate > endingDate
+    # If current date is bigger than the end date
+      return t(:error_after_end_date)
+    else
+      return true
+    end
+  end
+
+  def getCurrentMonth(selectedDay)
+
+    currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
+
+    # If the current day is bigger than the requested day, get data from next month
+    if Date.today.strftime("%d").to_i > selectedDay.to_i
+      currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
+    end
+
+    return currentMonth
+  end
+
+  def getRequestedDateFormated (selectedDay)
+    currentMonth = getCurrentMonth(selectedDay).to_s
+    currentYear  = getCurrentYear().to_s
+
+    return Date.parse(selectedDay + "/" + currentMonth + "/" + currentYear, t(:date_format))
+  end
+
+  def getCurrentYear
+    return Time.now.year.to_s
+  end
+
+  def getShowsFormated(shows, dateFormated)
+    responseMessage = t(:shows_title_message, :dateFormated => dateFormated)
+    shows.each do |show|
+      responseMessage += t(:event_title, :eventTitle => show.name)
+
+      eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
+      responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
+      responseMessage +=  t(:event_band_info, :moreInfo => show.link_band)
+    end
+    responseMessage += "--------------- \n"
+
+    return responseMessage
+  end
+
 end

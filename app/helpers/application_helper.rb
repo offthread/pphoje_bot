@@ -3,7 +3,7 @@ module ApplicationHelper
 	NUM_WEEK_DAYS = 7
 	MESSAGE_CHECK_USAGE_COMMAND = I18n.t(:check_usage_command)
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
-	END_DATE_STRING = "03/07/2016"
+	END_DATE_STRING = "03/06/2016"
 
 	def getDayFromString (day)
 		currentWeekDay = Date.today.wday
@@ -40,7 +40,7 @@ module ApplicationHelper
 	def daysBefore(currentWeekDay, askedWeekDay)
 		difference = askedWeekDay - currentWeekDay
 		if difference < 0
-			return (difference) + NUM_WEEK_DAYS
+			difference += NUM_WEEK_DAYS
 		end
 		return difference
 	end
