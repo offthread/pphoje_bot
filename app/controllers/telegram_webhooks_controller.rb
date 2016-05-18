@@ -19,10 +19,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         dayFromArgs = args[0].to_s.rjust(2, '0')
         errorMessage = validateDayFromMonth(dayFromArgs.to_i)
       elsif args[0].is_a? String
-        #Day informed as a string (monday, tuesday...) 
+        #Day informed as a string (monday, tuesday...)
         dayFromArgs = getDayFromString(args[0].to_s)
       else
-        #Command does not match anything 
+        #Command does not match anything
         errorMessage = MESSAGE_CHECK_USAGE_COMMAND
       end
 
@@ -35,7 +35,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
 
       # If the current day is bigger than the requested day, get data from next month
-      if Date.today.strftime("%d").to_i > dayFromArgs.to_i 
+      if Date.today.strftime("%d").to_i > dayFromArgs.to_i
         currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
       end
 
@@ -69,11 +69,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
           response_message +=  t(:event_band_info, :moreInfo => show.link_band)
         end
         response_message += "--------------- \n"
-        
+
         reply_with :message, text: response_message
       end
     else
-      reply_with :message, text: MESSAGE_CHECK_USAGE_COMMAND
+      shows(Date.today.strftime("%d"))
     end
   end
 
