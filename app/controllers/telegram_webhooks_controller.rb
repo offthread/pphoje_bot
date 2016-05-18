@@ -78,7 +78,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         reply_with :message, text: response_message
       end
     else
-      reply_with :message, text: MESSAGE_CHECK_USAGE_COMMAND
+      shows(Date.today.strftime("%d"))
     end
   end
 
