@@ -77,6 +77,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     end
   end
 
+  def ajuda(*)
+    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_further) + t(:help_shows_day_str))
+  end
+
+  def help(*)
+    ajuda
+  end
   # v0.6
   context_handler do
     reply_with :message, text: "You wrote: #{payload['text']}"
