@@ -34,4 +34,4 @@ pt-BR:
 
   error_invalid_days   : "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."
   error_after_end_date : "Apenas datas entre o intervalo de 03 de Junho a 03 de Julho e maiores que a data atual são consideradas válidas."
-  error_invalid_weekday: "Por favor, forneça um dia da semana válido (lembre-se de usar apenas as três primeiras letras (exemplo: seg))."
+  error_invalid_weekday: 'Por favor, forneça um dia da semana válido (lembre-se de usar apenas as três primeiras letras, assim como em "seg").'
