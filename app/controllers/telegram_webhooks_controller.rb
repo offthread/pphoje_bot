@@ -9,11 +9,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     reply_with :message, text: 'Hi there!'
   end
 
-  def shows(* args)
+  def shows(*args)
     # If arguments is not empty, check if it's a number or a string
     if args.any?
 
-      selectedDay, argsTypeErrorMessage, selectedMonth = getArgsFromCommand(* args)
+      selectedDay, argsTypeErrorMessage, selectedMonth = getArgsFromCommand(*args)
 
       # Return immediately if an error message was caught
       if argsTypeErrorMessage
@@ -68,7 +68,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   private
-  def getArgsFromCommand(* args)
+  def getArgsFromCommand(*args)
     #Day informed as a number
     if args[0].match(NUMBER_REGULAR_EXPRESSION)
 
