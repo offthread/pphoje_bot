@@ -34,3 +34,4 @@ en:
 
   error_invalid_days  : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
   error_after_end_date : "Only dates between June 3rd and July 3rd and greater than the current date are valid."
+  error_invalid_weekday: "Please, provide a valid weekday name (remember to only use the first three letters (example: mon))."

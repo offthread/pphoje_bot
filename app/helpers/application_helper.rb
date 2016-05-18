@@ -25,10 +25,10 @@ module ApplicationHelper
 			weekDayRequested = daysBefore(currentWeekDay, 6)
 		when t(:week_day_sunday)
 			weekDayRequested = daysBefore(currentWeekDay, 0)
-		when t(:week_day_tomorrow)
+		when t(:week_tomorrow)
 			weekDayRequested = 1
 		else
-			weekDayRequested = Date.today.wday
+			return nil
 		end
 
 		dateRequested = Date.today() + weekDayRequested.to_i
