@@ -37,8 +37,8 @@ module ApplicationHelper
 		return dayRequested
 	end
 
-	def daysBefore(currentWeekDay, askedWeekDay)
-		difference = askedWeekDay - currentWeekDay
+	def daysBefore(currentWeekDay, requestedWeekDay)
+		difference = requestedWeekDay - currentWeekDay
 		if difference < 0
 			difference += NUM_WEEK_DAYS
 		end
