@@ -3,7 +3,8 @@ module ApplicationHelper
 	NUM_WEEK_DAYS = 7
 	MESSAGE_CHECK_USAGE_COMMAND = I18n.t(:check_usage_command)
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
-	END_DATE_STRING = "03/06/2016"
+	DATE_REGULAR_EXPRESSION   = /^[0-3]?[0-9]\/[0-3]?[0-9]$/
+	END_DATE_STRING = "03/07/2016"
 
 	def getDayFromString (day)
 		currentWeekDay = Date.today.wday
@@ -49,5 +50,15 @@ module ApplicationHelper
 		if day > 30 || day < 1
 			return I18n.t(:error_invalid_days)
 		end
+	end
+
+	def validateMonth(month)
+		if month < 6 || month > 7
+			return I18n.t(:error_invalid_days)
+		end
+	end
+
+	def validateDateFromInput(day, month)
+		return validateDayFromMonth(day) || validateMonth(month)
 	end
 end

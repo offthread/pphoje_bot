@@ -10,12 +10,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def shows(* args)
-    endingDate = Date.parse(END_DATE_STRING, t(:date_format))
-
     # If arguments is not empty, check if it's a number or a string
     if args.any?
 
-      selectedDay, argsTypeErrorMessage = getArgsFromCommand(* args)
+      selectedDay, argsTypeErrorMessage, selectedMonth = getArgsFromCommand(* args)
 
       # Return immediately if an error message was caught
       if argsTypeErrorMessage
@@ -26,7 +24,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         return
       end
 
-      requestedDate = getRequestedDateFormated(selectedDay)
+      requestedDate = getRequestedDateFormated(selectedDay, selectedMonth)
+      endingDate = Date.parse(END_DATE_STRING, t(:date_format))
 
       resultAvailable = checkDateAvailability(endingDate, requestedDate)
 
@@ -45,7 +44,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
           replyWithText(responseMessage)
         end
-
       end
 
     else
@@ -73,16 +71,42 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def getArgsFromCommand(* args)
     #Day informed as a number
     if args[0].match(NUMBER_REGULAR_EXPRESSION)
+
       dayFromArgs = args[0].to_s.rjust(2, '0')
-      errorMessage = validateDayFromMonth(dayFromArgs.to_i)
+      isCurrentMonth = true
+
+    elsif args[0].match(DATE_REGULAR_EXPRESSION)
+
+      dateSplitted = args[0].split('/')
+      dateFormated = Date.strptime(dateSplitted[0] + "/" + dateSplitted[1] + "/" + getCurrentYear, t(:date_format))
+      puts dateFormated.month
+      
+      dayFromArgs = dateFormated.strftime('%d')
+      monthFromArgs = dateFormated.strftime('%m')
+      isCurrentMonth = false
+
     elsif args[0].is_a? String
       #Day informed as a string (monday, tuesday...)
       dayFromArgs = getDayFromString(args[0].to_s)
+      isCurrentMonth = true
+
     else
       #Command does not match anything
       errorMessage = MESSAGE_CHECK_USAGE_COMMAND
+
     end
-    return dayFromArgs, errorMessage
+
+    if not errorMessage
+      if isCurrentMonth
+        errorMessage = validateDateFromInput(dayFromArgs.to_i, getCurrentMonth(nil).to_i)
+      else
+        errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs.to_i)
+      end
+
+    end
+
+    return dayFromArgs, errorMessage, monthFromArgs
+
   end
 
   def replyWithText(text)
@@ -95,7 +119,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       return t(:ended_message)
     elsif requestedDate > endingDate
     # If current date is bigger than the end date
-      return t(:error_after_end_date)
+      return t(:error_invalid_days)
     else
       return true
     end
@@ -106,15 +130,23 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
 
     # If the current day is bigger than the requested day, get data from next month
-    if Date.today.strftime("%d").to_i > selectedDay.to_i
+    if selectedDay.nil?
+      return currentMonth
+    elsif Date.today.strftime("%d").to_i > selectedDay.to_i
       currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
     end
 
     return currentMonth
   end
 
-  def getRequestedDateFormated (selectedDay)
-    currentMonth = getCurrentMonth(selectedDay).to_s
+  def getRequestedDateFormated (selectedDay, selectedMonth)
+
+    if selectedMonth.nil?
+      currentMonth = getCurrentMonth(selectedDay).to_s
+    else
+      currentMonth = selectedMonth.to_s
+    end
+
     currentYear  = getCurrentYear().to_s
 
     return Date.parse(selectedDay + "/" + currentMonth + "/" + currentYear, t(:date_format))
