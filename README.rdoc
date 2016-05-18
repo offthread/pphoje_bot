@@ -18,6 +18,7 @@ We support the following commands:
 {next_day}   -> String value, representing the day after today. [{amanha, tomorrow}]
 
 Example of usage:
+/shows         -> returns the shows for the current day
 /shows 21      -> returns the shows for the 21th day of the current month
 /shows amanha  -> returns the shows for the next day
 /shows mon     -> returns the shows on Monday (current day, if it's Monday or next Monday otherwise)
@@ -40,7 +41,7 @@ Just run bin/rake telegram:bot:poller to start the project
 * License
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2016 OFF-Thread <offthread@gmail.com>
+Copyright 2016 OFF Thread <offthread@gmail.com>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
