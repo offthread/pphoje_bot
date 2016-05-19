@@ -19,12 +19,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       if argsTypeErrorMessage
         replyWithText(argsTypeErrorMessage)
         return
-      elsif selectedDay.nil?
+      elsif not selectedDay
         replyWithText(t(:error_invalid_weekday))
         return
       end
 
-      requestedDate = getRequestedDateFormated(selectedDay, selectedMonth)
+      requestedDate = getRequestedDateFormatted(selectedDay, selectedMonth)
       endingDate = Date.parse(END_DATE_STRING, t(:date_format))
 
       resultAvailable = checkDateAvailability(endingDate, requestedDate)
@@ -35,12 +35,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       else
         @shows = Show.by_date(requestedDate)
 
-        dateFormated = t(:custom_date_format, :day => requestedDate.strftime("%d"), :month => requestedDate.strftime("%m"))
+        dateFormatted = t(:custom_date_format, :day => requestedDate.strftime("%d"), :month => requestedDate.strftime("%m"))
 
         if @shows.empty?
-          replyWithText(t(:empty_shows_results, :dateFormated => dateFormated))
+          replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
         else
-          responseMessage = getShowsFormated(@shows, dateFormated)
+          responseMessage = getShowsFormatted(@shows, dateFormatted)
 
           replyWithText(responseMessage)
         end
@@ -52,7 +52,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def ajuda(*)
-    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_further) + t(:help_shows_day_str))
+    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_day_str))
   end
 
   def help(*)
@@ -78,11 +78,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     elsif args[0].match(DATE_REGULAR_EXPRESSION)
 
       dateSplitted = args[0].split('/')
-      dateFormated = Date.strptime(dateSplitted[0] + "/" + dateSplitted[1] + "/" + getCurrentYear, t(:date_format))
-      puts dateFormated.month
+      dateFormatted = Date.strptime("#{dateSplitted[0]}/#{dateSplitted[1]}/#{getCurrentYear}", t(:date_format))
       
-      dayFromArgs = dateFormated.strftime('%d')
-      monthFromArgs = dateFormated.strftime('%m')
+      dayFromArgs = dateFormatted.strftime('%d')
+      monthFromArgs = dateFormatted.strftime('%m')
       isCurrentMonth = false
 
     elsif args[0].is_a? String
@@ -98,7 +97,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     if not errorMessage
       if isCurrentMonth
-        errorMessage = validateDateFromInput(dayFromArgs.to_i, getCurrentMonth(nil).to_i)
+        errorMessage = validateDateFromInput(dayFromArgs.to_i, Time.now.month.to_i)
       else
         errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs.to_i)
       end
@@ -130,7 +129,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
 
     # If the current day is bigger than the requested day, get data from next month
-    if selectedDay.nil?
+    if not selectedDay
       return currentMonth
     elsif Date.today.strftime("%d").to_i > selectedDay.to_i
       currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
@@ -139,9 +138,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     return currentMonth
   end
 
-  def getRequestedDateFormated (selectedDay, selectedMonth)
+  def getRequestedDateFormatted (selectedDay, selectedMonth)
 
-    if selectedMonth.nil?
+    if not selectedMonth
       currentMonth = getCurrentMonth(selectedDay).to_s
     else
       currentMonth = selectedMonth.to_s
@@ -156,8 +155,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     return Time.now.year.to_s
   end
 
-  def getShowsFormated(shows, dateFormated)
-    responseMessage = t(:shows_title_message, :dateFormated => dateFormated)
+  def getShowsFormatted(shows, dateFormatted)
+    responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted)
     shows.each do |show|
       responseMessage += t(:event_title, :eventTitle => show.name)
 
