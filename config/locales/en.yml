@@ -24,6 +24,8 @@ en:
   help_shows_day_month : "-> The command '/shows month/day' informa quais os eventos do dia e mes selecionados. Exemplo: '/shows 04/06' ou '/shows 22/6'\n\n"
   help_shows_day_str   : "-> Also, the command '/shows day_of_week' informs the events for the day of week chosen (inform only the three first letters). Example: '/shows mon'.\n"
 
+  start_message        : "Hi!\n\nThe biggest São João Festival in the world take place at Campina Grande, Paraíba and I can help you with information about main festival's shows.\nTyping '/help' you can check the list of available commands."
+
   custom_date_format   : "%{month}/%{day}"
 
   check_usage_command  : "Verify the usage instructions using the command /help"
@@ -32,5 +34,5 @@ en:
 
   ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
 
-  error_invalid_days  : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
+  error_invalid_days   : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
   error_invalid_weekday: 'Please provide a valid weekday name (remember to only use the first three letters as in "mon").'

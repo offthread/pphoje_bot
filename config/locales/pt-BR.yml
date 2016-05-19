@@ -22,7 +22,9 @@ pt-BR:
   help_shows_tomorrow  : "-> Utilizando o comando '/shows amanha', veja os eventos do próximo dia.\n\n"
   help_shows_day_num   : "-> O comando '/shows #dia' informa quais os eventos do dia selecionado, para o mês atual. Exemplo: '/shows 21'.\n\n"
   help_shows_day_month : "-> O comando '/shows dia/mes' informa quais os eventos do dia e mes selecionados. Exemplo: '/shows 04/06' ou '/shows 22/6'\n\n"
-  help_shows_day_str   : "-> O comando '/shows dia_da_semana' informa quais os eventos do dia da semana do mês atual (apenas as três primeiras letras do dia) selecionado. Exemplo: '/shows seg'.\n"
+  help_shows_day_str   : "-> O comando '/shows dia_da_semana' informa quais os eventos do dia da semana do mês atual (apenas as três primeiras letras do dia) selecionado. Exemplo: '/shows seg'.\n\n"
+
+  start_message        : "Olá!\n\nO Maior São João do Mundo acontece em Campina Grande, Paraíba e eu posso te ajudar com informações sobre os principais shows do festival.\n\nDigitando '/help' você pode ver a lista de comandos disponíveis."
 
   custom_date_format   : "%{day}/%{month}"
 

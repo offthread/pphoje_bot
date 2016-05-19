@@ -6,7 +6,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def start(*)
     # TODO: change this default message
-    reply_with :message, text: 'Hi there!'
+    reply_with :message, text: t(:start_message)
   end
 
   def shows(*args)
@@ -52,7 +52,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def ajuda(*)
-    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_day_str))
+    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_shows_day_month) + "--------------")
   end
 
   def help(*)
@@ -60,11 +60,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
   # v0.6
   context_handler do
-    reply_with :message, text: "You wrote: #{payload['text']}"
+    replyWithText(t(:check_usage_command))
   end
 
   def action_missing(action)
-    reply_with :message, text: "Can not perform #{action}" if command?
+    replyWithText(t(:check_usage_command))
   end
 
   private
