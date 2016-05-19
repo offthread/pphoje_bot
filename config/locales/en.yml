@@ -1,6 +1,6 @@
 en:
-  empty_shows_results  : "There are no events for the date %{dateFormated}."
-  shows_title_message  : "The events for the date %{dateFormated} are:\n"
+  empty_shows_results  : "There are no events for the date %{dateFormatted}."
+  shows_title_message  : "The events for the date %{dateFormatted} are:\n"
 
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Event confirmed: %{eventConfirmed}\n"
@@ -21,7 +21,7 @@ en:
   help_message         : "Sure! The available commands are:\n-> Use the command '/shows' to check today's events.\n\n"
   help_shows_tomorrow  : "-> Using the command '/shows tomorrow', check the events for the next day.\n"
   help_shows_day_num   : "-> The command '/shows #day' informs the events for the #day chosen. Example: '/shows 21'.\n\n"
-  help_shows_further   : "* P.S.: If the current day is greater than the chosen day, we'll verify the events in the next month.\n\n"
+  help_shows_day_month : "-> The command '/shows month/day' informa quais os eventos do dia e mes selecionados. Exemplo: '/shows 04/06' ou '/shows 22/6'\n\n"
   help_shows_day_str   : "-> Also, the command '/shows day_of_week' informs the events for the day of week chosen (inform only the three first letters). Example: '/shows mon'.\n"
 
   custom_date_format   : "%{month}/%{day}"
@@ -33,5 +33,4 @@ en:
   ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
 
   error_invalid_days  : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
-  error_after_end_date : "Only dates between June 3rd and July 3rd and greater than the current date are valid."
   error_invalid_weekday: 'Please provide a valid weekday name (remember to only use the first three letters as in "mon").'

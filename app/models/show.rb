@@ -1,3 +1,3 @@
 class Show < ActiveRecord::Base
-	scope :by_day, lambda { |day, month| where('strftime("%d", date) = ? AND strftime("%m", date) = ? ', day, month) }
+	scope :by_date, lambda { |selectedDate| where('strftime("%d", date) = ? AND strftime("%m", date) = ? ', selectedDate.strftime("%d"), selectedDate.strftime("%m")) }
 end
