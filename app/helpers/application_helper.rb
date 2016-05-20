@@ -5,7 +5,7 @@ module ApplicationHelper
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
 	DATE_REGULAR_EXPRESSION   = /^[0-3]?[0-9]\/[0-3]?[0-9]$/
 	END_DATE_STRING = "03/07/2016"
-	END_STREAM_STRING = "------------------------------\n"
+	END_STREAM_STRING = "\n-----------------------------------------------\n"
 
 	def getDayFromString (day)
 		currentWeekDay = Date.today.wday
