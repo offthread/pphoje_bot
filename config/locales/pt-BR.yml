@@ -1,0 +1,40 @@
+pt-BR:
+  empty_shows_results  : "Não há eventos programados para o dia %{dateFormatted}."
+  shows_title_message  : "No dia %{dateFormatted} teremos, no palco principal, os eventos:\n"
+
+  event_title          : "-> %{eventTitle}\n"
+  event_confirmed      : "- Evento confirmado: %{eventConfirmed}\n"
+  event_band_info      : "- Informações da banda: %{moreInfo}\n\n"
+
+  confirmed            : "Sim"
+  not_confirmed        : "Não"
+
+  week_day_monday      : "seg"
+  week_day_tuesday     : "ter"
+  week_day_wednesday   : "qua"
+  week_day_thursday    : "qui"
+  week_day_friday      : "sex"
+  week_day_saturday    : "sab"
+  week_day_sunday      : "dom"
+  week_tomorrow        : "amanha"
+
+  help_message         : "Claro! Os comandos disponíveis são:\n -> Utilize o comando '/shows' para ver os eventos do dia atual.\n\n"
+  help_shows_tomorrow  : "-> Utilizando o comando '/shows amanha', veja os eventos do próximo dia.\n\n"
+  help_shows_day_num   : "-> O comando '/shows #dia' informa quais os eventos do dia selecionado, considerando o período do São João Campina Grande. Exemplo: '/shows 21'.\n\n"
+  help_shows_day_month : "-> O comando '/shows dia/mes' informa quais os eventos do dia e mes selecionados. Exemplo: '/shows 04/06' ou '/shows 22/6'\n\n"
+  help_shows_day_str   : "-> O comando '/shows dia_da_semana' informa quais os eventos do dia da semana, do mês atual. Necessário apenas as três primeiras letras do dia selecionado. Exemplo: '/shows seg'.\n\n"
+  help_support         : "Dúvidas e sugestões? Entre em contato com os desenvolvedores utilizando o e-mail offthread@gmail.com.\n\n"
+  help_developed_by    : "Desenvolvido por OFFThread™"
+
+  start_message        : "Olá!\n\nO Maior São João do Mundo acontece em Campina Grande, Paraíba e eu posso te ajudar com informações sobre os principais shows do festival.\n\nDigitando '/help' você pode ver a lista de comandos disponíveis."
+
+  custom_date_format   : "%{day}/%{month}"
+
+  check_usage_command  : "Verifique as instruções de uso utilizando o comando /help"
+
+  date_format          : "%d/%m/%Y"
+
+  ended_message        : "O Maior São João do Mundo 2016 acabou! Não há informações futuras disponíveis."
+
+  error_invalid_days   : "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."
+  error_invalid_weekday: 'Por favor, forneça um dia da semana válido (lembre-se de usar apenas as três primeiras letras, assim como em "seg").'
