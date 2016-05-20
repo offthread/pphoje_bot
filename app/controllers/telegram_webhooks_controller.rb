@@ -24,35 +24,20 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
         return
       end
 
-      requestedDate = getRequestedDateFormatted(selectedDay, selectedMonth)
-      endingDate = Date.parse(END_DATE_STRING, t(:date_format))
-
-      resultAvailable = checkDateAvailability(endingDate, requestedDate)
-
-      if resultAvailable.is_a? String
-        replyWithText(resultAvailable)
-        return
-      else
-        @shows = Show.by_date(requestedDate)
-
-        dateFormatted = t(:custom_date_format, :day => requestedDate.strftime("%d"), :month => requestedDate.strftime("%m"))
-
-        if @shows.empty?
-          replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
-        else
-          responseMessage = getShowsFormatted(@shows, dateFormatted)
-
-          replyWithText(responseMessage)
-        end
-      end
+      # Return requested info
+      sendShowsInformation(selectedDay, selectedMonth)
 
     else
+      # Ask infos about the current day
       shows(Date.today.strftime("%d/%m"))
     end
   end
 
   def ajuda(*)
-    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_support) + END_STREAM_STRING + t(:help_developed_by) + END_STREAM_STRING)
+    helpMessage = t(:help_message) + t(:help_shows_tomorrow) + 
+    t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_support) + 
+    END_STREAM_STRING + t(:help_developed_by) + END_STREAM_STRING
+    reply_with :message, text: helpMessage
   end
 
   def help(*)
@@ -78,8 +63,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     elsif args[0].match(DATE_REGULAR_EXPRESSION)
 
       dateSplitted = args[0].split('/')
-      dateFormatted = Date.strptime("#{dateSplitted[0]}/#{dateSplitted[1]}/#{getCurrentYear}", t(:date_format))
-      
+      dateFormatted = Date.strptime("#{dateSplitted[0]}/#{dateSplitted[1]}/#{getCurrentYear}",
+        t(:date_format))
+
       dayFromArgs = dateFormatted.strftime('%d')
       monthFromArgs = dateFormatted.strftime('%m')
       isCurrentMonth = false
@@ -179,6 +165,31 @@ def getCurrentMonth(selectedDay)
     responseMessage += END_STREAM_STRING
 
     return responseMessage
+  end
+
+  def sendShowsInformation(selectedDay, selectedMonth)
+    requestedDate = getRequestedDateFormatted(selectedDay, selectedMonth)
+    endingDate = Date.parse(END_DATE_STRING, t(:date_format))
+
+    resultAvailable = checkDateAvailability(endingDate, requestedDate)
+
+    if resultAvailable.is_a? String
+      replyWithText(resultAvailable)
+      return
+    else
+      @shows = Show.by_date(requestedDate)
+
+      dateFormatted = t(:custom_date_format, :day => requestedDate.strftime("%d"),
+        :month => requestedDate.strftime("%m"))
+
+      if @shows.empty?
+        replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
+      else
+        responseMessage = getShowsFormatted(@shows, dateFormatted)
+
+        replyWithText(responseMessage)
+      end
+    end
   end
 
 end
