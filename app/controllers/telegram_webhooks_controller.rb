@@ -52,7 +52,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def ajuda(*)
-    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow) + t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_shows_day_month) + "--------------")
+    reply_with :message, text: (t(:help_message) + t(:help_shows_tomorrow)
+      + t(:help_shows_day_num) + t(:help_shows_day_str)
+      + t(:help_support) + t(:help_developed_by) + END_STREAM_STRING)
   end
 
   def help(*)
@@ -73,7 +75,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     if args[0].match(NUMBER_REGULAR_EXPRESSION)
 
       dayFromArgs = args[0].to_s.rjust(2, '0')
-      isCurrentMonth = true
+      isCurrentMonth = false
 
     elsif args[0].match(DATE_REGULAR_EXPRESSION)
 
@@ -98,6 +100,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     if not errorMessage
       if isCurrentMonth
         errorMessage = validateDateFromInput(dayFromArgs.to_i, Time.now.month.to_i)
+      elsif not monthFromArgs
+        errorMessage, monthFromArgs = getMonthIfEmptyFromArgs(dayFromArgs)
       else
         errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs.to_i)
       end
@@ -106,6 +110,16 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     return dayFromArgs, errorMessage, monthFromArgs
 
+  end
+
+  def getMonthIfEmptyFromArgs(dayFromArgs)
+    if Time.now.month.to_i < 6 || dayFromArgs.to_i < Time.now.day.to_i
+      monthFromArgs = Time.now.month.to_i + 1
+      errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs)
+    else
+      errorMessage = validateDateFromInput(dayFromArgs.to_i, (Time.now.month.to_i))
+    end
+    return errorMessage, monthFromArgs
   end
 
   def replyWithText(text)
@@ -118,15 +132,15 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       return t(:ended_message)
     elsif requestedDate > endingDate
     # If current date is bigger than the end date
-      return t(:error_invalid_days)
-    else
-      return true
-    end
+    return t(:error_invalid_days)
+  else
+    return true
   end
+end
 
-  def getCurrentMonth(selectedDay)
+def getCurrentMonth(selectedDay)
 
-    currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
+  currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
 
     # If the current day is bigger than the requested day, get data from next month
     if not selectedDay
@@ -164,7 +178,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
       responseMessage +=  t(:event_band_info, :moreInfo => show.link_band)
     end
-    responseMessage += "--------------- \n"
+    responseMessage += END_STREAM_STRING
 
     return responseMessage
   end
