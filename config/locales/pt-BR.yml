@@ -1,6 +1,6 @@
 pt-BR:
   empty_shows_results  : "Não há eventos programados para o dia %{dateFormatted}."
-  shows_title_message  : "No dia %{dateFormatted} os eventos serão:\n"
+  shows_title_message  : "No dia %{dateFormatted} teremos, no palco principal, os eventos:\n"
 
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Evento confirmado: %{eventConfirmed}\n"
