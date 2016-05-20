@@ -47,7 +47,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       end
 
     else
-      shows(Date.today.strftime("%d"))
+      shows(Date.today.strftime("%d/%m"))
     end
   end
 
