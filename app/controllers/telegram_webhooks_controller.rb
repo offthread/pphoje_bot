@@ -154,7 +154,12 @@ def getCurrentMonth(selectedDay)
   end
 
   def getShowsFormatted(shows, dateFormatted)
-    responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted)
+    
+    completedDate = dateFormatted + "/" + getCurrentYear
+    weekDayNumber = Date.parse(completedDate, t(:date_format)).wday
+    weekDayStr = weekDayName(weekDayNumber)
+
+    responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted, :weekDay => weekDayStr)
     shows.each do |show|
       responseMessage += t(:event_title, :eventTitle => show.name)
 
