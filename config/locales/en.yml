@@ -1,0 +1,40 @@
+en:
+  empty_shows_results  : "There are no events for the date %{dateFormatted}."
+  shows_title_message  : "The events, in the main stage, for the date %{dateFormatted} (%{weekDay}) will be:\n"
+
+  event_title          : "-> %{eventTitle}\n"
+  event_confirmed      : "- Event confirmed: %{eventConfirmed}\n"
+  event_band_info      : "- Band info: %{moreInfo}\n"
+
+  confirmed            : "Yes"
+  not_confirmed        : "No"
+
+  week_day_monday      : "mon"
+  week_day_tuesday     : "tue"
+  week_day_wednesday   : "wed"
+  week_day_thursday    : "thu"
+  week_day_friday      : "fri"
+  week_day_saturday    : "sat"
+  week_day_sunday      : "sun"
+  week_tomorrow        : "tomorrow"
+
+  help_message         : "Sure! The available commands are:\n-> Use the command '/shows' to check today's events.\n\n"
+  help_shows_tomorrow  : "-> Using the command '/shows tomorrow', check the events for the next day.\n"
+  help_shows_day_num   : "-> The command '/shows #day' informs the events for the #day chosen, considering the São João Campina Grande months range. Example: '/shows 21'.\n\n"
+  help_shows_day_month : "-> The command '/shows month/day' informa quais os eventos do dia e mes selecionados. Exemplo: '/shows 04/06' ou '/shows 22/6'\n\n"
+  help_shows_day_str   : "-> Also, the command '/shows day_of_week' informs the events for the day of week chosen (inform only the three first letters). Example: '/shows mon'.\n"
+  help_support         : "Questions and suggestions? Send the developers an email to offthread@gmail.com.\n\n"
+  help_developed_by    : "Developed by OFFThread™"
+
+  start_message        : "Hi!\n\nThe biggest São João Festival in the world take place at Campina Grande, Paraíba and I can help you with information about main festival's shows.\nTyping '/help' you can check the list of available commands."
+
+  custom_date_format   : "%{month}/%{day}"
+
+  check_usage_command  : "Verify the usage instructions using the command /help"
+
+  date_format          : "%m/%d/%Y"
+
+  ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
+
+  error_invalid_days   : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
+  error_invalid_weekday: 'Please provide a valid weekday name (remember to only use the first three letters as in "mon").'

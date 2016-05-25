@@ -1,0 +1,60 @@
+== README
+
+Do you want to stay tuned about the big events that will be happening at Parque do Povo during the biggest São João in the World - Campina Grande?
+
+We can help you to find the shows of Parque do Povo - Campina Grande/PB with this Telegram Bot, pphoje_bot.
+
+If you are a Telegram user, you can include this bot into a channel or write commands directly on a private chat.
+
+We support the following commands:
+
+* /start - To start the bot
+
+* /help  - To check the supported commands
+
+* /shows {day_number} {week_day} {next_day} - To check the shows for a specific date. The arguments are optional and you can inform one of the commands as the example.
+{day_number} -> Integer value, representing the day of a month. [1, 2, 3, 4, ..., 30]
+{week_day}   -> String value, representing the day of a week. [{seg, mon}, {ter, tue}, {qua, wed}, {qui, thu}, {sex, fri}, {sab, sat}, {dom, sun}]
+{next_day}   -> String value, representing the day after today. [{amanha, tomorrow}]
+
+Example of usage:
+/shows         -> returns the shows for the current day
+/shows 21      -> returns the shows for the 21th day of the current month
+/shows amanha  -> returns the shows for the next day
+/shows mon     -> returns the shows on Monday (current day, if it's Monday or next Monday otherwise)
+
+This project is configured to run using the following configuration:
+
+* Ruby version - 2.3.0
+
+* Configuration
+
+* Database creation:
+You should run the following commands to start the project correctly: rake db:create
+
+* Database initialization
+You should run the following commands to start the project correctly: rake db:migrate -> rake db:seed
+
+* Deployment instructions
+Just run bin/rake telegram:bot:poller to start the project
+
+* License
+This software is licensed under the Apache 2 license, quoted below.
+
+Copyright 2016 OFF Thread <offthread@gmail.com>
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+
+* Contributing
+
+Feel free to contribute using your own bot, as we should change the bot secret soon (should be configured in system variables environment).
