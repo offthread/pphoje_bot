@@ -1,6 +1,6 @@
 en:
   empty_shows_results  : "There are no events for the date %{dateFormatted}."
-  shows_title_message  : "The events, in the main stage, for the date %{dateFormatted} will be:\n"
+  shows_title_message  : "The events, in the main stage, for the date %{dateFormatted} (%{weekDay}) will be:\n"
 
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Event confirmed: %{eventConfirmed}\n"

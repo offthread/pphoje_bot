@@ -62,4 +62,9 @@ module ApplicationHelper
 	def validateDateFromInput(day, month)
 		return validateDayFromMonth(day) || validateMonth(month)
 	end
+
+	def weekDayName(dayNumber)
+  		return I18n.t(:day_names)[dayNumber]
+	end
+
 end
