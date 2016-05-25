@@ -34,8 +34,8 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def ajuda(*)
-    helpMessage = t(:help_message) + t(:help_shows_tomorrow) + 
-    t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_support) + 
+    helpMessage = t(:help_message) + t(:help_shows_tomorrow) +
+    t(:help_shows_day_num) + t(:help_shows_day_str) + t(:help_support) +
     END_STREAM_STRING + t(:help_developed_by) + END_STREAM_STRING
     reply_with :message, text: helpMessage
   end
@@ -154,8 +154,7 @@ def getCurrentMonth(selectedDay)
   end
 
   def getShowsFormatted(shows, dateFormatted)
-    
-    completedDate = dateFormatted + "/" + getCurrentYear
+    completedDate = "#{dateFormatted}/#{getCurrentYear}"
     weekDayNumber = Date.parse(completedDate, t(:date_format)).wday
     weekDayStr = weekDayName(weekDayNumber)
 
