@@ -29,7 +29,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     else
       # Ask infos about the current day
-      shows(Date.today.strftime("%d/%m"))
+      shows(Time.zone.today.strftime("%d/%m"))
     end
   end
 
@@ -112,7 +112,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
   def checkDateAvailability (endingDate, requestedDate)
     # If requested date is bigger than the end date
-    if Date.today > endingDate
+    if Time.zone.today > endingDate
       return t(:ended_message)
     elsif requestedDate > endingDate
     # If current date is bigger than the end date
