@@ -83,7 +83,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     if not errorMessage
       if isCurrentMonth
-        errorMessage = validateDateFromInput(dayFromArgs.to_i, Time.now.month.to_i)
+        errorMessage = validateDateFromInput(dayFromArgs.to_i, Time.zone.now.month.to_i)
       elsif not monthFromArgs
         errorMessage, monthFromArgs = getMonthIfEmptyFromArgs(dayFromArgs)
       else
@@ -97,11 +97,11 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def getMonthIfEmptyFromArgs(dayFromArgs)
-    if Time.now.month.to_i < 6 || dayFromArgs.to_i < Time.now.day.to_i
-      monthFromArgs = Time.now.month.to_i + 1
+    if Time.zone.now.month.to_i < 6 || dayFromArgs.to_i < Time.zone.now.day.to_i
+      monthFromArgs = Time.zone.now.month.to_i + 1
       errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs)
     else
-      errorMessage = validateDateFromInput(dayFromArgs.to_i, (Time.now.month.to_i))
+      errorMessage = validateDateFromInput(dayFromArgs.to_i, (Time.zone.now.month.to_i))
     end
     return errorMessage, monthFromArgs
   end
@@ -124,13 +124,14 @@ end
 
 def getCurrentMonth(selectedDay)
 
-  currentMonth = Date.today.strftime("%m").to_s.rjust(2, '0')
+  currentMonth = Date.today.to_time_in_current_zone.strftime("%m").to_s.rjust(2, '0')
+  puts currentMonth
 
     # If the current day is bigger than the requested day, get data from next month
     if not selectedDay
       return currentMonth
-    elsif Date.today.strftime("%d").to_i > selectedDay.to_i
-      currentMonth = (Date.today.strftime("%m").to_i + 1).to_s.rjust(2, '0')
+    elsif Date.today.to_time_in_current_zone.strftime("%d").to_i > selectedDay.to_i
+      currentMonth = (Date.today.to_time_in_current_zone.strftime("%m").to_i + 1).to_s.rjust(2, '0')
     end
 
     return currentMonth
@@ -150,7 +151,7 @@ def getCurrentMonth(selectedDay)
   end
 
   def getCurrentYear
-    return Time.now.year.to_s
+    return Time.zone.now.year.to_s
   end
 
   def getShowsFormatted(shows, dateFormatted)
