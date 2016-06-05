@@ -81,7 +81,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
     end
 
-    if not errorMessage
+    if dayFromArgs.nil?
+      errorMessage = t(:check_usage_command)
+    elsif not errorMessage
       if isCurrentMonth
         errorMessage = validateDateFromInput(dayFromArgs.to_i, Time.zone.now.month.to_i)
       elsif not monthFromArgs
@@ -89,7 +91,6 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       else
         errorMessage = validateDateFromInput(dayFromArgs.to_i, monthFromArgs.to_i)
       end
-
     end
 
     return dayFromArgs, errorMessage, monthFromArgs
@@ -124,14 +125,14 @@ end
 
 def getCurrentMonth(selectedDay)
 
-  currentMonth = Date.today.to_time_in_current_zone.strftime("%m").to_s.rjust(2, '0')
+  currentMonth = Time.zone.now.strftime("%m").to_s.rjust(2, '0')
   puts currentMonth
 
     # If the current day is bigger than the requested day, get data from next month
     if not selectedDay
       return currentMonth
-    elsif Date.today.to_time_in_current_zone.strftime("%d").to_i > selectedDay.to_i
-      currentMonth = (Date.today.to_time_in_current_zone.strftime("%m").to_i + 1).to_s.rjust(2, '0')
+    elsif Time.zone.now.strftime("%d").to_i > selectedDay.to_i
+      currentMonth = (Time.zone.now.strftime("%m").to_i + 1).to_s.rjust(2, '0')
     end
 
     return currentMonth

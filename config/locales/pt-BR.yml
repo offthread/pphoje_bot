@@ -30,7 +30,7 @@ pt-BR:
 
   custom_date_format   : "%{day}/%{month}"
 
-  check_usage_command  : "Verifique as instruções de uso utilizando o comando /help"
+  check_usage_command  : "Comando não disponível.\nVerifique as instruções de uso utilizando o comando /help"
 
   date_format          : "%d/%m/%Y"
 
