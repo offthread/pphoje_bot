@@ -6,9 +6,10 @@ module ApplicationHelper
 	DATE_REGULAR_EXPRESSION   = /^[0-3]?[0-9]\/[0-3]?[0-9]$/
 	END_DATE_STRING = "03/07/2016"
 	END_STREAM_STRING = "\n-----------------------------------------------\n"
+	STRING_TOMORROW_PT_BR = "amanhã"
 
 	def getDayFromString (day)
-		currentWeekDay = Date.today.wday
+		currentWeekDay = Time.zone.now.wday
 
 		weekDayRequested = 1
 
@@ -27,7 +28,7 @@ module ApplicationHelper
 			weekDayRequested = daysBefore(currentWeekDay, 6)
 		when t(:week_day_sunday)
 			weekDayRequested = daysBefore(currentWeekDay, 0)
-		when t(:week_tomorrow)
+		when t(:week_tomorrow), STRING_TOMORROW_PT_BR
 			weekDayRequested = 1
 		else
 			return nil
