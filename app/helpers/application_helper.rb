@@ -34,10 +34,9 @@ module ApplicationHelper
 			return nil
 		end
 
-		dateRequested = Date.today() + weekDayRequested.to_i
-		dayRequested = dateRequested.strftime("%d")
+		dateRequested = Time.zone.now.day.to_i + weekDayRequested.to_i
 
-		return dayRequested
+		return dateRequested.to_s
 	end
 
 	def daysBefore(currentWeekDay, requestedWeekDay)
