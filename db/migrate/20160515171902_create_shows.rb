@@ -2,7 +2,7 @@ class CreateShows < ActiveRecord::Migration
   def change
     create_table :shows do |t|
 	  t.string :name
-      t.date :date
+      t.datetime :date
       t.boolean :is_confirmed
       t.string :link_band
       

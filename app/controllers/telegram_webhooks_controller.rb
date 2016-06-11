@@ -167,6 +167,9 @@ def getCurrentMonth(selectedDay)
       eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
       responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
       responseMessage +=  t(:event_band_info, :moreInfo => show.link_band)
+
+      showTime = show.date.strftime("%H:%M")
+      responseMessage +=  t(:event_time, :eventTime => showTime)
     end
     responseMessage += END_STREAM_STRING
 

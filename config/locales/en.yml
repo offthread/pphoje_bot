@@ -5,6 +5,7 @@ en:
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Event confirmed: %{eventConfirmed}\n"
   event_band_info      : "- Band info: %{moreInfo}\n"
+  event_time           : "- Estimated time: %{eventTime}\n\n"
 
   confirmed            : "Yes"
   not_confirmed        : "No"

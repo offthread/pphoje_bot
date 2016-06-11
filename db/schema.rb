@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20160515171902) do
 
   create_table "shows", force: :cascade do |t|
     t.string   "name"
-    t.date     "date"
+    t.datetime "date"
     t.boolean  "is_confirmed"
     t.string   "link_band"
     t.datetime "created_at",   null: false
