@@ -4,8 +4,8 @@ pt-BR:
 
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Evento confirmado: %{eventConfirmed}\n"
-  event_band_info      : "- Informações da banda: %{moreInfo}\n"
-  event_time           : "- Início estimado: %{eventTime}\n\n"
+  event_band_info      : "- Informações da banda: %{moreInfo}\n\n"
+  event_time           : "- Início estimado: %{eventTime}\n"
 
   confirmed            : "Sim"
   not_confirmed        : "Não"

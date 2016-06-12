@@ -5,7 +5,7 @@ class CreateShows < ActiveRecord::Migration
       t.datetime :date
       t.boolean :is_confirmed
       t.string :link_band
-      
+      t.string :hour
       t.timestamps null: false
     end
   end
