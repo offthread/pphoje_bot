@@ -163,13 +163,11 @@ def getCurrentMonth(selectedDay)
     responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted, :weekDay => weekDayStr)
     shows.each do |show|
       responseMessage += t(:event_title, :eventTitle => show.name)
-
+      responseMessage +=  t(:event_time, :eventTime => show.hour)
+      
       eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
       responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
       responseMessage +=  t(:event_band_info, :moreInfo => show.link_band)
-
-      showTime = show.date.strftime("%H:%M")
-      responseMessage +=  t(:event_time, :eventTime => showTime)
     end
     responseMessage += END_STREAM_STRING
 

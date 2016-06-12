@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160515171902) do
     t.datetime "date"
     t.boolean  "is_confirmed"
     t.string   "link_band"
+    t.string   "hour"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
