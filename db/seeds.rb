@@ -1,11 +1,4 @@
 Show.create(
-	name: 'Biliu de Campina',
-	date: Date.parse("03/06/2016"),
-	hour: '21:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=knMCqoaGSeU'
-);
-Show.create(
 	name: 'Jairo Madruga',
 	date: Date.parse("03/06/2016"),
 	hour: '21:00',
@@ -187,25 +180,11 @@ Show.create(
 );
 
 Show.create(
-	name: 'Capilé',
-	date: Date.parse("11/06/2016"),
-	hour: '21:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=p_yA2YKZOvs'
-);
-Show.create(
 	name: 'Coroné Grilo',
 	date: Date.parse("11/06/2016"),
 	hour: '22:20',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=exPlmH0LoZo'
-);
-Show.create(
-	name: 'João Lima',
-	date: Date.parse("11/06/2016"),
-	hour: '00:10',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=rrq_kaY3zB8'
 );
 Show.create(
 	name: 'Gatinha Manhosa',
@@ -275,30 +254,23 @@ Show.create(
 );
 
 Show.create(
-	name: 'Luizinho Calixto',
-	date: Date.parse("16/06/2016"),
-	hour: '20:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=3mft2vHPRe8'
-);
-Show.create(
 	name: 'Esdras Veras',
 	date: Date.parse("16/06/2016"),
-	hour: '21:00',
+	hour: '21:30',
 	is_confirmed: true,
 	link_band: 'Sem informações'
 );
 Show.create(
 	name: 'Alcymar Monteiro',
 	date: Date.parse("16/06/2016"),
-	hour: '21:00',
+	hour: '23:00',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=a8JyLOH5n_U'
 );
 Show.create(
 	name: 'Forró das Antigas',
 	date: Date.parse("16/06/2016"),
-	hour: '21:00',
+	hour: '00:40',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=knT-hcA8sAA'
 );
@@ -332,13 +304,6 @@ Show.create(
 	link_band: 'https://www.youtube.com/watch?v=bCTOmyCEtGY'
 );
 
-Show.create(
-	name: 'Cabruêra',
-	date: Date.parse("18/06/2016"),
-	hour: '21:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=LlvkWgjvVeo'
-);
 Show.create(
 	name: 'Chambinho',
 	date: Date.parse("18/06/2016"),
@@ -436,13 +401,6 @@ Show.create(
 );
 
 Show.create(
-	name: 'Zé Calixto',
-	date: Date.parse("23/06/2016"),
-	hour: '21:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=tRQxgAaoA1I'
-);
-Show.create(
 	name: 'Iohannes',
 	date: Date.parse("23/06/2016"),
 	hour: '22:20',
@@ -486,7 +444,7 @@ Show.create(
 	link_band: 'https://www.youtube.com/watch?v=I00wEuQtRhQ'
 );
 Show.create(
-	name: 'Marlon',
+	name: 'João Lima',
 	date: Date.parse("24/06/2016"),
 	hour: '02:40',
 	is_confirmed: true,
@@ -494,32 +452,32 @@ Show.create(
 );
 
 Show.create(
-	name: 'Cezinha',
+	name: 'Zé Calizto',
 	date: Date.parse("25/06/2016"),
 	hour: '21:00',
 	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=QWqFbc3Dxb4'
+	link_band: 'https://www.youtube.com/watch?v=tRQxgAaoA1I'
 );
 Show.create(
-	name: 'Banda Magia',
+	name: 'Cabruêra',
 	date: Date.parse("25/06/2016"),
 	hour: '22:30',
 	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=OLud5SCN1yY'
-);
-Show.create(
-	name: 'Solteirões do Forró',
-	date: Date.parse("25/06/2016"),
-	hour: '23:50',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=97thlHnje6s'
+	link_band: 'https://www.youtube.com/watch?v=LlvkWgjvVeo'
 );
 Show.create(
 	name: 'Amazan',
 	date: Date.parse("25/06/2016"),
-	hour: '01:10',
+	hour: '23:50',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=6kqFdbOJdVs'
+);
+Show.create(
+	name: 'Solteirões do Forró',
+	date: Date.parse("25/06/2016"),
+	hour: '01:10',
+	is_confirmed: true,
+	link_band: 'https://www.youtube.com/watch?v=97thlHnje6s'
 );
 
 Show.create(
@@ -530,27 +488,27 @@ Show.create(
 	link_band: 'https://www.youtube.com/watch?v=C12Gmsp0VdQ'
 );
 Show.create(
-	name: 'Ranniery Gomes',
-	date: Date.parse("26/06/2016"),
-	hour: '22:20',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=XU-ck23MqGE'
-);
-Show.create(
 	name: 'Lucy Alves',
 	date: Date.parse("26/06/2016"),
-	hour: '23:30',
+	hour: '22:20',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=lOSBY8Xl-T0'
 );
 Show.create(
-	name: 'João Lima',
+	name: 'Banda Magia',
 	date: Date.parse("26/06/2016"),
-	hour: '01:40',
+	hour: '00:30',
 	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=rrq_kaY3zB8'
+	link_band: 'https://www.youtube.com/watch?v=OLud5SCN1yY'
 );
 
+Show.create(
+	name: 'Luizinho Calixto',
+	date: Date.parse("28/06/2016"),
+	hour: '20:00',
+	is_confirmed: true,
+	link_band: 'https://www.youtube.com/watch?v=3mft2vHPRe8'
+);
 Show.create(
 	name: 'Duquinha',
 	date: Date.parse("28/06/2016"),
@@ -571,13 +529,6 @@ Show.create(
 	hour: '23:30',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=g4TyYu3NMLI'
-);
-Show.create(
-	name: 'Forró do Esquema',
-	date: Date.parse("28/06/2016"),
-	hour: '00:30',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=isIB7035O18'
 );
 
 Show.create(
@@ -602,11 +553,11 @@ Show.create(
 	link_band: 'https://www.youtube.com/watch?v=mgBb_orhreU'
 );
 Show.create(
-	name: 'Bonde do Brasil',
+	name: 'Saia Rodada',
 	date: Date.parse("29/06/2016"),
 	hour: '00:50',
 	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=i1H6xOvJwNo'
+	link_band: 'https://www.youtube.com/watch?v=2My8TLiJSUk'
 );
 
 Show.create(
@@ -668,18 +619,18 @@ Show.create(
 );
 
 Show.create(
-	name: 'Gitana',
+	name: 'Novinho da Paraíba',
 	date: Date.parse("02/07/2016"),
 	hour: '21:00',
 	is_confirmed: true,
-	link_band: 'Sem informações'
+	link_band: 'https://www.youtube.com/watch?v=iLXY9xPUC8I'
 );
 Show.create(
-	name: 'Novinho da Paraíba',
+	name: 'Gitana',
 	date: Date.parse("02/07/2016"),
 	hour: '22:40',
 	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=iLXY9xPUC8I'
+	link_band: 'Sem informações'
 );
 Show.create(
 	name: 'Dorgival Dantas',
@@ -696,31 +647,25 @@ Show.create(
 	link_band: 'https://www.youtube.com/watch?v=OLcx1hA6Vqo'
 );
 
-Show.create(
-	name: 'Levada Mix',
-	date: Date.parse("03/07/2016"),
-	hour: '21:00',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=VABy4hbSeUw'
-);
-Show.create(
-	name: 'Forró da Resenha',
-	date: Date.parse("03/07/2016"),
-	hour: '22:30',
-	is_confirmed: true,
-	link_band: 'https://www.youtube.com/watch?v=wVGS_KuIVUk'
-);
+
 Show.create(
 	name: 'Stella Alves',
 	date: Date.parse("03/07/2016"),
-	hour: '00:10',
+	hour: '21:00',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=i_A8U3nwn_4'
 );
 Show.create(
+	name: 'Capilé',
+	date: Date.parse("11/06/2016"),
+	hour: '22:30',
+	is_confirmed: true,
+	link_band: 'https://www.youtube.com/watch?v=p_yA2YKZOvs'
+);
+Show.create(
 	name: 'Aviões do Forró',
 	date: Date.parse("03/07/2016"),
-	hour: '01:30',
+	hour: '00:30',
 	is_confirmed: true,
 	link_band: 'https://www.youtube.com/watch?v=puwtOpKFhxw'
 );
