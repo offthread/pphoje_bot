@@ -20,4 +20,4 @@ const port = process.env.PORT || 3000
 app.use('/api', router)
 app.listen(port)
 
-console.log(`Magic happens on port ${port}`)
+console.log(`Listening on port ${port}`)
