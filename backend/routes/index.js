@@ -1,6 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
-import * as showsController from '../modules/shows'
+import * as showsController from '../controllers/shows'
 
 const router = express.Router()
 
