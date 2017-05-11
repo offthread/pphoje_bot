@@ -21,7 +21,7 @@ const router = express.Router()
 // middleware to use for all requests
 router.use((req, res, next) => {
     // do logging
-    console.log('Something is happening.')
+    console.log(`${req.method} ${req.originalUrl} called`)
     next() // make sure we go to the next routes and don't stop here
 })
 
