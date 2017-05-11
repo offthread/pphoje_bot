@@ -4,10 +4,11 @@ import mongoose from 'mongoose'
 import _ from 'lodash'
 
 import router from './routes'
+import config from './config'
 
 const app = express()
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://api:offthread@ds137141.mlab.com:37141/ppbot-db')
+mongoose.connect(config.database.url)
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

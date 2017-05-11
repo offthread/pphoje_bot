@@ -1,15 +1,10 @@
 import express from 'express'
-
+import morgan from 'morgan'
 import * as showsController from '../modules/shows'
 
 const router = express.Router()
 
-// middleware to use for all requests
-router.use((req, res, next) => {
-    // do logging
-    console.log(`${req.method} ${req.originalUrl} called`)
-    next() // make sure we go to the next routes and don't stop here
-})
+router.use(morgan('dev'))
 
 router.get('/', (req, res) => {
     res.json({ message: 'hooray! welcome to our api!' })
