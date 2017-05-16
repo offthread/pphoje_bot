@@ -2,7 +2,8 @@
   "name": "ppbot-messenger",
   "main": "server.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon --exec babel-node server.js"
+    "start": "babel-node server.js",
+    "nodemon": "nodemon --exec babel-node server.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
