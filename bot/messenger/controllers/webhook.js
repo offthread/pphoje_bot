@@ -1,5 +1,5 @@
 export function authenticate (req, res) {
-  if (req.query['hub.node'] === 'subscribe' && req.query['hub.verify_token'] === 'ppbot-messenger_ot') {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'ppbot-messenger_ot') {
       res.status(200).send(req.query['hub.challenge'])
     } else {
       res.sendStatus(403)
