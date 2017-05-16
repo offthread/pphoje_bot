@@ -12,10 +12,10 @@ module.exports = {
         {
           test: /\.js$/,
           exclude: [
-            path.resolve(node_modules)
+            path.resolve('node_modules')
           ],
           loader: 'babel-loader',
-          query: {
+          options: {
               presets: ['es2015']
           },
           options: {

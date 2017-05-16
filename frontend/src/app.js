@@ -42,7 +42,6 @@ ko.components.register('show', {
     viewModel: class ShowViewModel {
         constructor(ctx) {
             this.show = ctx.show;
-            console.log(this.show);
         }
     },
     template: ` <div data-bind="with: show">
@@ -66,14 +65,14 @@ function loadingMiddleware( ctx ) {
 
 function loadShows(ctx) {
     if (!ctx.shows) {
-      return $.ajax('http://192.168.0.106:3000/api/shows')
+      return $.ajax('http://192.168.25.166:3000/api/shows')
         .then( ( result ) => ctx.shows = result )
     }
 }
 
 function loadShow(ctx) {
     if (!ctx.show) {
-        return $.ajax('http://192.168.0.106:3000/api/shows')
+        return $.ajax('http://192.168.25.166:3000/api/shows/')
         .then( ( result ) => _.filter( ctx.shows, ( show ) => show._id == ctx.params.id ) );
     }
 }

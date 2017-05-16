@@ -5988,13 +5988,13 @@ module.exports = exporter;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["k"] = sequence;
-/* harmony export (immutable) */ __webpack_exports__["c"] = traversePath;
-/* harmony export (immutable) */ __webpack_exports__["b"] = resolveHref;
-/* harmony export (immutable) */ __webpack_exports__["a"] = isActivePath;
-/* harmony export (immutable) */ __webpack_exports__["n"] = isGenerator;
-/* harmony export (immutable) */ __webpack_exports__["m"] = isThenable;
-/* harmony export (immutable) */ __webpack_exports__["o"] = promisify;
+/* harmony export (immutable) */ __webpack_exports__["i"] = sequence;
+/* harmony export (immutable) */ __webpack_exports__["a"] = traversePath;
+/* harmony export (immutable) */ __webpack_exports__["s"] = resolveHref;
+/* harmony export (immutable) */ __webpack_exports__["t"] = isActivePath;
+/* harmony export (immutable) */ __webpack_exports__["l"] = isGenerator;
+/* harmony export (immutable) */ __webpack_exports__["k"] = isThenable;
+/* harmony export (immutable) */ __webpack_exports__["m"] = promisify;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isFunction__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_es_isUndefined__ = __webpack_require__(171);
@@ -6003,31 +6003,31 @@ module.exports = exporter;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_es_isArray__ = __webpack_require__(11);
 /* unused harmony reexport isArray */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_es_isBoolean__ = __webpack_require__(575);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_6_lodash_es_isBoolean__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_1_lodash_es_isFunction__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_6_lodash_es_isBoolean__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_1_lodash_es_isFunction__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_es_isPlainObject__ = __webpack_require__(576);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_7_lodash_es_isPlainObject__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_7_lodash_es_isPlainObject__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_es_isString__ = __webpack_require__(577);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_8_lodash_es_isString__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2_lodash_es_isUndefined__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_8_lodash_es_isString__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2_lodash_es_isUndefined__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_es_castArray__ = __webpack_require__(566);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_9_lodash_es_castArray__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_9_lodash_es_castArray__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_es_concat__ = __webpack_require__(567);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_10_lodash_es_concat__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_10_lodash_es_concat__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_es_extend__ = __webpack_require__(569);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_11_lodash_es_extend__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_11_lodash_es_extend__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash_es_extendWith__ = __webpack_require__(570);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_12_lodash_es_extendWith__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_12_lodash_es_extendWith__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_lodash_es_filter__ = __webpack_require__(571);
 /* unused harmony reexport filter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_lodash_es_flatMap__ = __webpack_require__(572);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_14_lodash_es_flatMap__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_14_lodash_es_flatMap__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_lodash_es_map__ = __webpack_require__(173);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_15_lodash_es_map__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_15_lodash_es_map__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_lodash_es_mapValues__ = __webpack_require__(578);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_16_lodash_es_mapValues__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_16_lodash_es_mapValues__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_lodash_es_reduce__ = __webpack_require__(582);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_17_lodash_es_reduce__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_17_lodash_es_reduce__["a"]; });
 
 
 
@@ -13747,7 +13747,7 @@ var Router = (function () {
         this.onInit = [];
         this.component = __WEBPACK_IMPORTED_MODULE_1_knockout___default.a.observable(null);
         this.isNavigating = __WEBPACK_IMPORTED_MODULE_1_knockout___default.a.observable(true);
-        this.isRoot = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])($parentCtx);
+        this.isRoot = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])($parentCtx);
         this.routes = this.isRoot
             ? Router.createRoutes(Router.routes)
             : $parentCtx.route.children;
@@ -13778,7 +13778,7 @@ var Router = (function () {
             var resolveRouter = function (router) { return function (resolve) { return resolve(router); }; };
             var ctx = _this.ctx;
             while (ctx) {
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["d" /* map */])(ctx.router.onInit, resolveRouter(ctx.router));
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* map */])(ctx.router.onInit, resolveRouter(ctx.router));
                 ctx = ctx.$child;
             }
         });
@@ -13789,19 +13789,19 @@ var Router = (function () {
             return __WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __generator */](this, function (_d) {
                 switch (_d.label) {
                     case 0:
-                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["p" /* isBoolean */])(_args)) {
+                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["n" /* isBoolean */])(_args)) {
                             args = { push: _args };
                         }
-                        else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(_args)) {
+                        else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(_args)) {
                             args = {};
                         }
                         else {
                             args = _args;
                         }
-                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(args.push)) {
+                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(args.push)) {
                             args.push = true;
                         }
-                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(args.with)) {
+                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(args.with)) {
                             args.with = {};
                         }
                         fromCtx = this.ctx;
@@ -13832,7 +13832,7 @@ var Router = (function () {
                         return [4 /*yield*/, toCtx.runBeforeRender()];
                     case 5:
                         _d.sent();
-                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(toCtx._redirect)) {
+                        if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(toCtx._redirect)) {
                             this.component(null);
                             __WEBPACK_IMPORTED_MODULE_1_knockout___default.a.tasks.runEarly();
                         }
@@ -13841,11 +13841,11 @@ var Router = (function () {
                     case 6:
                         _d.sent();
                         toCtx.render();
-                        if (!!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(toCtx._redirect)) return [3 /*break*/, 8];
+                        if (!!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(toCtx._redirect)) return [3 /*break*/, 8];
                         return [4 /*yield*/, toCtx.runAfterRender()];
                     case 7:
                         _d.sent();
-                        _c = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* traversePath */])(toCtx.router, toCtx._redirect), r = _c.router, p = _c.path;
+                        _c = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["a" /* traversePath */])(toCtx.router, toCtx._redirect), r = _c.router, p = _c.path;
                         r.update(p, toCtx._redirectArgs);
                         _d.label = 8;
                     case 8: return [2 /*return*/, true];
@@ -13901,11 +13901,11 @@ var Router = (function () {
     });
     Router.setConfig = function (_a) {
         var base = _a.base, hashbang = _a.hashbang, activePathCSSClass = _a.activePathCSSClass;
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["q" /* extendWith */])(Router.config, {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["o" /* extendWith */])(Router.config, {
             base: base,
             hashbang: hashbang,
             activePathCSSClass: activePathCSSClass
-        }, function (_default, v) { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(v) ? _default : v; });
+        }, function (_default, v) { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(v) ? _default : v; });
     };
     Router.use = function () {
         var fns = [];
@@ -13924,7 +13924,7 @@ var Router = (function () {
         var _a;
     };
     Router.useRoutes = function (routes) {
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["j" /* extend */])(Router.routes, Router.normalizeRoutes(routes));
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["h" /* extend */])(Router.routes, Router.normalizeRoutes(routes));
     };
     Router.get = function (i) {
         var router = Router.head;
@@ -14010,25 +14010,25 @@ var Router = (function () {
         return Router.parseUrl(url).pathname;
     };
     Router.hasRoute = function (path) {
-        return !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(Router.head.resolveRoute(Router.getPath(path)));
+        return !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(Router.head.resolveRoute(Router.getPath(path)));
     };
     Router.createRoutes = function (routes) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["d" /* map */])(routes, function (config, path) { return new __WEBPACK_IMPORTED_MODULE_3__route__["a" /* default */](path, config); });
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* map */])(routes, function (config, path) { return new __WEBPACK_IMPORTED_MODULE_3__route__["a" /* default */](path, config); });
     };
     Router.normalizeRoutes = function (routes) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["r" /* mapValues */])(routes, function (c) {
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["d" /* map */])(Router.runPlugins(c), function (routeConfig) {
-                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["h" /* isPlainObject */])(routeConfig)
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["p" /* mapValues */])(routes, function (c) {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* map */])(Router.runPlugins(c), function (routeConfig) {
+                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["f" /* isPlainObject */])(routeConfig)
                     ? Router.normalizeRoutes(routeConfig) // eslint-disable-line
                     : routeConfig;
             });
         });
     };
     Router.runPlugins = function (config) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["s" /* flatMap */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["t" /* castArray */])(config), function (rc) {
-            var routeConfig = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["f" /* reduce */])(Router.plugins, function (accum, plugin) {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["q" /* flatMap */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["r" /* castArray */])(config), function (rc) {
+            var routeConfig = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["d" /* reduce */])(Router.plugins, function (accum, plugin) {
                 var prc = plugin(rc);
-                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["e" /* isUndefined */])(prc) ? accum : accum.concat(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["t" /* castArray */])(prc));
+                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["c" /* isUndefined */])(prc) ? accum : accum.concat(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils__["r" /* castArray */])(prc));
             }, []);
             return routeConfig.length > 0
                 ? routeConfig
@@ -15384,7 +15384,7 @@ var Context = (function () {
         this._routeMiddlewareDownstream = [];
         var route = router.resolveRoute(path);
         var _a = route.parse(path), params = _a[0], pathname = _a[1], childPath = _a[2];
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["j" /* extend */])(this, {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["h" /* extend */])(this, {
             $parent: $parent,
             router: router,
             route: route,
@@ -15466,7 +15466,7 @@ var Context = (function () {
     Context.prototype.redirect = function (path, args) {
         if (args === void 0) { args = {}; }
         this._redirect = path;
-        this._redirectArgs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["j" /* extend */])({}, args, { push: false });
+        this._redirectArgs = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["h" /* extend */])({}, args, { push: false });
     };
     Context.prototype.runBeforeNavigateCallbacks = function () {
         return __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __awaiter */](this, void 0, void 0, function () {
@@ -15481,7 +15481,7 @@ var Context = (function () {
                             callbacks = ctx._beforeNavigateCallbacks.concat(callbacks);
                             ctx = ctx.$child;
                         }
-                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(callbacks)];
+                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(callbacks)];
                     case 1:
                         success = (_a.sent()).success;
                         return [2 /*return*/, success];
@@ -15499,7 +15499,7 @@ var Context = (function () {
                         thisQueue = Promise.all(this._queue).then(function () {
                             _this._queue = [];
                         });
-                        childQueues = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["d" /* map */])(this.$children, function (c) { return c.flushQueue(); });
+                        childQueues = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* map */])(this.$children, function (c) { return c.flushQueue(); });
                         return [4 /*yield*/, Promise.all([thisQueue].concat(childQueues))];
                     case 1:
                         _a.sent();
@@ -15511,7 +15511,7 @@ var Context = (function () {
     Context.prototype.render = function () {
         var ctx = this; // eslint-disable-line
         while (ctx) {
-            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["e" /* isUndefined */])(ctx._redirect)) {
+            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* isUndefined */])(ctx._redirect)) {
                 ctx.router.component(ctx.route.component);
             }
             ctx = ctx.$child;
@@ -15527,15 +15527,15 @@ var Context = (function () {
                     case 0:
                         appMiddlewareDownstream = Context.runMiddleware(__WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].middleware, this);
                         routeMiddlewareDownstream = Context.runMiddleware(this.route.middleware, this);
-                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(appMiddlewareDownstream)];
+                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(appMiddlewareDownstream)];
                     case 1:
                         numAppMiddlewareRanPreRedirect = (_a.sent()).count;
-                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(routeMiddlewareDownstream)];
+                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(routeMiddlewareDownstream)];
                     case 2:
                         numRouteMiddlewareRanPreRedirect = (_a.sent()).count;
                         this._appMiddlewareDownstream = appMiddlewareDownstream.slice(0, numAppMiddlewareRanPreRedirect);
                         this._routeMiddlewareDownstream = routeMiddlewareDownstream.slice(0, numRouteMiddlewareRanPreRedirect);
-                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["e" /* isUndefined */])(this._redirect))) return [3 /*break*/, 4];
+                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* isUndefined */])(this._redirect))) return [3 /*break*/, 4];
                         return [4 /*yield*/, this.$child.runBeforeRender(false)];
                     case 3:
                         _a.sent();
@@ -15555,7 +15555,7 @@ var Context = (function () {
         return __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __awaiter */](this, void 0, void 0, function () {
             return __WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __generator */](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["l" /* concat */])(this._appMiddlewareDownstream, this._routeMiddlewareDownstream))];
+                    case 0: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["j" /* concat */])(this._appMiddlewareDownstream, this._routeMiddlewareDownstream))];
                     case 1:
                         _a.sent();
                         return [4 /*yield*/, this.flushQueue()];
@@ -15572,12 +15572,12 @@ var Context = (function () {
             return __WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __generator */](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["e" /* isUndefined */])(this._redirect))) return [3 /*break*/, 2];
+                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* isUndefined */])(this._redirect))) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.$child.runBeforeDispose(false)];
                     case 1:
                         _a.sent();
                         _a.label = 2;
-                    case 2: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["l" /* concat */])(this._routeMiddlewareDownstream, this._appMiddlewareDownstream))];
+                    case 2: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["j" /* concat */])(this._routeMiddlewareDownstream, this._appMiddlewareDownstream))];
                     case 3:
                         _a.sent();
                         if (!flush) return [3 /*break*/, 5];
@@ -15596,12 +15596,12 @@ var Context = (function () {
             return __WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __generator */](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["e" /* isUndefined */])(this._redirect))) return [3 /*break*/, 2];
+                        if (!(this.$child && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* isUndefined */])(this._redirect))) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.$child.runAfterDispose(false)];
                     case 1:
                         _a.sent();
                         _a.label = 2;
-                    case 2: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["l" /* concat */])(this._routeMiddlewareDownstream, this._appMiddlewareDownstream))];
+                    case 2: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["i" /* sequence */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["j" /* concat */])(this._routeMiddlewareDownstream, this._appMiddlewareDownstream))];
                     case 3:
                         _a.sent();
                         if (!flush) return [3 /*break*/, 5];
@@ -15616,7 +15616,7 @@ var Context = (function () {
     };
     Context.runMiddleware = function (middleware, ctx) {
         var _this = this;
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["d" /* map */])(middleware, function (fn) {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* map */])(middleware, function (fn) {
             var runner = Context.generatorify(fn)(ctx);
             var beforeRender = true;
             return function () { return __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __awaiter */](_this, void 0, void 0, function () {
@@ -15625,13 +15625,13 @@ var Context = (function () {
                     switch (_a.label) {
                         case 0:
                             ret = runner.next() || {};
-                            if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* isThenable */])(ret)) return [3 /*break*/, 2];
+                            if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* isThenable */])(ret)) return [3 /*break*/, 2];
                             return [4 /*yield*/, ret];
                         case 1:
                             _a.sent();
                             return [3 /*break*/, 4];
                         case 2:
-                            if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* isThenable */])(ret.value)) return [3 /*break*/, 4];
+                            if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["k" /* isThenable */])(ret.value)) return [3 /*break*/, 4];
                             return [4 /*yield*/, ret.value];
                         case 3:
                             _a.sent();
@@ -15641,7 +15641,7 @@ var Context = (function () {
                                 // this should only block the sequence for the first call,
                                 // and allow cleanup after the redirect
                                 beforeRender = false;
-                                return [2 /*return*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["e" /* isUndefined */])(ctx._redirect)];
+                                return [2 /*return*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["c" /* isUndefined */])(ctx._redirect)];
                             }
                             else {
                                 return [2 /*return*/, true];
@@ -15654,7 +15654,7 @@ var Context = (function () {
     };
     // ts why u no haz async generators?? babel why ur generators so $$$?????
     Context.generatorify = function (fn) {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["n" /* isGenerator */])(fn)
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["l" /* isGenerator */])(fn)
             ? fn
             : function (ctx) {
                 var count = 1, ret;
@@ -15673,11 +15673,11 @@ var Context = (function () {
                                             case 4: return [3 /*break*/, 12];
                                         }
                                         return [3 /*break*/, 15];
-                                    case 1: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["o" /* promisify */])(fn)(ctx)];
+                                    case 1: return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* promisify */])(fn)(ctx)];
                                     case 2:
                                         ret = (_f.sent()) || false;
                                         if (!(ret && ret.beforeRender)) return [3 /*break*/, 4];
-                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["o" /* promisify */])(ret.beforeRender)()];
+                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* promisify */])(ret.beforeRender)()];
                                     case 3:
                                         _b = _f.sent();
                                         return [3 /*break*/, 5];
@@ -15688,7 +15688,7 @@ var Context = (function () {
                                     case 6:
                                         _c = ret;
                                         if (!_c) return [3 /*break*/, 8];
-                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["o" /* promisify */])(ret.afterRender)()];
+                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* promisify */])(ret.afterRender)()];
                                     case 7:
                                         _c = (_f.sent());
                                         _f.label = 8;
@@ -15696,7 +15696,7 @@ var Context = (function () {
                                     case 9:
                                         _d = ret;
                                         if (!_d) return [3 /*break*/, 11];
-                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["o" /* promisify */])(ret.beforeDispose)()];
+                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* promisify */])(ret.beforeDispose)()];
                                     case 10:
                                         _d = (_f.sent());
                                         _f.label = 11;
@@ -15704,7 +15704,7 @@ var Context = (function () {
                                     case 12:
                                         _e = ret;
                                         if (!_e) return [3 /*break*/, 14];
-                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["o" /* promisify */])(ret.afterDispose)()];
+                                        return [4 /*yield*/, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils__["m" /* promisify */])(ret.afterDispose)()];
                                     case 13:
                                         _e = (_f.sent());
                                         _f.label = 14;
@@ -15740,7 +15740,7 @@ var Route = (function () {
         this.component = component;
         this.middleware = middleware;
         this.children = children;
-        var _b = Route.parsePath(path, !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["e" /* isUndefined */])(children)), keys = _b[0], regexp = _b[1];
+        var _b = Route.parsePath(path, !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["c" /* isUndefined */])(children)), keys = _b[0], regexp = _b[1];
         this.keys = keys;
         this.regexp = regexp;
     }
@@ -15781,19 +15781,19 @@ var Route = (function () {
     Route.parseConfig = function (config) {
         var component;
         var children;
-        var middleware = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["f" /* reduce */])(config, function (accum, m) {
-            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["g" /* isString */])(m)) {
+        var middleware = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["d" /* reduce */])(config, function (accum, m) {
+            if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["e" /* isString */])(m)) {
                 m = m;
                 component = m;
             }
-            else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["h" /* isPlainObject */])(m)) {
+            else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["f" /* isPlainObject */])(m)) {
                 m = m;
-                children = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["d" /* map */])(m, function (routeConfig, path) { return new Route(path, routeConfig); });
+                children = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["b" /* map */])(m, function (routeConfig, path) { return new Route(path, routeConfig); });
                 if (!component) {
                     component = 'ko-component-router';
                 }
             }
-            else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["i" /* isFunction */])(m)) {
+            else if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils__["g" /* isFunction */])(m)) {
                 m = m;
                 accum.push(m);
             }
@@ -27949,44 +27949,31 @@ module.exports = function(module) {
 
 /***/ }),
 /* 292 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(589);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_knockout__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_knockout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_knockout__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ko_component_router__ = __webpack_require__(478);
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
 // import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 
-var _jquery = __webpack_require__(476);
+const loading = __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.observable(true);
 
-var _jquery2 = _interopRequireDefault(_jquery);
+__WEBPACK_IMPORTED_MODULE_4_ko_component_router__["a" /* default */].use(loadingMiddleware);
 
-var _lodash = __webpack_require__(589);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _moment = __webpack_require__(1);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-var _knockout = __webpack_require__(56);
-
-var _knockout2 = _interopRequireDefault(_knockout);
-
-var _koComponentRouter = __webpack_require__(478);
-
-var _koComponentRouter2 = _interopRequireDefault(_koComponentRouter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var loading = _knockout2.default.observable(true);
-
-_koComponentRouter2.default.use(loadingMiddleware);
-
-_koComponentRouter2.default.useRoutes({
+__WEBPACK_IMPORTED_MODULE_4_ko_component_router__["a" /* default */].useRoutes({
     '/': 'home',
     '/shows': {
         '/': [loadShows, 'shows'],
@@ -27994,46 +27981,45 @@ _koComponentRouter2.default.useRoutes({
     }
 });
 
-_knockout2.default.components.register('home', {
-    template: '<a data-bind="path: \'/shows\'">Shows</a>'
+__WEBPACK_IMPORTED_MODULE_3_knockout___default.a.components.register('home', {
+    template: `<a data-bind="path: '/shows'">Shows</a>`
 });
 
-_knockout2.default.components.register('shows', {
-    viewModel: function () {
-        function ShowsViewModel(ctx) {
-            _classCallCheck(this, ShowsViewModel);
-
+__WEBPACK_IMPORTED_MODULE_3_knockout___default.a.components.register('shows', {
+    viewModel: class ShowsViewModel {
+        constructor(ctx) {
             this.shows = ctx.shows;
         }
 
-        _createClass(ShowsViewModel, [{
-            key: 'navigateToShow',
-            value: function navigateToShow(show) {
-                _koComponentRouter2.default.update('/shows/' + show._id, { with: { show: show } });
-            }
-        }]);
-
-        return ShowsViewModel;
-    }(),
-    template: '<ul data-bind="foreach: shows">\n                  <li data-bind="text: name, click: $parent.navigateToShow"></li>\n               </ul>\n              '
+        navigateToShow(show) {
+            __WEBPACK_IMPORTED_MODULE_4_ko_component_router__["a" /* default */].update('/shows/' + show._id, { with: { show } });
+        }
+    },
+    template: `<ul data-bind="foreach: shows">
+                  <li data-bind="text: name, click: $parent.navigateToShow"></li>
+               </ul>
+              `
 });
 
-_knockout2.default.components.register('show', {
-    viewModel: function ShowViewModel(ctx) {
-        _classCallCheck(this, ShowViewModel);
-
-        this.show = ctx.show;
-        console.log(this.show);
+__WEBPACK_IMPORTED_MODULE_3_knockout___default.a.components.register('show', {
+    viewModel: class ShowViewModel {
+        constructor(ctx) {
+            this.show = ctx.show;
+        }
     },
-    template: ' <div data-bind="with: show">\n                <span data-bind="text: name"></span>\n                <a target="_blank" data-bind="attr: { href: link }">Link</a>\n                </div>\n              '
+    template: ` <div data-bind="with: show">
+                <span data-bind="text: name"></span>
+                <a target="_blank" data-bind="attr: { href: link }">Link</a>
+                </div>
+              `
 });
 
 function loadingMiddleware(ctx) {
     return {
-        beforeRender: function beforeRender() {
+        beforeRender() {
             loading(true);
         },
-        afterRender: function afterRender() {
+        afterRender() {
             loading(false);
         }
     };
@@ -28041,29 +28027,21 @@ function loadingMiddleware(ctx) {
 
 function loadShows(ctx) {
     if (!ctx.shows) {
-        return _jquery2.default.ajax('http://192.168.0.106:3000/api/shows').then(function (result) {
-            return ctx.shows = result;
-        });
+        return __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax('http://192.168.25.166:3000/api/shows').then(result => ctx.shows = result);
     }
 }
 
 function loadShow(ctx) {
     if (!ctx.show) {
-        return _jquery2.default.ajax('http://192.168.0.106:3000/api/shows').then(function (result) {
-            return _lodash2.default.filter(ctx.shows, function (show) {
-                return show._id == ctx.params.id;
-            });
-        });
+        return __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax('http://192.168.25.166:3000/api/shows/').then(result => __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.filter(ctx.shows, show => show._id == ctx.params.id));
     }
 }
 
-var main = function main() {
-    _knockout2.default.applyBindings({ loading: loading });
+const main = () => {
+    __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.applyBindings({ loading });
 };
 
-(0, _jquery2.default)(document).ready(function () {
-    return main();
-});
+__WEBPACK_IMPORTED_MODULE_0_jquery___default()(document).ready(() => main());
 
 /***/ }),
 /* 293 */
@@ -42481,13 +42459,13 @@ __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.bindingHandlers.path = {
     init: function (el, valueAccessor, allBindings, viewModel, bindingCtx) {
         var activePathCSSClass = allBindings.get('pathActiveClass') || __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].config.activePathCSSClass;
         __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].initialized.then(function () {
-            var route = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* traversePath */])(getRouter(bindingCtx), __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.unwrap(valueAccessor())); });
+            var route = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* traversePath */])(getRouter(bindingCtx), __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.unwrap(valueAccessor())); });
             __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.applyBindingsToNode(el, {
                 attr: {
-                    href: __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["b" /* resolveHref */])(route()); })
+                    href: __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["s" /* resolveHref */])(route()); })
                 },
                 css: (_a = {},
-                    _a[activePathCSSClass] = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* isActivePath */])(route()); }),
+                    _a[activePathCSSClass] = __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.pureComputed(function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["t" /* isActivePath */])(route()); }),
                     _a)
             });
             var _a;
@@ -42495,8 +42473,8 @@ __WEBPACK_IMPORTED_MODULE_0_knockout___default.a.bindingHandlers.path = {
     }
 };
 function getRouter(bindingCtx) {
-    while (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["e" /* isUndefined */])(bindingCtx)) {
-        if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["e" /* isUndefined */])(bindingCtx.$router)) {
+    while (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* isUndefined */])(bindingCtx)) {
+        if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* isUndefined */])(bindingCtx.$router)) {
             return bindingCtx.$router;
         }
         bindingCtx = bindingCtx.$parentContext;
@@ -42510,23 +42488,22 @@ function getRouter(bindingCtx) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_knockout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_knockout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__binding__ = __webpack_require__(477);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__context__ = __webpack_require__(147);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Context", function() { return __WEBPACK_IMPORTED_MODULE_4__context__["a"]; });
+/* unused harmony reexport Context */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__route__ = __webpack_require__(148);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_5__route__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "isActivePath", function() { return __WEBPACK_IMPORTED_MODULE_2__utils__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "resolveHref", function() { return __WEBPACK_IMPORTED_MODULE_2__utils__["b"]; });
+/* unused harmony reexport Route */
+/* unused harmony reexport isActivePath */
+/* unused harmony reexport resolveHref */
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */]);
 
 
 
@@ -42566,18 +42543,18 @@ function createViewModel(params) {
             .then(function () {
             if (router.ctx._redirect) {
                 router.ctx.runAfterRender().then(function () {
-                    var _a = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* traversePath */])(router, router.ctx._redirect), r = _a.router, p = _a.path;
+                    var _a = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* traversePath */])(router, router.ctx._redirect), r = _a.router, p = _a.path;
                     r.update(p, router.ctx._redirectArgs);
                 });
             }
             else {
                 router.ctx.render();
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["d" /* map */])(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].onInit, function (resolve) { return resolve(_this); });
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["b" /* map */])(__WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].onInit, function (resolve) { return resolve(_this); });
             }
         });
     }
     else if (router.ctx._redirect) {
-        var _a = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["c" /* traversePath */])(router, router.ctx._redirect), r = _a.router, p = _a.path;
+        var _a = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils__["a" /* traversePath */])(router, router.ctx._redirect), r = _a.router, p = _a.path;
         r.update(p, router.ctx._redirectArgs);
     }
     return router;
