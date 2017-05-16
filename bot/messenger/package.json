@@ -3,7 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "./node_modules/.bin/babel-node server.js",
-    "nodemon": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node server.js"
+    "nodemon": "nodemon --exec babel-node server.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
