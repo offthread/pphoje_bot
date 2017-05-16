@@ -1,0 +1,3 @@
+export default {
+  page_access_token: 'EAASLgFOkSxYBAE8gzcR28BDYV3TybZBeqYJsJcdnruRie0pRmCN1nS0CghRJ8AqpiEkNGzE3kjC4IoxfPUUDZCw3EWz5RpBMreYJyZCZCpRPhjnLVTkiyYuAAQ40J0ux9lAs5RzZBdXsydZCQDpM4sVbbTFkRMx4Sg78uZBnZCTmlAZDZD'
+}

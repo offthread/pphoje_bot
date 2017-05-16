@@ -1,3 +1,5 @@
+import config from '../config'
+
 export function authenticate (req, res) {
   if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'ppbot-messenger_ot') {
       res.status(200).send(req.query['hub.challenge'])
@@ -29,4 +31,26 @@ export function receiveMessage (req, res) {
 
 function receivedMessage(event) {
   console.log("Message data:", event.message)
+}
+
+function callSendAPI(messageData) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: config.page_access_token },
+    method: 'POST',
+    json: messageData
+
+  }, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id
+      var messageId = body.message_id;
+
+      console.log("Successfully sent generic message with id %s to recipient %s", 
+        messageId, recipientId)
+    } else {
+      console.error("Unable to send message.")
+      console.error(response)
+      console.error(error)
+    }
+  })
 }
