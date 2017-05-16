@@ -7,7 +7,7 @@
     "nodemon": "nodemon --exec babel-node server.js"
   },
   "dependencies": {
-    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
     "bcrypt": "^1.0.2",
     "express": "^4.15.2",
     "lodash": "^4.17.4",
