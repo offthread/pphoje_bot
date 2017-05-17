@@ -1,4 +1,6 @@
 import config from '../config'
+import botHelper from '../helpers'
+import apiService from '../services/ppbotApi'
 
 export function authenticate (req, res) {
   if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'ppbot-messenger_ot') {
@@ -45,12 +47,15 @@ function callSendAPI(messageData) {
       var recipientId = body.recipient_id
       var messageId = body.message_id;
 
-      console.log("Successfully sent generic message with id %s to recipient %s", 
-        messageId, recipientId)
+      console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
     } else {
       console.error("Unable to send message.")
       console.error(response)
       console.error(error)
     }
   })
+}
+
+function processMessage (message) {
+  const dates = botHelper.getDateFromMessage(message)
 }
