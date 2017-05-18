@@ -2,31 +2,33 @@ import $ from 'jquery';
 import _ from 'lodash';
 import moment from 'moment';
 import ko from 'knockout';
-// import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+
 import Router from 'ko-component-router';
+import loadingMiddleware from '../middleware/loading'
 
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import BootstrapJS from 'bootstrap/dist/js/bootstrap.js';
 import styles from '../styles/main.css';
 
 import * as login_template from '../views/login';
+import * as shows_template from '../views/shows';
 
 const loading = ko.observable(true);
 
-Router.use( loadingMiddleware );
+Router.use( loadingMiddleware( loading ) );
 Router.use( ( ctx ) => {
     const isLoginPage = ctx.path === '/login';
-    const isHomePage = ctx.path === '/';
     const isLoggedIn = sessionStorage.getItem( 'authenticated' );
 
     if ( !isLoggedIn && !isLoginPage ) {
-        ctx.redirect( '/login' );
+        ctx.redirect( '//login' );
     } else if ( isLoggedIn && isLoginPage ) {
-        ctx.redirect( '/shows' );
+        ctx.redirect( '//shows' );
     }
 } );
 
 Router.useRoutes( {
-        '/': 'home',
+        '/': [ checkCredentials, 'home' ],
         '/login': 'login',
         '/shows': {
             '/': [ loadShows, 'shows' ],
@@ -47,7 +49,6 @@ ko.components.register( 'login', {
 
             this.authenticated.subscribe( ( isAuthenticated ) => {
                 if ( isAuthenticated ) {
-                    sessionStorage.setItem( 'authenticated', true );
                     Router.update( '/shows' );
                 }
             } );
@@ -66,18 +67,34 @@ ko.components.register( 'login', {
 ko.components.register( 'shows', {
     viewModel: class ShowsViewModel {
         constructor( ctx ) {
-            this.shows = ctx.shows;
+            var self = this;
+            this.shows = ctx.shows.map( ( show ) => {
+                show.date = moment( show.date ).format('DD/MM/YYYY');
+                return show;
+            });
+            this.show = ko.observable( null );
+            this.showSelectedShow = function( show ) {
+                self.show( show );
+                $( '#showModal' ).modal( 'show' );
+            }
         }
 
-        navigateToShow( show ) {
-            Router.update( '/shows/' + show._id, { with: { show } } );
+        logout() {
+            sessionStorage.removeItem( 'authenticated' );
+            Router.update( '/' );
         }
+
+        editShowSubmit( ) {
+            const modal = $( '#showModal' );
+            const modalNewName = $( '.modal-form #name' ).val();
+            const modalNewVideoUrl = $( '.modal-form #videoUrl' ).val();
+            const modalNewImgUrl = $( '.modal-form #imgUrl' ).val();
+            const modalNewDate = $( '.modal-form #date' ).val();
+            $( '#showModal' ).modal( 'hide' );
+        }
+
     },
-    template: `
-               <ul data-bind="foreach: shows">
-                  <li data-bind="text: name, click: $parent.navigateToShow"></li>
-               </ul>
-              `
+    template: shows_template.template
 });
 
 ko.components.register( 'show', {
@@ -93,18 +110,6 @@ ko.components.register( 'show', {
                 </div>
               `
 } );
-
-
-function loadingMiddleware( ctx ) {
-    return {
-        beforeRender() {
-            loading( true );
-        },
-        afterRender() {
-            loading( false );
-        }
-    }
-}
 
 function loadShows( ctx ) {
     if ( !ctx.shows ) {
@@ -126,16 +131,24 @@ function attemptLogin( user, localCtx ) {
             type: 'POST',
             data: { username: user.username, password: user.password },
             success: ( result ) => {
-                console.log( result )
                 if ( result.success ) {
+                    sessionStorage.setItem( 'token', result.token );
+                    sessionStorage.setItem( 'authenticated', true );
                     localCtx.authenticated( true );
                 } else {
-                    localCtx.errorMessage( result.message );
+                    localCtx.errorMessage( 'Login ou senha inválidos. Tente novamente.' );
                 }
             },
             error: ( result ) => {
+                localCtx.errorMessage( 'Erro interno. Tente novamente atualizar a página ou volte mais tarde.' );
             }
         } )
+    }
+}
+
+function checkCredentials( ctx ) {
+    if ( sessionStorage.getItem( 'authenticated' ) ) {
+        ctx.redirect( '//shows' );
     }
 }
 

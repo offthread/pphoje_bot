@@ -1,4 +1,5 @@
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: [ path.resolve(__dirname, './src/app.js'), 'babel-polyfill' ],
@@ -35,5 +36,11 @@ module.exports = {
           loader: 'style-loader!css-loader'
         }
       ]
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin( {
+        $: "jquery",
+        jQuery: "jquery"
+      } )
+    ]
 };
