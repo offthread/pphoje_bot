@@ -1,13 +1,16 @@
+import _ from 'lodash'
 import Moment from 'moment'
+
+import config from '../config'
 import constants from '../constants'
 
-Moment().locale('pt-BR')
+Moment.locale('pt-BR')
 
 function getDateFromMessage (message) {
   let result = []
 
   if (message.match(constants.DATE_REGULAR_EXPRESSION) && isValidDate(message)) {
-    result.push(Moment(message, 'DD/MM/YYYY'))
+    result.push(Moment(message, 'DD/MM'))
   } else if (message.match(constants.NUMBER_REGULAR_EXPRESSION) && message !== '31') {
     result = getDatesFromNumber(message)
   } else {
@@ -17,9 +20,23 @@ function getDateFromMessage (message) {
   return result
 }
 
+function filterShows ({ shows, dates }) {
+  let result = []
+  _.forEach(shows, s => {
+    const showDate = Moment(s.date)
+    _.forEach(dates, d => {
+      if (showDate.isSame(d, 'day')) {
+        result.push(s)
+      }
+    })
+  })
+  return result
+}
+
 function isValidDate (date) {
+  let parsedDate = {}
   try {
-    const parsedDate = Moment(date, 'DD/MM/YYYY') 
+    parsedDate = Moment(date, 'DD/MM/YYYY') 
   } catch (error) {
     console.log(error)
     return false
@@ -34,10 +51,10 @@ function getDatesFromNumber (day) {
     const juneDate = `${day}/06/2017`
     const julyDate = `${day}/07/2017`
     if (isValidDate(juneDate)) {
-      result.push(juneDate)
+      result.push(Moment(juneDate))
     } 
     if (isValidDate(julyDate)) {
-      result.push(julyDate)
+      result.push(Moment(julyDate))
     } 
   } catch (error) {
     console.log(error)
@@ -49,7 +66,9 @@ function getDatesFromNumber (day) {
 function getDayFromString (day) {
   let result = {}
   try {
-    result = Moment().day(day)
+    if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
+      result = Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
+    }
   } catch (error) {
     console.log(error)
   }
@@ -57,5 +76,6 @@ function getDayFromString (day) {
 }
 
 export default {
+  filterShows,
   getDateFromMessage
 }

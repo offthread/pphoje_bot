@@ -12,7 +12,7 @@ export function authenticate (req, res) {
 
 export function receiveMessage (req, res) {
   const data = req.body
-
+  
   if (data.object === 'page') {
     data.entry.forEach(entry => {
       const pageId = entry.pageId
@@ -32,7 +32,6 @@ export function receiveMessage (req, res) {
 }
 
 function receivedMessage(event) {
-  console.log("Message data:", event.message)
   processMessage(event.message.text)
 }
 
@@ -59,9 +58,9 @@ function callSendAPI(messageData) {
 
 function processMessage (message) {
   const dates = botHelper.getDateFromMessage(message)
-  let shows = []
   apiService.getShows()
-    .then(res => shows = res)
+    .then(shows => {
+      botHelper.filterShows({ shows, dates })
+    })
     .catch(err => console.log(err))
-  console.log(shows)
 }
