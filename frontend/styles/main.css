@@ -1,0 +1,29 @@
+body {
+    max-width: 100%;
+    background: #d3d3d3;
+    height: 100%;
+}
+
+h2 {
+    color: #daf236;
+}
+
+h4 {
+    color: #e5e2e2;
+}
+
+.focused {
+    border-radius: 5px;
+    background-color: #555555;
+    min-height: 420px;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    min-height: 75vh;
+}
+
+label {
+    color: #e5e2e2
+}

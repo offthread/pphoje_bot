@@ -23,6 +23,10 @@ module.exports = {
           }
         },
         {
+          test: /\.html$/,
+          loader: 'html-loader'
+        },
+        {
           test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
           loader: 'url-loader'
         },
@@ -30,6 +34,6 @@ module.exports = {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
         }
-      ],
+      ]
     }
 };
