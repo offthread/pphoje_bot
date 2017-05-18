@@ -34,7 +34,11 @@ export function receiveMessage (req, res) {
 
 function receivedMessage(event) {
   const senderID = event.sender.id
-  processMessage({senderID, message: event.message.text})
+  try {
+    processMessage({senderID, message: event.message.text})
+  } catch (error) {
+    sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
+  }
 }
 
 function processMessage ({ senderID, message }) {
@@ -45,19 +49,19 @@ function processMessage ({ senderID, message }) {
       if (!_.isEmpty(filteredShows)) { 
         sendReply({ recipientId: senderID, shows: filteredShows })
       } else {
-        sendDefaultMessage(senderID)
+        sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
       }
     })
     .catch(err => console.log(err))
 }
 
-function sendDefaultMessage(recipientId) {
+function sendTextMessage({recipientId, text}) {
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "Nenhum show encontrado para o período desejado"
+      text
     }
   }
 
