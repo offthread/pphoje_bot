@@ -52,7 +52,10 @@ function processMessage ({ senderID, message }) {
         sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      throw err
+    })
 }
 
 function sendTextMessage({recipientId, text}) {
