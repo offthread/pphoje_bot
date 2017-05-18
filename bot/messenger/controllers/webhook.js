@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import config from '../config'
 import botHelper from '../helpers'
 import apiService from '../services/ppbotApi'
@@ -32,7 +33,55 @@ export function receiveMessage (req, res) {
 }
 
 function receivedMessage(event) {
-  processMessage(event.message.text)
+  const senderID = event.sender.id
+  processMessage({senderID, message: event.message.text})
+}
+
+function processMessage ({ senderID, message }) {
+  const dates = botHelper.getDateFromMessage(message)
+  apiService.getShows()
+    .then(shows => {
+      const filteredShows = botHelper.filterShows({ shows, dates })
+      if (!_.isEmpty(filteredShows)) { 
+        sendReply({ recipientId: senderID, shows: filteredShows })
+      } else {
+        sendDefaultMessage(senderID)
+      }
+    })
+    .catch(err => console.log(err))
+}
+
+function sendDefaultMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Nenhum show encontrado para o período desejado"
+    }
+  }
+
+  callSendAPI(messageData);
+}
+
+function sendReply ({ recipientId, shows }) {
+  const data = createMessage(shows)
+  const messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: data
+        }
+      }
+    }
+  }
+
+  callSendAPI(messageData)
 }
 
 function callSendAPI(messageData) {
@@ -56,11 +105,21 @@ function callSendAPI(messageData) {
   })
 }
 
-function processMessage (message) {
-  const dates = botHelper.getDateFromMessage(message)
-  apiService.getShows()
-    .then(shows => {
-      botHelper.filterShows({ shows, dates })
+function createMessage (shows) {
+  let result = []
+  _.forEach(shows, s => {
+    result.push({
+      title: s.name,
+      subtitle: Moment(s.date).format('DD de MMMM'),
+      image_url: s.imgUrl,
+      buttons: [
+        {
+          type: "web_url",
+          url: s.videoUrl,
+          title: "Ver vídeo"
+        }
+      ]
     })
-    .catch(err => console.log(err))
+  })
+  return result
 }
