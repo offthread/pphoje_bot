@@ -17,7 +17,8 @@ export function getShow (req, res) {
 export function insertShow (req, res)  {
   const show = new Show()
   show.name = req.body.name
-  show.link = req.body.link
+  show.videoUrl = req.body.videoUrl
+  show.imgUrl = req.body.imgUrl
   show.date = req.body.date
 
   show.save().then(s => {
@@ -35,8 +36,12 @@ export function updateShow (req, res) {
     attributes.name = name
   }
 
-  if (!_.isEmpty(link)) {
-    attributes.link = link
+  if (!_.isEmpty(videoUrl)) {
+    attributes.videoUrl = videoUrl
+  }
+
+  if (!_.isEmpty(imgUrl)) {
+    attributes.imgUrl = imgUrl
   }
 
   if (!_.isEmpty(date)) {

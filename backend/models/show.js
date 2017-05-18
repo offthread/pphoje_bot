@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const ShowSchema = new Schema({
   name: String,
-  link: String,
+  videoUrl: String,
+  imgUrl: String,
   date: Date
 })
 

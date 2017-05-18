@@ -33,6 +33,7 @@ export function receiveMessage (req, res) {
 
 function receivedMessage(event) {
   console.log("Message data:", event.message)
+  processMessage(event.message)
 }
 
 function callSendAPI(messageData) {
@@ -58,4 +59,9 @@ function callSendAPI(messageData) {
 
 function processMessage (message) {
   const dates = botHelper.getDateFromMessage(message)
+  let shows = []
+  apiService.getShows()
+    .then(res => shows = res)
+    .catch(err => console.log(err))
+  console.log(shows)
 }
