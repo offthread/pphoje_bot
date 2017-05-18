@@ -44,20 +44,24 @@ function receivedMessage(event) {
 }
 
 function processMessage ({ senderID, message }) {
-  const dates = botHelper.getDateFromMessage(message)
-  apiService.getShows()
-    .then(shows => {
-      const filteredShows = botHelper.filterShows({ shows, dates })
-      if (!_.isEmpty(filteredShows)) { 
-        sendReply({ recipientId: senderID, shows: filteredShows })
-      } else {
-        sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
-      }
-    })
-    .catch(err => {
-      console.log(err)
-      sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
-    })
+  if (message === config.help_command) {
+    sendTextMessage({ recipientId: senderID, text: config.help_text })
+  } else {
+    const dates = botHelper.getDateFromMessage(message)
+    apiService.getShows()
+      .then(shows => {
+        const filteredShows = botHelper.filterShows({ shows, dates })
+        if (!_.isEmpty(filteredShows)) { 
+          sendReply({ recipientId: senderID, shows: filteredShows })
+        } else {
+          sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
+      })
+  }
 }
 
 function sendTextMessage({recipientId, text}) {
@@ -70,7 +74,7 @@ function sendTextMessage({recipientId, text}) {
     }
   }
 
-  callSendAPI(messageData);
+  callSendAPI(messageData)
 }
 
 function sendReply ({ recipientId, shows }) {
