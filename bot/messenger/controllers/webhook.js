@@ -33,7 +33,7 @@ export function receiveMessage (req, res) {
 
 function receivedMessage(event) {
   console.log("Message data:", event.message)
-  processMessage(event.message)
+  processMessage(event.message.text)
 }
 
 function callSendAPI(messageData) {
