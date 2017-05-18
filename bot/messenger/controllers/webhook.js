@@ -1,4 +1,6 @@
+import rp from 'request-promise'
 import _ from 'lodash'
+
 import config from '../config'
 import botHelper from '../helpers'
 import apiService from '../services/ppbotApi'
@@ -92,23 +94,23 @@ function sendReply ({ recipientId, shows }) {
 }
 
 function callSendAPI(messageData) {
-  request({
+  rp({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: config.page_access_token },
     method: 'POST',
     json: messageData
-
-  }, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  })
+  .then((response, body) => {
+    if (response.statusCode == 200) {
       var recipientId = body.recipient_id
-      var messageId = body.message_id;
+      var messageId = body.message_id
 
       console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
-    } else {
-      console.error("Unable to send message.")
-      console.error(response)
-      console.error(error)
     }
+  })
+  .catch(err => {
+    console.error("Unable to send message.")
+    console.error(err)
   })
 }
 
