@@ -44,7 +44,7 @@ function receivedMessage(event) {
 }
 
 function processMessage ({ senderID, message }) {
-  if (message === config.help_command) {
+  if (_.upperCase(message) === config.help_command) {
     sendTextMessage({ recipientId: senderID, text: config.help_text })
   } else {
     const dates = botHelper.getDateFromMessage(message)

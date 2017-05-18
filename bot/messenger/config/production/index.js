@@ -2,6 +2,7 @@ export default {
   api_url: 'http://localhost:3000/api',
   sj_initial_day: '2017-06-01',
   sj_end_day: '2017-07-03',
+  help_command: 'AJUDA',
   help_text: `
     Você pode consultar a programação das seguintes formas:
 
