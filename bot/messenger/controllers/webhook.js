@@ -54,7 +54,7 @@ function processMessage ({ senderID, message }) {
     })
     .catch(err => {
       console.log(err)
-      throw err
+      sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
     })
 }
 
