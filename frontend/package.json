@@ -6,6 +6,7 @@
   "author": "Filipe Costa",
   "license": "MIT",
   "scripts": {
+    "start": "npm run watch",
     "watch": "yarn webpack --watch"
   },
   "dependencies": {
