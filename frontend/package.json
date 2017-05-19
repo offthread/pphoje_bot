@@ -6,7 +6,7 @@
   "author": "Filipe Costa",
   "license": "MIT",
   "scripts": {
-    "start": "yarn webpack",
+    "start": "yarn webpack-dev-server",
     "watch": "yarn webpack --watch"
   },
   "dependencies": {
