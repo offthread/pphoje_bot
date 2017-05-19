@@ -56,7 +56,7 @@ export function updateShow (req, res) {
 }
 
 export function removeShow (req, res) {
-  Show.remove({
+  Show.findOneAndRemove({
     _id: req.params.show_id
   }, (err, show) => {
     if (err) res.send(err)

@@ -121,10 +121,10 @@ ko.components.register( 'shows', {
             }
 
             // Remove the current show from array (front-end only).
-            self.removeFromArray = function( show ) {
+            self.removeFromArray = function( removedShow ) {
                 self.shows(
                     _.chain( self.shows() )
-                    .remove( show )
+                    .filter( ( show ) => show._id !== removedShow._id )
                     .value()
                 );
             }
