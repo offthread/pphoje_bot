@@ -4,7 +4,7 @@ import moment from 'moment';
 import ko from 'knockout';
 
 import Router from 'ko-component-router';
-import loadingMiddleware from '../middleware/loading'
+import loadingMiddleware from '../middleware/loading';
 
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJS from 'bootstrap/dist/js/bootstrap.js';
@@ -12,6 +12,8 @@ import styles from '../styles/main.css';
 
 import * as login_template from '../views/login';
 import * as shows_template from '../views/shows';
+
+import config from '../config';
 
 global.moment = moment;
 
@@ -196,21 +198,21 @@ ko.components.register( 'show', {
 
 function loadShows( ctx ) {
     if ( !ctx.shows ) {
-      return $.ajax( 'http://192.168.25.166:3000/api/shows' )
+      return $.ajax( `${config.api_url}/shows` )
         .then( ( result ) => ctx.shows = result )
     }
 }
 
 function loadShow( ctx ) {
     if ( !ctx.show ) {
-        return $.ajax( 'http://192.168.25.166:3000/api/shows/' )
+        return $.ajax( `${config.api_url}/shows` )
             .then( ( result ) => _.filter( ctx.shows, ( show ) => show._id == ctx.params.id ) );
     }
 }
 
 function attemptLogin( user, localCtx ) {
     if ( !sessionStorage.getItem( 'authenticated' ) ) {
-        return $.ajax( 'http://192.168.25.166:3000/api/authenticate/', {
+        return $.ajax( `${config.api_url}/authenticate/`, {
             type: 'POST',
             data: { username: user.username, password: user.password },
             success: ( result ) => {
@@ -231,7 +233,7 @@ function attemptLogin( user, localCtx ) {
 
 function insertShow( show, addFnc, ctx ) {
     return $.ajax( {
-            url: 'http://192.168.25.166:3000/api/shows/',
+            url: `${config.api_url}/shows/`,
             type: 'POST',
             beforeSend: function( xhr ) {
                 xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );
@@ -245,7 +247,7 @@ function insertShow( show, addFnc, ctx ) {
 
 function editShow( show, updateFnc, ctx ) {
     return $.ajax( {
-            url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+            url: `${config.api_url}/shows/` + show._id,
             type: 'PUT',
             beforeSend: function( xhr ) {
                 xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );
@@ -259,7 +261,7 @@ function editShow( show, updateFnc, ctx ) {
 
 function removeShow( show, removeFnc, ctx ) {
     return $.ajax( {
-            url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+            url: `${config.api_url}/shows/` + show._id,
             type: 'DELETE',
             beforeSend: function( xhr ) {
                 xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );

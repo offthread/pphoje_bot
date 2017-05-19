@@ -6,10 +6,13 @@
   "author": "Filipe Costa",
   "license": "MIT",
   "scripts": {
-    "start": "yarn webpack-dev-server",
+    "start": "npm run start:webpack && npm run start:server",
+    "start:server": "./node_modules/.bin/babel-node server.js",
+    "start:webpack": "yarn webpack",
     "watch": "yarn webpack --watch"
   },
   "dependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
