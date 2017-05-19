@@ -45,6 +45,8 @@ function receivedMessage(event) {
 }
 
 function processMessage ({ senderID, message }) {
+  sendTyping(senderID)
+
   if (_.upperCase(message) === config.help_command) {
     sendTextMessage({ recipientId: senderID, text: config.help_text })
   } else {
@@ -96,6 +98,32 @@ function sendReply ({ recipientId, shows }) {
   }
 
   callSendAPI(messageData)
+}
+
+function sendTyping (senderId) {
+  rp({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: config.page_access_token },
+    method: 'POST',
+    json: {
+      recipient: {
+        id: senderId
+      },
+      sender_action: 'typing_on'
+    }
+  })
+  .then((response, body) => {
+    if (response.statusCode == 200) {
+      var recipientId = body.recipient_id
+      var messageId = body.message_id
+
+      console.log("Successfully sent typing message with id %s to recipient %s", messageId, recipientId)
+    }
+  })
+  .catch(err => {
+    console.error("Unable to send message.")
+    console.error(err)
+  })
 }
 
 function callSendAPI(messageData) {

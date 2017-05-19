@@ -51,10 +51,10 @@ function getDatesFromNumber (day) {
     const juneDate = `${day}/06/2017`
     const julyDate = `${day}/07/2017`
     if (isValidDate(juneDate)) {
-      result.push(Moment(juneDate))
+      result.push(Moment(juneDate, 'DD/MM/YYYY'))
     } 
     if (isValidDate(julyDate)) {
-      result.push(Moment(julyDate))
+      result.push(Moment(julyDate, 'DD/MM/YYYY'))
     } 
   } catch (error) {
     console.log(error)
@@ -66,7 +66,11 @@ function getDatesFromNumber (day) {
 function getDayFromString (day) {
   let result = {}
   try {
-    if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
+    if (_.upperCase(day) === constants.TODAY_TEXT) {
+      result.push(Moment())
+    } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
+      result.push(Moment().add(1, 'days'))
+    } else if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
       result = Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
     }
   } catch (error) {
