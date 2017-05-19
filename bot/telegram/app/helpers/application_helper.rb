@@ -4,7 +4,7 @@ module ApplicationHelper
 	MESSAGE_CHECK_USAGE_COMMAND = I18n.t(:check_usage_command)
 	NUMBER_REGULAR_EXPRESSION = /^-?[0-9]+$/
 	DATE_REGULAR_EXPRESSION   = /^[0-3]?[0-9]\/[0-3]?[0-9]$/
-	END_DATE_STRING = "03/07/2016"
+	END_DATE_STRING = "02/07/2017"
 	END_STREAM_STRING = "\n-----------------------------------------------\n"
 	STRING_TOMORROW_PT_BR = "amanhã"
 
