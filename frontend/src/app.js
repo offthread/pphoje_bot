@@ -122,7 +122,11 @@ ko.components.register( 'shows', {
 
             // Remove the current show from array (front-end only).
             self.removeFromArray = function( show ) {
-                self.shows.remove( show );
+                self.shows(
+                    _.chain( self.shows() )
+                    .remove( show )
+                    .value()
+                );
             }
 
             // Update the selected show with the information of the show edited.
