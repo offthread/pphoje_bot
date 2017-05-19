@@ -1,5 +1,6 @@
 import rp from 'request-promise'
 import _ from 'lodash'
+import Moment from 'moment'
 
 import config from '../config'
 import botHelper from '../helpers'
