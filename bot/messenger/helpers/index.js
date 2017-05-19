@@ -51,10 +51,10 @@ function getDatesFromNumber (day) {
     const juneDate = `${day}/06/2017`
     const julyDate = `${day}/07/2017`
     if (isValidDate(juneDate)) {
-      result.push(Moment(juneDate))
+      result.push(Moment(juneDate, 'DD/MM/YYYY'))
     } 
     if (isValidDate(julyDate)) {
-      result.push(Moment(julyDate))
+      result.push(Moment(julyDate, 'DD/MM/YYYY'))
     } 
   } catch (error) {
     console.log(error)
