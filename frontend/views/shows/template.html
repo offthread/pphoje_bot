@@ -11,14 +11,14 @@
     <hr>
   </div>
   <br>
-  <div data-bind="if: shows().length > 0" class="row">
+  <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-4">
+    <div data-bind="if: shows().length > 0 || search" class="col-md-4">
       <form>
         <div class="input-group add-on">
           <input type="text" class="form-control" id="search" placeholder="Filtrar eventos">
           <div class="input-group-btn">
-            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+            <button data-bind="click: filterShows, clickBubble: false" type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
           </div>
         </div>
       </form>

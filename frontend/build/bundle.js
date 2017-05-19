@@ -38663,6 +38663,7 @@ __WEBPACK_IMPORTED_MODULE_4_ko_component_router__["a" /* default */].use(ctx => 
     }
 });
 
+// Define the routes available for this application (but still, single page)
 __WEBPACK_IMPORTED_MODULE_4_ko_component_router__["a" /* default */].useRoutes({
     '/': [checkCredentials, 'home'],
     '/login': 'login',
@@ -38704,42 +38705,97 @@ __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.components.register('shows', {
         constructor(ctx) {
             var self = this;
 
-            var initialShows = ctx.shows.map(show => {
-                const dateFormated = __WEBPACK_IMPORTED_MODULE_2_moment___default()(show.date).format('YYYY-MM-DD');
+            var initialShows = __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.chain(ctx.shows).map(show => {
+                // Data with timestamp is being parsed to D - 1. Y?
+                const dateFormated = __WEBPACK_IMPORTED_MODULE_2_moment___default()(show.date, 'YYYY-MM-DDZHH:mm').add(1, 'day').format('YYYY-MM-DD');
                 show.date = dateFormated;
                 return show;
-            });
+            })
+            // Sort by date
+            .sortBy(show => __WEBPACK_IMPORTED_MODULE_2_moment___default()(show.date, 'YYYY-MM-DD')).value();
 
+            // Save all shows so we can replace when query is empty.
+            self.allShows = initialShows;
+
+            // Array of shows, loaded from database.
             self.shows = __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.observableArray(initialShows);
+            // Edit show object, initialy a dummy one.
             self.editShow = __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.observable({ name: null, date: '', imgUrl: '', videoUrl: '' });
 
-            self.addShow = function () {
-                __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#showModal').modal('show');
-            };
-
+            // When editing a show, open the modal with the information of the current show.
             self.showSelectedShow = function (show) {
                 self.editShow(show);
                 __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#showModal').modal('show');
             };
 
+            // Open the modal to add a new show info.
+            self.addShow = function () {
+                __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#showModal').modal('show');
+            };
+
+            // Add the show into the array of shows, sorting it by date.
+            self.addToArray = show => {
+                self.shows(__WEBPACK_IMPORTED_MODULE_1_lodash___default.a.chain(self.shows()).push(show).sortBy(show => {
+                    return __WEBPACK_IMPORTED_MODULE_2_moment___default()(show.date);
+                }).value());
+            };
+
             self.removeShow = function (show) {
+                removeShow(show, self.removeFromArray, ctx);
+            };
+
+            // Remove the current show from array (front-end only).
+            self.removeFromArray = function (show) {
                 self.shows.remove(show);
             };
 
-            self.addToArray = function (show) {
-                self.shows.push(show);
+            // Update the selected show with the information of the show edited.
+            self.updateShow = function (updatedShow) {
+                self.shows(__WEBPACK_IMPORTED_MODULE_1_lodash___default.a.map(self.shows(), show => {
+                    if (updatedShow._id === show._id) {
+                        return show = updatedShow;
+                    }
+                    return show;
+                }));
             };
 
+            // Send to server the request with a new show or a show being edited
             self.editShowSubmit = function () {
                 if (this._id) {
-                    // Do nothing for now...
+                    editShow(this, self.updateShow, ctx);
                 } else {
-                    console.log(this);
                     insertShow(this, self.addToArray, ctx);
                 }
                 self.editShow({ name: null, date: '', imgUrl: '', videoUrl: '' });
                 __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#showModal').modal('hide');
             };
+
+            // Locally filter the shows using the search input.
+            self.filterShows = function () {
+                const query = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#search').val().toLowerCase().trim();
+                if (query.length) {
+                    self.shows(__WEBPACK_IMPORTED_MODULE_3_knockout___default.a.utils.arrayFilter(self.shows(), show => {
+                        return __WEBPACK_IMPORTED_MODULE_3_knockout___default.a.utils.stringStartsWith(show.name.toLowerCase(), query);
+                    }));
+                } else {
+                    self.shows(self.allShows);
+                }
+            };
+
+            // Bind the enter key to prevent submitting the input.
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#search').bind('keypress', event => {
+                const ENTER_KEY = 13;
+                if (event.which == ENTER_KEY) {
+                    event.preventDefault();
+                    self.filterShows();
+                }
+            });
+
+            // Delay the execution of the search and filter results.
+            __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#search').on('keyup', __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.debounce(event => {
+                event.preventDefault();
+                self.filterShows();
+            }, 350));
         }
 
         logout() {
@@ -38806,8 +38862,33 @@ function insertShow(show, addFnc, ctx) {
         },
         data: show
     }).then(result => {
-        console.log(result);
         addFnc(result.show);
+    });
+}
+
+function editShow(show, updateFnc, ctx) {
+    return __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+        url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+        type: 'PUT',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('x-access-token', sessionStorage.getItem('token'));
+        },
+        data: show
+    }).then(result => {
+        updateFnc(result.show);
+    });
+}
+
+function removeShow(show, removeFnc, ctx) {
+    return __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+        url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+        type: 'DELETE',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('x-access-token', sessionStorage.getItem('token'));
+        },
+        data: show
+    }).then(result => {
+        removeFnc(result.show);
     });
 }
 
@@ -45438,7 +45519,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <br>\n  
 /* 486 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <div class=\"row\">\n      <div class=\"col-md-12 text-right\">\n        <button data-bind=\"click: logout\"class=\"btn btn-warning logout\">Logout</button>\n      </div>\n    </div>\n    <h2 class=\"text-center\">Shows</h2>\n    <h4 data-bind=\"if: shows().length > 0\"class=\"text-center\">Eventos do Maior São João do Mundo</h4>\n    <h4 data-bind=\"if: shows().length === 0\"class=\"text-center\">Não há eventos cadastrados no momento.</h4>\n    <hr>\n  </div>\n  <br>\n  <div data-bind=\"if: shows().length > 0\" class=\"row\">\n    <div class=\"col-md-1\"></div>\n    <div class=\"col-md-4\">\n      <form>\n        <div class=\"input-group add-on\">\n          <input type=\"text\" class=\"form-control\" id=\"search\" placeholder=\"Filtrar eventos\">\n          <div class=\"input-group-btn\">\n            <button type=\"submit\" class=\"btn btn-default\"><i class=\"glyphicon glyphicon-search\"></i></button>\n          </div>\n        </div>\n      </form>\n    </div>\n    <div class=\"col-md-4\"></div>\n    <div class=\"col-md-2 text-right\">\n      <button data-bind=\"click: addShow\"class=\"btn btn-primary\">Adicionar Evento</button>\n    </div>\n  </div>\n  <br>\n  <br>\n  <div data-bind=\"if: shows().length > 0\" class=\"row\">\n    <div class=\"col-md-1\"></div>\n    <div class=\"col-md-10 text-center\">\n      <div class=\"row overflow\">\n        <div class=\"col-md-12\">\n          <table class=\"table table-stripped table-holder\">\n            <thead>\n              <tr>\n                <th class=\"text-center\">Data</th>\n                <th class=\"text-center\">Nome</th>\n                <th class=\"text-center\">Youtube Link</th>\n                <th class=\"text-center\">Imagem Artista</th>\n                <th class=\"text-center\">Action</th>\n              </tr>\n            </thead>\n            <tbody data-bind=\"foreach: shows\">\n              <tr>\n                <td data-bind=\"text: moment( date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' )\"></td>\n                <td data-bind=\"text: name\"></td>\n                <td><a target=\"_blank\" data-bind=\"attr: { href: videoUrl }\">Link</a></td>\n                <td><a target=\"_blank\" data-bind=\"attr: { href: imgUrl }\">Link</a></td>\n                <td class=\"text-center\">\n                  <button data-bind=\"click: $parent.showSelectedShow\"class=\"btn btn-primary btn-xs\">\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </button>\n                  <button data-bind=\"click: $parent.removeShow\" class=\"btn btn-danger btn-xs\">\n                    <span class=\"glyphicon glyphicon-remove\"></span>\n                  </button>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n      <br>\n      <br>\n    </div>\n    <div class=\"col-md-1\"></div>\n  </div>\n</div>\n<!-- Modal -->\n<div data-bind=\"with: editShow\" class=\"modal fade\" id=\"showModal\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n  \n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n        <h4 class=\"modal-title\"><!-- ko text: name ? 'Editing Show ' + name : 'New Show' --><!--/ko--></h4>\n      </div>\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"form-group modal-form\" method=\"PUT\">\n            <div class=\"form-group text-left\">\n              <label for=\"date\">Data do Show</label>\n              <input data-bind=\"value: date\" id=\"date\" type=\"date\" placeholder=\"Data...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"name\">Nome do Artista/Banda</label>\n              <input data-bind=\"value: name\" id=\"name\" type=\"text\" placeholder=\"Nome...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"videoUrl\">Link de um show do Artista/Banda</label>\n              <input data-bind=\"value: videoUrl\" id=\"videoUrl\" type=\"text\" placeholder=\"Link Youtube...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"imgUrl\">Link de uma image do Artista/Banda</label>\n              <input data-bind=\"value: imgUrl\" id=\"imgUrl\" type=\"text\" placeholder=\"Link Imagem...\" required class=\"form-control\">\n            </div>\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button data-bind=\"click: $parent.editShowSubmit, clickBubble: false\" type=\"button\" class=\"btn btn-success\">Salvar e Fechar</button>\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Fechar</button>\n      </div>\n    </div>\n    \n  </div>\n</div>";
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <div class=\"row\">\n      <div class=\"col-md-12 text-right\">\n        <button data-bind=\"click: logout\"class=\"btn btn-warning logout\">Logout</button>\n      </div>\n    </div>\n    <h2 class=\"text-center\">Shows</h2>\n    <h4 data-bind=\"if: shows().length > 0\"class=\"text-center\">Eventos do Maior São João do Mundo</h4>\n    <h4 data-bind=\"if: shows().length === 0\"class=\"text-center\">Não há eventos cadastrados no momento.</h4>\n    <hr>\n  </div>\n  <br>\n  <div class=\"row\">\n    <div class=\"col-md-1\"></div>\n    <div data-bind=\"if: shows().length > 0 || search\" class=\"col-md-4\">\n      <form>\n        <div class=\"input-group add-on\">\n          <input type=\"text\" class=\"form-control\" id=\"search\" placeholder=\"Filtrar eventos\">\n          <div class=\"input-group-btn\">\n            <button data-bind=\"click: filterShows, clickBubble: false\" type=\"button\" class=\"btn btn-default\"><i class=\"glyphicon glyphicon-search\"></i></button>\n          </div>\n        </div>\n      </form>\n    </div>\n    <div class=\"col-md-4\"></div>\n    <div class=\"col-md-2 text-right\">\n      <button data-bind=\"click: addShow\"class=\"btn btn-primary\">Adicionar Evento</button>\n    </div>\n  </div>\n  <br>\n  <br>\n  <div data-bind=\"if: shows().length > 0\" class=\"row\">\n    <div class=\"col-md-1\"></div>\n    <div class=\"col-md-10 text-center\">\n      <div class=\"row overflow\">\n        <div class=\"col-md-12\">\n          <table class=\"table table-stripped table-holder\">\n            <thead>\n              <tr>\n                <th class=\"text-center\">Data</th>\n                <th class=\"text-center\">Nome</th>\n                <th class=\"text-center\">Youtube Link</th>\n                <th class=\"text-center\">Imagem Artista</th>\n                <th class=\"text-center\">Action</th>\n              </tr>\n            </thead>\n            <tbody data-bind=\"foreach: shows\">\n              <tr>\n                <td data-bind=\"text: moment( date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' )\"></td>\n                <td data-bind=\"text: name\"></td>\n                <td><a target=\"_blank\" data-bind=\"attr: { href: videoUrl }\">Link</a></td>\n                <td><a target=\"_blank\" data-bind=\"attr: { href: imgUrl }\">Link</a></td>\n                <td class=\"text-center\">\n                  <button data-bind=\"click: $parent.showSelectedShow\"class=\"btn btn-primary btn-xs\">\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </button>\n                  <button data-bind=\"click: $parent.removeShow\" class=\"btn btn-danger btn-xs\">\n                    <span class=\"glyphicon glyphicon-remove\"></span>\n                  </button>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n      <br>\n      <br>\n    </div>\n    <div class=\"col-md-1\"></div>\n  </div>\n</div>\n<!-- Modal -->\n<div data-bind=\"with: editShow\" class=\"modal fade\" id=\"showModal\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n  \n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n        <h4 class=\"modal-title\"><!-- ko text: name ? 'Editing Show ' + name : 'New Show' --><!--/ko--></h4>\n      </div>\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"form-group modal-form\" method=\"PUT\">\n            <div class=\"form-group text-left\">\n              <label for=\"date\">Data do Show</label>\n              <input data-bind=\"value: date\" id=\"date\" type=\"date\" placeholder=\"Data...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"name\">Nome do Artista/Banda</label>\n              <input data-bind=\"value: name\" id=\"name\" type=\"text\" placeholder=\"Nome...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"videoUrl\">Link de um show do Artista/Banda</label>\n              <input data-bind=\"value: videoUrl\" id=\"videoUrl\" type=\"text\" placeholder=\"Link Youtube...\" required class=\"form-control\">\n            </div>\n            <div class=\"form-group text-left\">\n              <label for=\"imgUrl\">Link de uma image do Artista/Banda</label>\n              <input data-bind=\"value: imgUrl\" id=\"imgUrl\" type=\"text\" placeholder=\"Link Imagem...\" required class=\"form-control\">\n            </div>\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button data-bind=\"click: $parent.editShowSubmit, clickBubble: false\" type=\"button\" class=\"btn btn-success\">Salvar e Fechar</button>\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Fechar</button>\n      </div>\n    </div>\n    \n  </div>\n</div>";
 
 /***/ }),
 /* 487 */

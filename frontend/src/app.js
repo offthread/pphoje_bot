@@ -29,6 +29,7 @@ Router.use( ( ctx ) => {
     }
 } );
 
+// Define the routes available for this application (but still, single page)
 Router.useRoutes( {
         '/': [ checkCredentials, 'home' ],
         '/login': 'login',
@@ -71,42 +72,104 @@ ko.components.register( 'shows', {
         constructor( ctx ) {
             var self = this;
 
-            var initialShows = ctx.shows.map( ( show ) => {
-                const dateFormated = moment( show.date ).format( 'YYYY-MM-DD' );
+            var initialShows = _.chain(ctx.shows)
+                .map( ( show ) => {
+                // Data with timestamp is being parsed to D - 1. Y?
+                const dateFormated = moment( show.date, 'YYYY-MM-DDZHH:mm' ).add( 1, 'day' ).format( 'YYYY-MM-DD' );
                 show.date = dateFormated;
                 return show;
-            } );
+            } )
+            // Sort by date
+            .sortBy( ( show ) => moment( show.date, 'YYYY-MM-DD' ) )
+            .value();
 
+            // Save all shows so we can replace when query is empty.
+            self.allShows = initialShows;
+
+            // Array of shows, loaded from database.
             self.shows = ko.observableArray( initialShows );
+            // Edit show object, initialy a dummy one.
             self.editShow = ko.observable( { name: null, date: '', imgUrl: '', videoUrl: '' } );
 
-            self.addShow = function() {
-                $( '#showModal' ).modal( 'show' );
-            }
-
+            // When editing a show, open the modal with the information of the current show.
             self.showSelectedShow = function( show ) {
                 self.editShow( show );
                 $( '#showModal' ).modal( 'show' );
             }
 
+            // Open the modal to add a new show info.
+            self.addShow = function() {
+                $( '#showModal' ).modal( 'show' );
+            }
+
+            // Add the show into the array of shows, sorting it by date.
+            self.addToArray = ( show ) => {
+                self.shows(
+                    _.chain( self.shows() )
+                    .push( show )
+                    .sortBy( ( show ) => {
+                        return moment( show.date )
+                    } )
+                    .value()
+                );
+            }
+
             self.removeShow = function ( show ) {
+                removeShow( show, self.removeFromArray, ctx )
+            }
+
+            // Remove the current show from array (front-end only).
+            self.removeFromArray = function( show ) {
                 self.shows.remove( show );
             }
 
-            self.addToArray = function( show ) {
-                self.shows.push( show );
+            // Update the selected show with the information of the show edited.
+            self.updateShow = function( updatedShow ) {
+                self.shows( _.map( self.shows(), ( show ) => {
+                    if ( updatedShow._id === show._id  ) {
+                        return show = updatedShow;
+                    }
+                    return show;
+                } ) );
             }
 
+            // Send to server the request with a new show or a show being edited
             self.editShowSubmit = function() {
                 if (this._id) {
-                    // Do nothing for now...
+                    editShow( this, self.updateShow, ctx );
                 } else {
-                    console.log( this );
                     insertShow( this, self.addToArray, ctx );
                 }
                 self.editShow( { name: null, date: '', imgUrl: '', videoUrl: '' } );
                 $( '#showModal' ).modal( 'hide' );
-            }
+            };
+
+            // Locally filter the shows using the search input.
+            self.filterShows = function () {
+                const query = $( '#search' ).val().toLowerCase().trim();
+                if ( query.length ) {
+                    self.shows( ko.utils.arrayFilter( self.shows(), ( show ) => {
+                        return ko.utils.stringStartsWith( show.name.toLowerCase(), query );
+                    } ) );
+                } else {
+                    self.shows( self.allShows );
+                }
+            };
+
+            // Bind the enter key to prevent submitting the input.
+            $( '#search' ).bind( 'keypress', ( ( event ) => {
+                const ENTER_KEY = 13;
+                if ( event.which == ENTER_KEY ) {
+                    event.preventDefault();
+                    self.filterShows();
+                }
+            } ) );
+
+            // Delay the execution of the search and filter results.
+            $( '#search' ).on( 'keyup', _.debounce( ( event ) => {
+                event.preventDefault();
+                self.filterShows();
+            }, 350 ) );
         }
 
         logout() {
@@ -176,8 +239,35 @@ function insertShow( show, addFnc, ctx ) {
             data: show
         } )
         .then( result => {
-            console.log( result );
             addFnc( result.show );
+        } );
+}
+
+function editShow( show, updateFnc, ctx ) {
+    return $.ajax( {
+            url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+            type: 'PUT',
+            beforeSend: function( xhr ) {
+                xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );
+            },
+            data: show
+        } )
+        .then( result => {
+            updateFnc( result.show );
+        } );
+}
+
+function removeShow( show, removeFnc, ctx ) {
+    return $.ajax( {
+            url: 'http://192.168.25.166:3000/api/shows/' + show._id,
+            type: 'DELETE',
+            beforeSend: function( xhr ) {
+                xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );
+            },
+            data: show
+        } )
+        .then( result => {
+            removeFnc( result.show );
         } );
 }
 

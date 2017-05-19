@@ -1,4 +1,5 @@
 import Show from '../models/show'
+import _ from 'lodash';
 
 export function getAllShows (req, res) {
   Show.find((err, shows) => {
@@ -17,7 +18,8 @@ export function getShow (req, res) {
 export function insertShow (req, res)  {
   const show = new Show()
   show.name = req.body.name
-  show.link = req.body.link
+  show.videoUrl = req.body.videoUrl
+  show.imgUrl = req.body.imgUrl
   show.date = req.body.date
 
   show.save().then(s => {
@@ -29,14 +31,18 @@ export function insertShow (req, res)  {
 
 export function updateShow (req, res) {
   let attributes = {}
-  const { name, link, date } = req.body
+  const { name, videoUrl, imgUrl, date } = req.body
 
   if (!_.isEmpty(name)) {
     attributes.name = name
   }
 
-  if (!_.isEmpty(link)) {
-    attributes.link = link
+  if (!_.isEmpty(videoUrl)) {
+    attributes.videoUrl = videoUrl
+  }
+
+  if (!_.isEmpty(imgUrl)) {
+    attributes.imgUrl = imgUrl
   }
 
   if (!_.isEmpty(date)) {
@@ -54,6 +60,6 @@ export function removeShow (req, res) {
     _id: req.params.show_id
   }, (err, show) => {
     if (err) res.send(err)
-    res.json({ message: 'Show removed!' })
+    res.json({ message: 'Show removed!', show: show })
   })
 }
