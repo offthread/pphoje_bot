@@ -13,6 +13,8 @@ export default {
 
     Lembrando que o Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017. APROVEITE!
 
+    Fonte: https://saojoaodecampina.com.br/programacao
+
     Dúvidas ou sugestões? Envie e-mail para offthread@gmail.com.
 
     Desenvolvido por OFF Thread.
