@@ -9,7 +9,7 @@ import config from './config'
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'x-access-token, content-type');
     next();
 };
 
@@ -22,6 +22,15 @@ mongoose.connect(config.database.url)
 
 // allow CORS
 app.use(allowCrossDomain);
+
+//  do not check for authorization if OPTIONS
+app.options('/*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+    res.header('Access-Control-Allow-Headers', 'x-access-token, content-type');
+    res.send(200);
+});
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 

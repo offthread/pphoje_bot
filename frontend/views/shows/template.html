@@ -6,12 +6,12 @@
       </div>
     </div>
     <h2 class="text-center">Shows</h2>
-    <h4 data-bind="if: shows.length > 0"class="text-center">Eventos do Maior São João do Mundo</h4>
-    <h4 data-bind="if: shows.length === 0"class="text-center">Não há eventos cadastrados no momento.</h4>
+    <h4 data-bind="if: shows().length > 0"class="text-center">Eventos do Maior São João do Mundo</h4>
+    <h4 data-bind="if: shows().length === 0"class="text-center">Não há eventos cadastrados no momento.</h4>
     <hr>
   </div>
   <br>
-  <div data-bind="if: shows.length > 0" class="row">
+  <div data-bind="if: shows().length > 0" class="row">
     <div class="col-md-1"></div>
     <div class="col-md-4">
       <form>
@@ -25,12 +25,12 @@
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-2 text-right">
-      <button class="btn btn-primary">Adicionar Evento</button>
+      <button data-bind="click: addShow"class="btn btn-primary">Adicionar Evento</button>
     </div>
   </div>
   <br>
   <br>
-  <div data-bind="if: shows.length > 0" class="row">
+  <div data-bind="if: shows().length > 0" class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10 text-center">
       <div class="row overflow">
@@ -47,7 +47,7 @@
             </thead>
             <tbody data-bind="foreach: shows">
               <tr>
-                <td data-bind="text: date"></td>
+                <td data-bind="text: moment( date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' )"></td>
                 <td data-bind="text: name"></td>
                 <td><a target="_blank" data-bind="attr: { href: videoUrl }">Link</a></td>
                 <td><a target="_blank" data-bind="attr: { href: imgUrl }">Link</a></td>
@@ -55,7 +55,7 @@
                   <button data-bind="click: $parent.showSelectedShow"class="btn btn-primary btn-xs">
                     <span class="glyphicon glyphicon-edit"></span>
                   </button>
-                  <button class="btn btn-danger btn-xs">
+                  <button data-bind="click: $parent.removeShow" class="btn btn-danger btn-xs">
                     <span class="glyphicon glyphicon-remove"></span>
                   </button>
                 </td>
@@ -71,21 +71,21 @@
   </div>
 </div>
 <!-- Modal -->
-<div data-bind="with: show" class="modal fade" id="showModal" role="dialog">
+<div data-bind="with: editShow" class="modal fade" id="showModal" role="dialog">
   <div class="modal-dialog">
   
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><!-- ko text: name ? 'Editing Show ' : 'New Show' --><!--/ko-->'<!-- ko text: name --><!--/ko-->'</h4>
+        <h4 class="modal-title"><!-- ko text: name ? 'Editing Show ' + name : 'New Show' --><!--/ko--></h4>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group modal-form" method="PUT">
             <div class="form-group text-left">
               <label for="date">Data do Show</label>
-              <input data-bind="value: date" id="date" type="text" placeholder="Data..." required class="form-control">
+              <input data-bind="value: date" id="date" type="date" placeholder="Data..." required class="form-control">
             </div>
             <div class="form-group text-left">
               <label for="name">Nome do Artista/Banda</label>

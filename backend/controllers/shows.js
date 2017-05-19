@@ -21,7 +21,7 @@ export function insertShow (req, res)  {
   show.date = req.body.date
 
   show.save().then(s => {
-    res.json({ message: `${s.name} inserted` })
+    res.json({ message: `${s.name} inserted`, show: s })
   }).catch(err => {
     res.send(err)
   })
@@ -45,7 +45,7 @@ export function updateShow (req, res) {
 
   Show.findByIdAndUpdate(req.params.show_id, { $set: attributes }, { new: true }, (err, s) => {
     if (err) res.send(err)
-    res.json({ messsage: `${s.name} updated!` })
+    res.json({ messsage: `${s.name} updated!`, show: s })
   })
 }
 

@@ -13,6 +13,8 @@ import styles from '../styles/main.css';
 import * as login_template from '../views/login';
 import * as shows_template from '../views/shows';
 
+global.moment = moment;
+
 const loading = ko.observable(true);
 
 Router.use( loadingMiddleware( loading ) );
@@ -68,14 +70,42 @@ ko.components.register( 'shows', {
     viewModel: class ShowsViewModel {
         constructor( ctx ) {
             var self = this;
-            this.shows = ctx.shows.map( ( show ) => {
-                show.date = moment( show.date ).format('DD/MM/YYYY');
+
+            var initialShows = ctx.shows.map( ( show ) => {
+                const dateFormated = moment( show.date ).format( 'YYYY-MM-DD' );
+                show.date = dateFormated;
                 return show;
-            });
-            this.show = ko.observable( null );
-            this.showSelectedShow = function( show ) {
-                self.show( show );
+            } );
+
+            self.shows = ko.observableArray( initialShows );
+            self.editShow = ko.observable( { name: null, date: '', imgUrl: '', videoUrl: '' } );
+
+            self.addShow = function() {
                 $( '#showModal' ).modal( 'show' );
+            }
+
+            self.showSelectedShow = function( show ) {
+                self.editShow( show );
+                $( '#showModal' ).modal( 'show' );
+            }
+
+            self.removeShow = function ( show ) {
+                self.shows.remove( show );
+            }
+
+            self.addToArray = function( show ) {
+                self.shows.push( show );
+            }
+
+            self.editShowSubmit = function() {
+                if (this._id) {
+                    // Do nothing for now...
+                } else {
+                    console.log( this );
+                    insertShow( this, self.addToArray, ctx );
+                }
+                self.editShow( { name: null, date: '', imgUrl: '', videoUrl: '' } );
+                $( '#showModal' ).modal( 'hide' );
             }
         }
 
@@ -83,16 +113,6 @@ ko.components.register( 'shows', {
             sessionStorage.removeItem( 'authenticated' );
             Router.update( '/' );
         }
-
-        editShowSubmit( ) {
-            const modal = $( '#showModal' );
-            const modalNewName = $( '.modal-form #name' ).val();
-            const modalNewVideoUrl = $( '.modal-form #videoUrl' ).val();
-            const modalNewImgUrl = $( '.modal-form #imgUrl' ).val();
-            const modalNewDate = $( '.modal-form #date' ).val();
-            $( '#showModal' ).modal( 'hide' );
-        }
-
     },
     template: shows_template.template
 });
@@ -121,7 +141,7 @@ function loadShows( ctx ) {
 function loadShow( ctx ) {
     if ( !ctx.show ) {
         return $.ajax( 'http://192.168.25.166:3000/api/shows/' )
-        .then( ( result ) => _.filter( ctx.shows, ( show ) => show._id == ctx.params.id ) );
+            .then( ( result ) => _.filter( ctx.shows, ( show ) => show._id == ctx.params.id ) );
     }
 }
 
@@ -144,6 +164,21 @@ function attemptLogin( user, localCtx ) {
             }
         } )
     }
+}
+
+function insertShow( show, addFnc, ctx ) {
+    return $.ajax( {
+            url: 'http://192.168.25.166:3000/api/shows/',
+            type: 'POST',
+            beforeSend: function( xhr ) {
+                xhr.setRequestHeader( 'x-access-token', sessionStorage.getItem( 'token' ) );
+            },
+            data: show
+        } )
+        .then( result => {
+            console.log( result );
+            addFnc( result.show );
+        } );
 }
 
 function checkCredentials( ctx ) {
