@@ -35,7 +35,11 @@ en:
 
   date_format          : "%m/%d/%Y"
 
-  ended_message        : "The biggest São João Festival in the world 2016 has ended! There are not further information available."
+  ended_message        : "The biggest São João Festival in the world 2017 has ended! There are not further information available."
 
-  error_invalid_days   : "The biggest São João Festival in the world take place between June 3rd and July 3rd. Inform a valid day to get more info."
-  error_invalid_weekday: 'Please provide a valid weekday name (remember to only use the first three letters as in "mon").'
+  error_invalid_days   : "The biggest São João Festival in the world take place between June 2rd and July 2rd. Inform a valid day to get more info."
+  error_invalid_weekday: "Please provide a valid weekday name (remember to only use the first three letters as in 'mon')."
+
+  error_request        : "Oh boy, server seems to be down right now. Please try again later."
+
+  server_date_format   : "%Y-%m%d"

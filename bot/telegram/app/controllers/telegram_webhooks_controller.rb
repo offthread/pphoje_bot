@@ -43,9 +43,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def help(*)
     ajuda
   end
-  # v0.6
-  context_handler do
+
+  def action_missing(action)
     replyWithText(t(:check_usage_command))
+  end
+
+  def replyWithText(text)
+    respond_with :message, text: text
   end
 
   def action_missing(action)
@@ -162,12 +166,9 @@ def getCurrentMonth(selectedDay)
 
     responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted, :weekDay => weekDayStr)
     shows.each do |show|
-      responseMessage += t(:event_title, :eventTitle => show.name)
-      responseMessage +=  t(:event_time, :eventTime => show.hour)
-      
-      eventConfirmed = show.is_confirmed ? t(:confirmed) : t(:not_confirmed)
-      responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
-      responseMessage +=  t(:event_band_info, :moreInfo => show.link_band)
+      responseMessage += t(:event_title, :eventTitle => show["name"])
+
+      responseMessage +=  t(:event_band_info, :moreInfo => show["videoUrl"])
     end
     responseMessage += END_STREAM_STRING
 
@@ -184,19 +185,45 @@ def getCurrentMonth(selectedDay)
       replyWithText(resultAvailable)
       return
     else
-      @shows = Show.by_date(requestedDate)
-
+      request = Typhoeus::Request.new(
+        "https://ppbot-mw.herokuapp.com/api/shows/"
+      )
       dateFormatted = t(:custom_date_format, :day => requestedDate.strftime("%d"),
         :month => requestedDate.strftime("%m"))
+      request.on_complete do | response |
+        if response.success?
+          shows = JSON.parse( response.body )
 
-      if @shows.empty?
-        replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
-      else
-        responseMessage = getShowsFormatted(@shows, dateFormatted)
+          shows = shows.map do |x|
+            x["date"] = Date.parse(x["date"], "%Y-%m-%d")
+            x
+          end
 
-        replyWithText(responseMessage)
+          shows = shows.select {|x| x["date"] == requestedDate }
+
+          if shows.empty?
+            replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
+          else
+            responseMessage = getShowsFormatted(shows, dateFormatted)
+            replyWithText( responseMessage )
+          end
+        else
+          replyWithText( t(:error_request) )
+        end
       end
+      request.run
+      # @shows = Show.by_date(requestedDate)
+
+      # dateFormatted = t(:custom_date_format, :day => requestedDate.strftime("%d"),
+      #   :month => requestedDate.strftime("%m"))
+
+      # if @shows.empty?
+      #   replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
+      # else
+      #   responseMessage = getShowsFormatted(@shows, dateFormatted)
+
+      #   replyWithText(responseMessage)
+      # end
     end
   end
-
 end
