@@ -4,7 +4,7 @@ export default {
   sj_end_day: '2017-07-03',
   help_command: 'AJUDA',
   help_text: `
-    Olá! :|]
+    Olá!
     
     Você pode consultar a programação do São João de Campina Grande 2017 das seguintes formas:
 
