@@ -35,9 +35,13 @@ pt-BR:
 
   date_format          : "%d/%m/%Y"
 
-  ended_message        : "O Maior São João do Mundo 2016 acabou! Não há informações futuras disponíveis."
+  ended_message        : "O Maior São João do Mundo 2017 acabou! Não há informações futuras disponíveis."
 
-  error_invalid_days   : "O Maior São João do Mundo acontece de 03 de Junho a 03 de Julho. Informe um dia válido para obter maiores informações."
-  error_invalid_weekday: 'Por favor, forneça um dia da semana válido (lembre-se de usar apenas as três primeiras letras, assim como em "seg").'
+  error_invalid_days   : "O Maior São João do Mundo acontece de 02 de Junho a 02 de Julho. Informe um dia válido para obter maiores informações."
+  error_invalid_weekday: "Por favor, forneça um dia da semana válido (lembre-se de usar apenas as três primeiras letras, assim como em 'seg')."
 
   day_names: [Domingo, Segunda-Feira, Terça-Feira, Quarta-Feira, Quinta-Feira, Sexta-Feira, Sábado]
+
+  error_request        : "Oxente, estamos com problemas na conexão com o servidor. Tente novamente mais tarde."
+
+  server_date_format   : "%Y-%m%d"

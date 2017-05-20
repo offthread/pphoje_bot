@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: [ path.resolve(__dirname, './src/app.js'), 'babel-polyfill' ],
-    watch: false,
+    watch: true,
     output: {
         path: __dirname + '/build',
         filename: 'bundle.js'
