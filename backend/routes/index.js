@@ -3,14 +3,13 @@ import morgan from 'morgan'
 import * as showsController from '../controllers/shows'
 import * as usersController from '../controllers/users'
 import * as authenticationController from '../controllers/authentication'
+import * as heartbeatController from '../controllers/heartbeat'
 
 const router = express.Router()
 
 router.use(morgan('dev'))
 
-router.get('/', (req, res) => {
-  res.json({ message: 'hooray! welcome to our api!' })
-})
+router.get('/heartbeat', heartbeatController.heartbeat)
 
 router.post('/user', usersController.createUser)
 
