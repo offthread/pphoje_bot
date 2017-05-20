@@ -1,10 +1,10 @@
 pt-BR:
   empty_shows_results  : "Não há eventos programados para o dia %{dateFormatted}."
-  shows_title_message  : "No dia %{dateFormatted} (%{weekDay}) teremos, no palco principal, os eventos:\n"
+  shows_title_message  : "No dia %{dateFormatted} (%{weekDay}) teremos, no palco principal, os shows de:\n"
 
   event_title          : "-> %{eventTitle}\n"
   event_confirmed      : "- Evento confirmado: %{eventConfirmed}\n"
-  event_band_info      : "- Informações da banda: %{moreInfo}\n\n"
+  event_band_info      : "- Conheça a banda: %{moreInfo}\n\n"
   event_time           : "- Início estimado: %{eventTime}\n"
 
   confirmed            : "Sim"

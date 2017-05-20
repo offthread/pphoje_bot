@@ -167,9 +167,7 @@ def getCurrentMonth(selectedDay)
     responseMessage = t(:shows_title_message, :dateFormatted => dateFormatted, :weekDay => weekDayStr)
     shows.each do |show|
       responseMessage += t(:event_title, :eventTitle => show["name"])
-      
-      eventConfirmed = t(:confirmed)
-      responseMessage +=  t(:event_confirmed, :eventConfirmed => eventConfirmed)
+
       responseMessage +=  t(:event_band_info, :moreInfo => show["videoUrl"])
     end
     responseMessage += END_STREAM_STRING
@@ -196,12 +194,12 @@ def getCurrentMonth(selectedDay)
         if response.success?
           shows = JSON.parse( response.body )
 
-          shows.map do |x|
+          shows = shows.map do |x|
             x["date"] = Date.parse(x["date"], "%Y-%m-%d")
             x
           end
 
-          shows.select {|x| x["date"] == requestedDate }
+          shows = shows.select {|x| x["date"] == requestedDate }
 
           if shows.empty?
             replyWithText(t(:empty_shows_results, :dateFormatted => dateFormatted))
