@@ -57,6 +57,7 @@ function processMessage ({ senderID, message }) {
     } catch (error) {
       console.log(error)
       sendTextMessage({ recipientId: senderID, text: "Digite uma data válida! O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
+      return
     }
 
     apiService.getShows()
@@ -65,7 +66,7 @@ function processMessage ({ senderID, message }) {
       if (!_.isEmpty(filteredShows)) { 
         sendReply({ recipientId: senderID, shows: filteredShows })
       } else {
-        sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
+        sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o dia desejado" })
       }
     })
     .catch(err => {

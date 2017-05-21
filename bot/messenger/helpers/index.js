@@ -11,7 +11,7 @@ function getDateFromMessage (message) {
 
   if (message.match(constants.DATE_REGULAR_EXPRESSION)) {
     if(isValidDate(message)) {
-          result.push(Moment(message, 'DD/MM'))
+      result.push(Moment(message, 'DD/MM'))
     } else {
       throw new Error('Invalid date')
     }
