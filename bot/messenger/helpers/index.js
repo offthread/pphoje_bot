@@ -27,13 +27,17 @@ function getDateFromMessage (message) {
 function filterShows ({ shows, dates }) {
   let result = []
   _.forEach(shows, s => {
-    const showDate = Moment(s.date)
+    const showDate = Moment(s.date, 'YYYY-MM-DD')
+
     _.forEach(dates, d => {
       if (showDate.isSame(d, 'day')) {
         result.push(s)
       }
     })
   })
+
+  result = _.groupBy(result, 'date')
+
   return result
 }
 
@@ -63,7 +67,7 @@ function getDatesFromNumber (day) {
   } catch (error) {
     console.log(error)
   }
-
+  
   return result
 }
 

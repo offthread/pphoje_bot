@@ -90,23 +90,25 @@ function sendTextMessage({recipientId, text}) {
 }
 
 function sendReply ({ recipientId, shows }) {
-  const data = createMessage(shows)
-  const messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: data
+  _.forIn(shows, (value, key) => {
+    const data = createMessage(value)
+    const messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: data
+          }
         }
       }
     }
-  }
 
-  callSendAPI(messageData)
+    callSendAPI(messageData)
+  })
 }
 
 function sendTyping (senderId) {
