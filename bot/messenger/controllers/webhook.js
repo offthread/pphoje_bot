@@ -40,7 +40,7 @@ function receivedMessage(event) {
   try {
     processMessage({senderID, message: event.message.text})
   } catch (error) {
-    sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
+    sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :(" })
   }
 }
 
@@ -50,20 +50,28 @@ function processMessage ({ senderID, message }) {
   if (_.upperCase(message) === config.help_command) {
     sendTextMessage({ recipientId: senderID, text: config.help_text })
   } else {
-    const dates = botHelper.getDateFromMessage(message)
+    let dates = []
+
+    try {
+      dates = botHelper.getDateFromMessage(message)
+    } catch (error) {
+      console.log(error)
+      sendTextMessage({ recipientId: senderID, text: "Digite uma data válida! O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
+    }
+
     apiService.getShows()
-      .then(shows => {
-        const filteredShows = botHelper.filterShows({ shows, dates })
-        if (!_.isEmpty(filteredShows)) { 
-          sendReply({ recipientId: senderID, shows: filteredShows })
-        } else {
-          sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem!" })
-      })
+    .then(shows => {
+      const filteredShows = botHelper.filterShows({ shows, dates })
+      if (!_.isEmpty(filteredShows)) { 
+        sendReply({ recipientId: senderID, shows: filteredShows })
+      } else {
+        sendTextMessage({ recipientId: senderID, text: "Nenhum show encontrado para o período desejado" })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :(" })
+    }) 
   }
 }
 

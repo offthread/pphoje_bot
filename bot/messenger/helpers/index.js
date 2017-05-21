@@ -9,8 +9,12 @@ Moment.locale('pt-BR')
 function getDateFromMessage (message) {
   let result = []
 
-  if (message.match(constants.DATE_REGULAR_EXPRESSION) && isValidDate(message)) {
-    result.push(Moment(message, 'DD/MM'))
+  if (message.match(constants.DATE_REGULAR_EXPRESSION)) {
+    if(isValidDate(message)) {
+          result.push(Moment(message, 'DD/MM'))
+    } else {
+      throw new Error('Invalid date')
+    }
   } else if (message.match(constants.NUMBER_REGULAR_EXPRESSION) && message !== '31') {
     result = getDatesFromNumber(message)
   } else {
