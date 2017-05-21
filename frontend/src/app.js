@@ -9,6 +9,8 @@ import loadingMiddleware from '../middleware/loading';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJS from 'bootstrap/dist/js/bootstrap.js';
 import styles from '../styles/main.css';
+import swal from 'sweetalert/dist/sweetalert.min.js';
+import swalCss from 'sweetalert/dist/sweetalert.css';
 
 import * as login_template from '../views/login';
 import * as shows_template from '../views/shows';
@@ -117,7 +119,18 @@ ko.components.register( 'shows', {
             }
 
             self.removeShow = function ( show ) {
-                removeShow( show, self.removeFromArray, ctx )
+                swal( {
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                },
+                function() {
+                    removeShow( show, self.removeFromArray, ctx );
+                } );
             }
 
             // Remove the current show from array (front-end only).
