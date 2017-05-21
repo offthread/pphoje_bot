@@ -81,6 +81,11 @@
         <h4 class="modal-title"><!-- ko text: name ? 'Editing Show ' + name : 'New Show' --><!--/ko--></h4>
       </div>
       <div class="modal-body">
+        <div data-bind="visible: !$parent.addOrEditFilled()"class="row text-left">
+          <div class="alert alert-danger">
+            <strong>Erro!</strong> <span>Todos os campos devem ser preenchidos</span>
+          </div>
+        </div>
         <form>
           <div class="form-group modal-form" method="PUT">
             <div class="form-group text-left">
@@ -104,7 +109,7 @@
       </div>
       <div class="modal-footer">
         <button data-bind="click: $parent.editShowSubmit, clickBubble: false" type="button" class="btn btn-success">Salvar e Fechar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button data-bind="click: $parent.cancelAction, clickBubble: false" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
       </div>
     </div>
     

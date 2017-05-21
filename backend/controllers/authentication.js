@@ -19,7 +19,7 @@ export function authenticate (req, res) {
           // if user is found and password is right
           // create a token
           const token = jwt.sign(user, config.secret, {
-            expiresIn: 1440 // expires in 24 hours
+            expiresIn: 60 * 60 * 24 // In seconds, so: 60 seconds (1 minute) * 60 minutes (1 hour) * 24 (1 day)
           })
           res.json({
             success: true,

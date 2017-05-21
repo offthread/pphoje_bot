@@ -1,2 +1,2 @@
 node_modules/
-frontend/build/
+/frontend/build/bundle.js

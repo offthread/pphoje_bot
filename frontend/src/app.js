@@ -65,6 +65,7 @@ ko.components.register( 'login', {
             const username = $( '#username' ).val();
             const password = $( '#password' ).val();
             attemptLogin( { username, password }, this );
+            loading( true );
         }
 
     },
@@ -76,16 +77,7 @@ ko.components.register( 'shows', {
         constructor( ctx ) {
             var self = this;
 
-            var initialShows = _.chain(ctx.shows)
-                .map( ( show ) => {
-                // Data with timestamp is being parsed to D - 1. Y?
-                const dateFormated = moment( show.date, 'YYYY-MM-DDZHH:mm' ).add( 1, 'day' ).format( 'YYYY-MM-DD' );
-                show.date = dateFormated;
-                return show;
-            } )
-            // Sort by date
-            .sortBy( ( show ) => moment( show.date, 'YYYY-MM-DD' ) )
-            .value();
+            const initialShows = getInitialShows( ctx.shows );
 
             // Save all shows so we can replace when query is empty.
             self.allShows = initialShows;
@@ -94,6 +86,9 @@ ko.components.register( 'shows', {
             self.shows = ko.observableArray( initialShows );
             // Edit show object, initialy a dummy one.
             self.editShow = ko.observable( { name: null, date: '', imgUrl: '', videoUrl: '' } );
+
+            // Check input values are filled
+            self.addOrEditFilled = ko.observable( true );
 
             // When editing a show, open the modal with the information of the current show.
             self.showSelectedShow = function( show ) {
@@ -107,7 +102,12 @@ ko.components.register( 'shows', {
             }
 
             // Add the show into the array of shows, sorting it by date.
-            self.addToArray = ( show ) => {
+            self.addNewShow = ( show ) => {
+                const dateFormated = moment( show.date, 'YYYY-MM-DDZHH:mm' ).add( 1, 'day' ).format( 'YYYY-MM-DD' );
+                show.date = dateFormated;
+
+                console.log(  show.date );
+
                 self.shows(
                     _.chain( self.shows() )
                     .push( show )
@@ -120,12 +120,13 @@ ko.components.register( 'shows', {
 
             self.removeShow = function ( show ) {
                 swal( {
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this imaginary file!",
+                    title: "Tem certeza?",
+                    text: "Não será possível recuperar este evento!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonText: "Sim, remova o evento!",
+                    cancelButtonText: "Cancelar",
                     closeOnConfirm: true
                 },
                 function() {
@@ -146,7 +147,9 @@ ko.components.register( 'shows', {
             self.updateShow = function( updatedShow ) {
                 self.shows( _.map( self.shows(), ( show ) => {
                     if ( updatedShow._id === show._id  ) {
-                        return show = updatedShow;
+                        const dateFormated = moment( updatedShow.date, 'YYYY-MM-DDZHH:mm' ).add( 1, 'day' ).format( 'YYYY-MM-DD' );
+                        updatedShow.date = dateFormated;
+                        return updatedShow;
                     }
                     return show;
                 } ) );
@@ -154,13 +157,31 @@ ko.components.register( 'shows', {
 
             // Send to server the request with a new show or a show being edited
             self.editShowSubmit = function() {
+                const modalInputDate = $( '#date' ).val();
+                const modalInputName = $( '#name' ).val();
+                const modalInputVideoUrl = $( '#videoUrl' ).val();
+                const modalInputImageUrl = $( '#imgUrl' ).val();
+
+                function isFilled( value ) {
+                    return value && value.length > 0 && value.trim().length > 0 ? true : false;
+                }
+
+                const filledAllInputs = isFilled( modalInputDate ) && isFilled( modalInputName ) &&
+                    isFilled( modalInputVideoUrl ) && isFilled( modalInputImageUrl );
+                if ( !filledAllInputs ) {
+                    self.addOrEditFilled( false );
+                    return;
+                }
+
+                self.addOrEditFilled( true );
+                loading( true );
                 if (this._id) {
                     editShow( this, self.updateShow, ctx );
                 } else {
-                    insertShow( this, self.addToArray, ctx );
+                    insertShow( this, self.addNewShow, ctx );
                 }
-                self.editShow( { name: null, date: '', imgUrl: '', videoUrl: '' } );
-                $( '#showModal' ).modal( 'hide' );
+                
+                self.cancelAction();
             };
 
             // Locally filter the shows using the search input.
@@ -189,6 +210,11 @@ ko.components.register( 'shows', {
                 event.preventDefault();
                 self.filterShows();
             }, 350 ) );
+
+            self.cancelAction = function() {
+                self.editShow( { name: null, date: '', imgUrl: '', videoUrl: '' } );
+                $( '#showModal' ).modal( 'hide' );
+            }
         }
 
         logout() {
@@ -212,6 +238,20 @@ ko.components.register( 'show', {
                 </div>
               `
 } );
+
+function getInitialShows( shows ) {
+    return _.chain( shows )
+        .map( ( show ) => {
+        // Data with timestamp is being parsed to D - 1. Y?
+        const dateFormated = moment( show.date, 'YYYY-MM-DDZHH:mm' ).add( 1, 'day' ).format( 'YYYY-MM-DD' );
+        show.date = dateFormated;
+        return show;
+    } )
+    // Sort by date
+    .sortBy( ( show ) => moment( show.date, 'YYYY-MM-DD' ) )
+    .value();
+
+}
 
 function loadShows( ctx ) {
     if ( !ctx.shows ) {
@@ -240,15 +280,17 @@ function attemptLogin( user, localCtx ) {
                 } else {
                     localCtx.errorMessage( 'Login ou senha inválidos. Tente novamente.' );
                 }
+                loading( false );
             },
             error: ( result ) => {
                 localCtx.errorMessage( 'Erro interno. Tente novamente atualizar a página ou volte mais tarde.' );
+                loading( false );
             }
         } )
     }
 }
 
-function insertShow( show, addFnc, ctx ) {
+function insertShow( show, addFn, ctx ) {
     return $.ajax( {
             url: `${config.api_url}/shows/`,
             type: 'POST',
@@ -258,11 +300,20 @@ function insertShow( show, addFnc, ctx ) {
             data: show
         } )
         .then( result => {
-            addFnc( result.show );
+            const opts = {
+                success: result.success,
+                action: 'adicionado',
+                show: result.show,
+                nextFn: addFn
+            }
+
+            handleResponse( opts );
+
+            loading( false );
         } );
 }
 
-function editShow( show, updateFnc, ctx ) {
+function editShow( show, updateFn, ctx ) {
     return $.ajax( {
             url: `${config.api_url}/shows/` + show._id,
             type: 'PUT',
@@ -272,11 +323,20 @@ function editShow( show, updateFnc, ctx ) {
             data: show
         } )
         .then( result => {
-            updateFnc( result.show );
+            const opts = {
+                success: result.success,
+                action: 'alterado',
+                show: result.show,
+                nextFn: updateFn
+            }
+
+            handleResponse( opts );
+
+            loading( false );
         } );
 }
 
-function removeShow( show, removeFnc, ctx ) {
+function removeShow( show, removeFn, ctx ) {
     return $.ajax( {
             url: `${config.api_url}/shows/` + show._id,
             type: 'DELETE',
@@ -286,8 +346,44 @@ function removeShow( show, removeFnc, ctx ) {
             data: show
         } )
         .then( result => {
-            removeFnc( result.show );
+            const opts = {
+                success: result.success,
+                action: 'removido',
+                show: result.show,
+                nextFn: removeFn
+            }
+
+            handleResponse( opts );
+
+            loading( false );
         } );
+}
+
+function handleResponse( _opts ) {
+    const opts = _opts || {};
+    const success = opts.success || false;
+    const action = opts.action || '';
+    const show = opts.show || {};
+    const callNextFn = opts.nextFn || function() {};
+
+    if ( success ) {
+        swal( {
+            type: "success",
+            title: "Sucesso!",
+            text: "Evento foi " + action + ".",
+            timer: 1500,
+            showConfirmButton: false
+        } );
+        callNextFn( show );
+    } else {
+        swal( {
+            type: "error",
+            title: "Erro!",
+            text: "Não foi possível " + action + " o evento. Tente novamente ou deslogue e insira novamente suas credenciais.",
+            timer: 1500,
+            showConfirmButton: false
+        } );
+    }
 }
 
 function checkCredentials( ctx ) {
