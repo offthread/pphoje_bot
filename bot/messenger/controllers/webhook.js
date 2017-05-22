@@ -163,7 +163,7 @@ function createMessage (shows) {
   _.forEach(shows, s => {
     result.push({
       title: s.name,
-      subtitle: Moment(s.date).format('DD [de] MMMM'),
+      subtitle: Moment(s.date).format('DD [de] MMMM - dddd'),
       image_url: s.imgUrl,
       buttons: [
         {
