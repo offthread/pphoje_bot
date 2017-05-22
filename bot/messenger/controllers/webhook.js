@@ -40,7 +40,7 @@ function receivedMessage(event) {
   try {
     processMessage({senderID, message: event.message.text})
   } catch (error) {
-    sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :(" })
+    sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :( Tente novamente em alguns instantes." })
   }
 }
 
@@ -56,7 +56,7 @@ function processMessage ({ senderID, message }) {
       dates = botHelper.getDateFromMessage(message)
     } catch (error) {
       console.log(error)
-      sendTextMessage({ recipientId: senderID, text: "Digite uma data válida! O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
+      sendTextMessage({ recipientId: senderID, text: "Ops! Data inválida. O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
       return
     }
 
@@ -71,7 +71,7 @@ function processMessage ({ senderID, message }) {
     })
     .catch(err => {
       console.log(err)
-      sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :(" })
+      sendTextMessage({ recipientId: senderID, text: "Erro ao processar mensagem! :( Tente novamente em alguns instantes." })
     }) 
   }
 }
