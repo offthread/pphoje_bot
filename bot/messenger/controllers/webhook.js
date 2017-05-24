@@ -56,7 +56,11 @@ function processMessage ({ senderID, message }) {
       dates = botHelper.getDateFromMessage(message)
     } catch (error) {
       console.log(error)
-      sendTextMessage({ recipientId: senderID, text: "Ops! Data inválida. O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
+      if (error.name === 'InvalidStringException') {
+        sendTextMessage({ recipientId: senderID, text: "Ops! Mensagem inválida. Envie 'Ajuda' para mais detalhes de como utilizar o Bot! :)" })
+      } else {
+        sendTextMessage({ recipientId: senderID, text: "Ops! Data inválida. O Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017! :)" })
+      }
       return
     }
 

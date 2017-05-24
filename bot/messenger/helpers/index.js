@@ -73,17 +73,17 @@ function getDatesFromNumber (day) {
 
 function getDayFromString (day) {
   let result = {}
-  try {
-    if (_.upperCase(day) === constants.TODAY_TEXT) {
-      result.push(Moment())
-    } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
-      result.push(Moment().add(1, 'days'))
-    } else if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
-      result = Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
-    }
-  } catch (error) {
-    console.log(error)
+
+  if (_.upperCase(day) === constants.TODAY_TEXT) {
+    result.push(Moment())
+  } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
+    result.push(Moment().add(1, 'days'))
+  } else if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
+    result = Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
+  } else {
+    throw { name: 'InvalidStringException', message: 'Invalid input' }
   }
+
   return result
 }
 
