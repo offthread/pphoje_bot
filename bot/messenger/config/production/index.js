@@ -10,7 +10,7 @@ export default {
 
     #1 - Enviando a data desejada no formato DD/MM ou DD. Exemplo: 24/06 ou 15;
     #2 - Enviando a sigla do dia desejado (dos próximos 7 dias): DOM, SEG, TER, QUA, QUI, SEX ou SAB;
-    #3 - Enviando as pakavras 'Hoje' ou 'Amanhã'.  
+    #3 - Enviando as palavras 'Hoje' ou 'Amanhã'.  
 
     Lembrando que o Maior e Melhor São João do Mundo vai de 02 de junho a 02 de julho de 2017. 
     
