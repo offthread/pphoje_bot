@@ -21,6 +21,5 @@ export default {
     Dúvidas ou sugestões? Envie e-mail para offthread@gmail.com.
 
     Desenvolvido por OFF Thread (y)
-  `,
-  page_access_token: 'EAASLgFOkSxYBAAytNJKdAkldhpjGMaLwrZCNdudtOdh02llZAfmiQLGL2aJX8U5TWZCzaiXzZB0iRK2h6r3dXiF8LxpR5AKQuZCM8LEV5nZCv42ze7e4GRpt3I4FZA3sjkaM1iEXAreT6eZBxAufbLTIZBZC2Jlj5ksZA0NWXeZBf9R4zwZDZD'
+  `
 }

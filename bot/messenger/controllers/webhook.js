@@ -6,6 +6,8 @@ import config from '../config'
 import botHelper from '../helpers'
 import apiService from '../services/ppbotApi'
 
+const PAGE_TOKEN = process.env.MESSENGER_PAGE_TOKEN
+
 export function authenticate (req, res) {
   if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'ppbot-messenger_ot') {
       res.status(200).send(req.query['hub.challenge'])
@@ -118,7 +120,7 @@ function sendReply ({ recipientId, shows }) {
 function sendTyping (senderId) {
   rp({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: config.page_access_token },
+    qs: { access_token: PAGE_TOKEN },
     method: 'POST',
     json: {
       recipient: {
@@ -144,7 +146,7 @@ function sendTyping (senderId) {
 function callSendAPI(messageData) {
   rp({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: config.page_access_token },
+    qs: { access_token: PAGE_TOKEN },
     method: 'POST',
     json: messageData
   })
