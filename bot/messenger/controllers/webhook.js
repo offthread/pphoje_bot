@@ -54,7 +54,7 @@ function processMessage ({ senderID, message }) {
     sendTextMessage({ recipientId: senderID, text: config.help_text })
   } else if(_.includes(constants.GREETINGS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().replace('Á', 'A').value())) {
     sendTextMessage({ recipientId: senderID, text: "Oi! Envie 'Ajuda' para detalhes de como ficar por dentro da programação do Maior e Melhor São João do Mundo :D" })
-  } else if (_.includes(constants.THANKS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase())) {
+  } else if (_.includes(constants.THANKS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().value())) {
     sendTextMessage({ recipientId: senderID, text: "Por nada! ;)" })
   } else {
     let dates = []
