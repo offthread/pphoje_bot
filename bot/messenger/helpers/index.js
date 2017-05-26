@@ -42,14 +42,8 @@ function filterShows ({ shows, dates }) {
 }
 
 function isValidDate (date) {
-  let parsedDate = {}
-  try {
-    parsedDate = Moment(date, 'DD/MM/YYYY') 
-  } catch (error) {
-    console.log(error)
-    return false
-  }
-  return parsedDate.isBetween(config.sj_initial_day, config.sj_end_day)
+  const  parsedDate = Moment(date, 'DD/MM/YYYY')
+  return parsedDate.isValid() || parsedDate.isBetween(config.sj_initial_day, config.sj_end_day)
 }
 
 function getDatesFromNumber (day) {
