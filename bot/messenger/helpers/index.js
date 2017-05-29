@@ -73,13 +73,25 @@ function getDayFromString (day) {
     result.push(Moment())
   } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
     result.push(Moment().add(1, 'days'))
-  } else if (_.includes(constants.WEEK_DAYS, _.upperCase(day))) {
-    result = Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
+  } else if (checkDayName(day)) {
+    day = validateSaturday(day)
+    result = getDayFromName(day)
   } else {
     throw { name: 'InvalidStringException', message: 'Invalid input' }
   }
-
   return result
+}
+
+function validateSaturday (day) {
+  return _.chain(day).lowerCase().startsWith('sab').value() ? _.chain(day).lowerCase().replace('sab', 'sáb').value() : day
+}
+
+function checkDayName (day) {
+  return _.some(Moment.localeData().weekdaysShort(), d => (_.lowerCase(d) === _.lowerCase(day))) || _.some(Moment.localeData().weekdays(), d => (_.lowerCase(d) === _.lowerCase(day)))
+}
+
+function getDayFromName (day) {
+  return Moment().day(day, 'ddd').isBefore(Moment(), 'day') ? Moment().add(1, 'weeks').day(day, 'ddd') : Moment().day(day, 'ddd')
 }
 
 export default {
