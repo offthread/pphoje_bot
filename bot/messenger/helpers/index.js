@@ -70,7 +70,7 @@ function getDayFromString (day) {
   let result = {}
 
   if (_.upperCase(day) === constants.TODAY_TEXT) {
-    result  = Moment()
+    result = Moment()
   } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
     result = Moment().add(1, 'days')
   } else if (checkDayName(day)) {
