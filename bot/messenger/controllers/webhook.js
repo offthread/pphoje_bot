@@ -51,9 +51,8 @@ function processMessage ({ senderID, message }) {
   sendTyping(senderID)
 
   if (_.upperCase(message) === config.help_command) {
-    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(() => {
-      sendDefaultMessages(senderID)
-    }).catch(err => {
+    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(() => sendDefaultMessages(senderID))
+    .catch(err => {
       console.log(err)
     })
   } else if(_.includes(constants.GREETINGS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().replace('Á', 'A').value())) {
