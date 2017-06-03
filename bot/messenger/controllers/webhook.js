@@ -51,8 +51,11 @@ function processMessage ({ senderID, message }) {
   sendTyping(senderID)
 
   if (_.upperCase(message) === config.help_command) {
-    sendTextMessage({ recipientId: senderID, text: config.help_text })
-    sendDefaultMessages(senderID)
+    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(() => {
+      sendDefaultMessages(senderID)
+    }).catch(err => {
+      console.log(err)
+    })
   } else if(_.includes(constants.GREETINGS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().replace('Á', 'A').value())) {
     sendTextMessage({ recipientId: senderID, text: "Oi! Envie 'Ajuda' para detalhes de como ficar por dentro da programação do Maior e Melhor São João do Mundo :D" })
   } else if (_.includes(constants.THANKS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().value())) {
@@ -98,7 +101,7 @@ function sendTextMessage ({recipientId, text}) {
     }
   }
 
-  callSendAPI(messageData)
+  return callSendAPI(messageData)
 }
 
 function sendDefaultMessages (senderId) {
@@ -190,23 +193,27 @@ function sendTyping (senderId) {
 }
 
 function callSendAPI(messageData) {
-  rp({
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_TOKEN },
-    method: 'POST',
-    json: messageData
-  })
-  .then((response, body) => {
-    if (response.statusCode == 200) {
-      var recipientId = body.recipient_id
-      var messageId = body.message_id
+  return new Promise((resolve, reject) => {
+    rp({
+      uri: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: { access_token: PAGE_TOKEN },
+      method: 'POST',
+      json: messageData
+    })
+    .then((response, body) => {
+      if (response.statusCode == 200) {
+        var recipientId = body.recipient_id
+        var messageId = body.message_id
 
-      console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
-    }
-  })
-  .catch(err => {
-    console.error("Unable to send message.")
-    console.error(err)
+        console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
+        resolve(true)
+      }
+    })
+    .catch(err => {
+      console.error("Unable to send message.")
+      console.error(err)
+      reject(err)
+    })
   })
 }
 
