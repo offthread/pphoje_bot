@@ -52,6 +52,7 @@ function processMessage ({ senderID, message }) {
 
   if (_.upperCase(message) === config.help_command) {
     sendTextMessage({ recipientId: senderID, text: config.help_text })
+    sendDefaultMessages(senderID)
   } else if(_.includes(constants.GREETINGS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().replace('Á', 'A').value())) {
     sendTextMessage({ recipientId: senderID, text: "Oi! Envie 'Ajuda' para detalhes de como ficar por dentro da programação do Maior e Melhor São João do Mundo :D" })
   } else if (_.includes(constants.THANKS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().value())) {
@@ -87,7 +88,7 @@ function processMessage ({ senderID, message }) {
   }
 }
 
-function sendTextMessage({recipientId, text}) {
+function sendTextMessage ({recipientId, text}) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -98,6 +99,45 @@ function sendTextMessage({recipientId, text}) {
   }
 
   callSendAPI(messageData)
+}
+
+function sendDefaultMessages (senderId) {
+  rp({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: PAGE_TOKEN },
+    method: 'POST',
+    json: {
+      recipient: {
+        id: senderId
+      },
+      message: {
+        quick_replies: [
+          {
+            content_type: 'text',
+            title: 'Hoje',
+            payload: 'hoje'
+          },
+          {
+            content_type: 'text',
+            title: 'Amanhã',
+            payload: 'amanha'
+          }
+        ]
+      }
+    }
+  })
+  .then((response, body) => {
+    if (response.statusCode == 200) {
+      var recipientId = body.recipient_id
+      var messageId = body.message_id
+
+      console.log("Successfully sent typing message with id %s to recipient %s", messageId, recipientId)
+    }
+  })
+  .catch(err => {
+    console.error("Unable to send message.")
+    console.error(err)
+  })
 }
 
 function sendReply ({ recipientId, shows }) {
