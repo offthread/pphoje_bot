@@ -92,16 +92,18 @@ function processMessage ({ senderID, message }) {
 }
 
 function sendTextMessage ({recipientId, text}) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text
+  return new Promise((resolve, reject) => {
+    var messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text
+      }
     }
-  }
 
-  return callSendAPI(messageData)
+    callSendAPI(messageData).then(() => resolve(true)).catch(err => reject(err))
+  })
 }
 
 function sendDefaultMessages (senderId) {
