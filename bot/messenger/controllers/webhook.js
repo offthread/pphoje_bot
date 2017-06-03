@@ -51,14 +51,7 @@ function processMessage ({ senderID, message }) {
   sendTyping(senderID)
 
   if (_.upperCase(message) === config.help_command) {
-    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(r => {
-      console.log('sucessooooooo')
-      console.log(r)
-      sendDefaultMessages(senderID)}
-      )
-    .catch(err => {
-      console.log(err)
-    })
+    sendTextMessage({ recipientId: senderID, text: config.help_text })
   } else if(_.includes(constants.GREETINGS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().replace('Á', 'A').value())) {
     sendTextMessage({ recipientId: senderID, text: "Oi! Envie 'Ajuda' para detalhes de como ficar por dentro da programação do Maior e Melhor São João do Mundo :D" })
   } else if (_.includes(constants.THANKS, _.chain(message.replace(constants.MARKS_REGULAR_EXPRESSION, '')).upperCase().value())) {
@@ -95,58 +88,16 @@ function processMessage ({ senderID, message }) {
 }
 
 function sendTextMessage ({recipientId, text}) {
-  return new Promise((resolve, reject) => {
-    var messageData = {
-      recipient: {
-        id: recipientId
-      },
-      message: {
-        text
-      }
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text
     }
+  }
 
-    callSendAPI(messageData).then(r => resolve(true)).catch(err => reject(err))
-  })
-}
-
-function sendDefaultMessages (senderId) {
-  rp({
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_TOKEN },
-    method: 'POST',
-    json: {
-      recipient: {
-        id: senderId
-      },
-      message: {
-        text: 'Consultas rápidas:',
-        quick_replies: [
-          {
-            content_type: 'text',
-            title: 'Hoje',
-            payload: 'hoje'
-          },
-          {
-            content_type: 'text',
-            title: 'Amanhã',
-            payload: 'amanha'
-          }
-        ]
-      }
-    }
-  })
-  .then((response, body) => {
-    if (response.statusCode == 200) {
-      var recipientId = body.recipient_id
-      var messageId = body.message_id
-
-      console.log("Successfully sent typing message with id %s to recipient %s", messageId, recipientId)
-    }
-  })
-  .catch(err => {
-    console.error("Unable to send message.")
-    console.error(err)
-  })
+  callSendAPI(messageData)
 }
 
 function sendReply ({ recipientId, shows }) {
@@ -198,27 +149,23 @@ function sendTyping (senderId) {
 }
 
 function callSendAPI(messageData) {
-  return new Promise((resolve, reject) => {
-    rp({
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: { access_token: PAGE_TOKEN },
-      method: 'POST',
-      json: messageData
-    })
-    .then((response, body) => {
-      if (response.statusCode == 200) {
-        var recipientId = body.recipient_id
-        var messageId = body.message_id
+  rp({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: PAGE_TOKEN },
+    method: 'POST',
+    json: messageData
+  })
+  .then((response, body) => {
+    if (response.statusCode == 200) {
+      var recipientId = body.recipient_id
+      var messageId = body.message_id
 
-        console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
-        resolve(true)
-      }
-    })
-    .catch(err => {
-      console.error("Unable to send message.")
-      console.error(err)
-      reject(err)
-    })
+      console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId)
+    }
+  })
+  .catch(err => {
+    console.error("Unable to send message.")
+    console.error(err)
   })
 }
 
