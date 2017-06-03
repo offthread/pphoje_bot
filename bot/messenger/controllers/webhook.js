@@ -111,6 +111,7 @@ function sendDefaultMessages (senderId) {
         id: senderId
       },
       message: {
+        text: 'Consultas rápidas:',
         quick_replies: [
           {
             content_type: 'text',
