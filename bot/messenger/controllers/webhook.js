@@ -51,7 +51,7 @@ function processMessage ({ senderID, message }) {
   sendTyping(senderID)
 
   if (_.upperCase(message) === config.help_command) {
-    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(() => sendDefaultMessages(senderID))
+    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(r => sendDefaultMessages(senderID))
     .catch(err => {
       console.log(err)
     })
@@ -101,7 +101,7 @@ function sendTextMessage ({recipientId, text}) {
       }
     }
 
-    callSendAPI(messageData).then(() => resolve(true)).catch(err => reject(err))
+    callSendAPI(messageData).then(r => resolve(true)).catch(err => reject(err))
   })
 }
 
