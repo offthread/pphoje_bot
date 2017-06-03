@@ -51,7 +51,11 @@ function processMessage ({ senderID, message }) {
   sendTyping(senderID)
 
   if (_.upperCase(message) === config.help_command) {
-    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(r => sendDefaultMessages(senderID))
+    sendTextMessage({ recipientId: senderID, text: config.help_text }).then(r => {
+      console.log('sucessooooooo')
+      console.log(r)
+      sendDefaultMessages(senderID)}
+      )
     .catch(err => {
       console.log(err)
     })
