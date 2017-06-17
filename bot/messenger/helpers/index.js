@@ -30,7 +30,7 @@ function filterShows ({ shows, dates }) {
   _.forEach(shows, s => {
     const showDate = Moment(s.date, 'YYYY-MM-DD')
     _.forEach(dates, d => {
-      console.log(d)
+      console.log(showDate)
       if (showDate.isSame(d, 'day')) {
         result.push(s)
       }
