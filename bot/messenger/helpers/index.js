@@ -29,7 +29,7 @@ function filterShows ({ shows, dates }) {
   let result = []
   _.forEach(shows, s => {
     const showDate = Moment(s.date, 'YYYY-MM-DD')
-
+    console.log(d)
     _.forEach(dates, d => {
       if (showDate.isSame(d, 'day')) {
         result.push(s)
@@ -80,8 +80,6 @@ function getDayFromString (day) {
   } else {
     throw { name: 'InvalidStringException', message: 'Invalid input' }
   }
-
-  console.log(result)
 
   return result
 }

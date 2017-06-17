@@ -73,6 +73,7 @@ function processMessage ({ senderID, message }) {
 
     apiService.getShows()
     .then(shows => {
+      console.log(dates)
       const filteredShows = botHelper.filterShows({ shows, dates })
       if (!_.isEmpty(filteredShows)) { 
         sendReply({ recipientId: senderID, shows: filteredShows })
