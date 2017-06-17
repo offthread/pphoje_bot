@@ -29,8 +29,8 @@ function filterShows ({ shows, dates }) {
   let result = []
   _.forEach(shows, s => {
     const showDate = Moment(s.date, 'YYYY-MM-DD')
-    console.log(d)
     _.forEach(dates, d => {
+      console.log(d)
       if (showDate.isSame(d, 'day')) {
         result.push(s)
       }
@@ -38,7 +38,7 @@ function filterShows ({ shows, dates }) {
   })
 
   result = _.groupBy(result, 'date')
-
+  console.log(result)
   return result
 }
 
