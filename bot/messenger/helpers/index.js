@@ -80,6 +80,9 @@ function getDayFromString (day) {
   } else {
     throw { name: 'InvalidStringException', message: 'Invalid input' }
   }
+
+  console.log(result)
+
   return result
 }
 
