@@ -172,6 +172,7 @@ function callSendAPI(messageData) {
 function createMessage (shows) {
   let result = []
   _.forEach(shows, s => {
+    console.log(s.date)
     result.push({
       title: s.name,
       subtitle: Moment(s.date).format('DD [de] MMMM - dddd'),
