@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import Moment from 'moment'
-import MomentTZ from 'moment-timezone'
 
 import config from '../config'
 import constants from '../constants'
@@ -69,9 +68,9 @@ function getDayFromString (day) {
   let result = {}
 
   if (_.upperCase(day) === constants.TODAY_TEXT) {
-    result = MomentTZ().tz('America/Bahia')
+    result = Moment()
   } else if (_.chain(day).upperCase().replace('Ã', 'A').value() === constants.TOMORROW_TEXT) {
-    result = MomentTZ().tz('America/Bahia').add(1, 'days')
+    result = Moment().add(1, 'days')
   } else if (checkDayName(day)) {
     day = validateSaturday(day)
     result = getDayFromName(day)
